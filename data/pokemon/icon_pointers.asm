@@ -169,7 +169,6 @@ IconPointers:
 	dw CorsolaIcon
 	dw StaryuIcon
 	dw StarmieIcon
-	dw RemoraidIcon
 	dw ChinchouIcon
 	dw LanturnIcon
 	dw TentacoolIcon

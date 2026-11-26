@@ -174,7 +174,6 @@ MonMenuIconPals:
 	icon_pals PINK,   TEAL   ; CORSOLA
 	icon_pals BROWN,  GRAY   ; STARYU
 	icon_pals PURPLE, BLUE   ; STARMIE
-	icon_pals BLUE,   GRAY   ; REMORAID
 	icon_pals BLUE,   BLUE   ; CHINCHOU
 	icon_pals BLUE,   PURPLE ; LANTURN
 	icon_pals BLUE,   TEAL   ; TENTACOOL

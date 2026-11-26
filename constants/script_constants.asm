@@ -232,7 +232,7 @@ DEF NUM_DECODESCS EQU const_value
 	const_def
 	const FISHSWARM_NONE     ; 0
 	const FISHSWARM_QWILFISH ; 1
-	const FISHSWARM_REMORAID ; 2
+	const FISHSWARM_TENTACOOL ; 2
 
 ; CheckMagikarpLength return values
 	const_def

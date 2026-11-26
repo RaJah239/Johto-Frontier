@@ -167,7 +167,6 @@ AnimationPointers:
 	dw CorsolaAnimation
 	dw StaryuAnimation
 	dw StarmieAnimation
-	dw RemoraidAnimation
 	dw ChinchouAnimation
 	dw LanturnAnimation
 	dw TentacoolAnimation

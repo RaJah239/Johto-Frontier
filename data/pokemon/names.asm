@@ -167,7 +167,6 @@ PokemonNames::
 	db "Corsola@@@"
 	db "Staryu@@@@"
 	db "Starmie@@@"
-	db "Remoraid@@"
 	db "Chinchou@@"
 	db "Lanturn@@@"
 	db "Tentacool@"
@@ -239,6 +238,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

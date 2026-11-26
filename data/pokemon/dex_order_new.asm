@@ -169,7 +169,6 @@ NewPokedexOrder:
 	db CORSOLA
 	db STARYU
 	db STARMIE
-	db REMORAID
 	db CHINCHOU
 	db LANTURN
 	db TENTACOOL

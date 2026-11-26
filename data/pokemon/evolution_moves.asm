@@ -167,7 +167,6 @@ EvolutionMoves::
    db NO_MOVE      ; CORSOLA
    db NO_MOVE      ; STARYU
    db NO_MOVE      ; STARMIE
-   db NO_MOVE      ; REMORAID
    db NO_MOVE      ; CHINCHOU
    db NO_MOVE      ; LANTURN
    db NO_MOVE      ; TENTACOOL

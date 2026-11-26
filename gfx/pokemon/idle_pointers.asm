@@ -167,7 +167,6 @@ AnimationIdlePointers:
 	dw CorsolaAnimationIdle
 	dw StaryuAnimationIdle
 	dw StarmieAnimationIdle
-	dw RemoraidAnimationIdle
 	dw ChinchouAnimationIdle
 	dw LanturnAnimationIdle
 	dw TentacoolAnimationIdle

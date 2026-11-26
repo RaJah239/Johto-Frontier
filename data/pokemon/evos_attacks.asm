@@ -224,7 +224,6 @@ ShuckleEvosAttacks:
 CorsolaEvosAttacks:
 StaryuEvosAttacks:
 StarmieEvosAttacks:
-RemoraidEvosAttacks:
 ChinchouEvosAttacks:
 LanturnEvosAttacks:
 TentacoolEvosAttacks:

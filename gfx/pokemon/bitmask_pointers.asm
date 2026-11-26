@@ -167,7 +167,6 @@ BitmasksPointers:
 	dw CorsolaBitmasks
 	dw StaryuBitmasks
 	dw StarmieBitmasks
-	dw RemoraidBitmasks
 	dw ChinchouBitmasks
 	dw LanturnBitmasks
 	dw TentacoolBitmasks

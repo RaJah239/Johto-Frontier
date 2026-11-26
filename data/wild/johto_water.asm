@@ -48,7 +48,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 20, FEEBAS
 	db 20, MAGIKARP
-	db 20, REMORAID
+	db 20, TENTACOOL
 	end_water_wildmons
 
 	def_water_wildmons RUINS_OF_ALPH_OUTSIDE
@@ -89,14 +89,14 @@ JohtoWaterWildMons:
 	def_water_wildmons SLOWPOKE_WELL_B1F
 	db 4 percent ; encounter rate
 	db 20, SLOWPOKE
-	db 20, REMORAID
+	db 20, TENTACOOL
 	db 30, SLOWBRO
 	end_water_wildmons
 
 	def_water_wildmons SLOWPOKE_WELL_B2F
 	db 4 percent ; encounter rate
 	db 20, SLOWPOKE
-	db 20, REMORAID
+	db 20, TENTACOOL
 	db 30, SLOWBRO
 	end_water_wildmons
 
@@ -124,7 +124,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ECRUTEAK_CITY
 	db 4 percent ; encounter rate
 	db 20, WOOPER
-	db 20, REMORAID
+	db 20, TENTACOOL
 	db 20, MAGIKARP
 	end_water_wildmons
 
@@ -186,43 +186,43 @@ JohtoWaterWildMons:
 
 	def_water_wildmons OLIVINE_PORT
 	db 4 percent ; encounter rate
-	db 20, REMORAID
-	db 30, REMORAID
+	db 20, TENTACOOL
+	db 30, TENTACOOL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons OLIVINE_CITY
 	db 4 percent ; encounter rate
-	db 20, REMORAID
-	db 30, REMORAID
+	db 20, TENTACOOL
+	db 30, TENTACOOL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_12
 	db 4 percent ; encounter rate
-	db 30, REMORAID
+	db 30, TENTACOOL
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_13
 	db 4 percent ; encounter rate
-	db 30, REMORAID
+	db 30, TENTACOOL
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons CIANWOOD_CITY
 	db 4 percent ; encounter rate
-	db 30, REMORAID
+	db 30, TENTACOOL
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons CIANWOOD_PORT
 	db 4 percent ; encounter rate
-	db 20, REMORAID
-	db 30, REMORAID
+	db 20, TENTACOOL
+	db 30, TENTACOOL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
@@ -235,7 +235,7 @@ JohtoWaterWildMons:
 
 	def_water_wildmons ROUTE_15
 	db 4 percent ; encounter rate
-	db 20, REMORAID
+	db 20, TENTACOOL
 	db 30, GOLISOPOD
 	db 30, AZUMARILL
 	end_water_wildmons
@@ -249,7 +249,7 @@ JohtoWaterWildMons:
 
 	def_water_wildmons ROUTE_16
 	db 4 percent ; encounter rate
-	db 20, REMORAID
+	db 20, TENTACOOL
 	db 30, GOLISOPOD
 	db 30, TANGROWTH
 	end_water_wildmons
@@ -265,7 +265,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 20, MAGIKARP
 	db 20, FEEBAS
-	db 20, REMORAID
+	db 20, TENTACOOL
 	end_water_wildmons
 
 	def_water_wildmons SILVER_CAVE_OUTSIDE

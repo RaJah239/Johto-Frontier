@@ -448,7 +448,7 @@ PartyKeeperSpeciesList:
 	db SHUCKLE
 	db CORSOLA
 	db STARYU
-	db REMORAID
+	db TENTACOOL
 	db CHINCHOU
 	db LAPRAS
 	db TENTACOOL

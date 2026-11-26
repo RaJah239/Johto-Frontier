@@ -169,7 +169,6 @@ EvosAttacksPointers::
 	dw CorsolaEvosAttacks
 	dw StaryuEvosAttacks
 	dw StarmieEvosAttacks
-	dw RemoraidEvosAttacks
 	dw ChinchouEvosAttacks
 	dw LanturnEvosAttacks
 	dw TentacoolEvosAttacks

@@ -15,12 +15,12 @@ FishGroups:
 	fishgroup 75 percent + 1, .Pond_Old,             .Pond_Good,             .Pond_Super
 	fishgroup 75 percent + 1, .FEEBAS_Old,           .FEEBAS_Good,           .FEEBAS_Super
 	fishgroup 75 percent + 1, .FEEBAS_Swarm_Old,     .Feebas_Swarm_Good,     .Feebas_Swarm_Super
-	fishgroup 75 percent + 1, .Remoraid_Swarm_Old,   .Remoraid_Swarm_Good,   .Remoraid_Swarm_Super
+	fishgroup 75 percent + 1, .Tentacool_Swarm_Old,   .Tentacool_Swarm_Good,   .Tentacool_Swarm_Super
 	fishgroup 75 percent + 1, .Gyarados_Old,         .Gyarados_Good,         .Gyarados_Super
 	fishgroup 75 percent + 1, .FEEBAS_2_Old,         .FEEBAS_2_Good,         .FEEBAS_2_Super
 	fishgroup 75 percent + 1, .WhirlIslands_Old,     .WhirlIslands_Good,     .WhirlIslands_Super
 	fishgroup 75 percent + 1, .FEEBAS_Old,           .Feebas_Good,           .Feebas_Super
-	fishgroup 75 percent + 1, .Remoraid_Old,         .Remoraid_Good,         .Remoraid_Super
+	fishgroup 75 percent + 1, .Tentacool_Old,         .Tentacool_Good,         .Tentacool_Super
 	fishgroup 75 percent + 1, .FEEBAS_NoSwarm_Old,   .Feebas_NoSwarm_Good,   .Feebas_NoSwarm_Super
 	assert_table_length NUM_FISHGROUPS
 
@@ -114,20 +114,20 @@ FishGroups:
 	db  90 percent + 1, FEEBAS,     40
 	db 100 percent,     FEEBAS,     40
 
-.Remoraid_Swarm_Old:
+.Tentacool_Swarm_Old:
 	db  70 percent + 1, MAGIKARP,   10
 	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     REMORAID,   10
-.Remoraid_Swarm_Good:
+	db 100 percent,     TENTACOOL,   10
+.Tentacool_Swarm_Good:
 	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     REMORAID,   20
-	db  90 percent + 1, REMORAID,   20
+	db  70 percent,     TENTACOOL,   20
+	db  90 percent + 1, TENTACOOL,   20
 	db 100 percent,     time_group 12
-.Remoraid_Swarm_Super:
-	db  40 percent,     REMORAID,   40
+.Tentacool_Swarm_Super:
+	db  40 percent,     TENTACOOL,   40
 	db  70 percent,     time_group 13
-	db  90 percent + 1, REMORAID,   40
-	db 100 percent,     REMORAID,   40
+	db  90 percent + 1, TENTACOOL,   40
+	db 100 percent,     TENTACOOL,   40
 
 .Gyarados_Old:
 	db  70 percent + 1, MAGIKARP,   10
@@ -191,20 +191,20 @@ FishGroups:
 	db  90 percent + 1, MAGIKARP,   40
 	db 100 percent,     FEEBAS,     40
 
-.Remoraid_Old:
+.Tentacool_Old:
 	db  70 percent + 1, MAGIKARP,   10
 	db  85 percent + 1, MAGIKARP,   10
 	db 100 percent,     FEEBAS,    10
-.Remoraid_Good:
+.Tentacool_Good:
 	db  35 percent,     MAGIKARP,   20
 	db  70 percent,     FEEBAS,    20
 	db  90 percent + 1, FEEBAS,    20
 	db 100 percent,     time_group 6
-.Remoraid_Super:
+.Tentacool_Super:
 	db  40 percent,     FEEBAS,    40
 	db  70 percent,     time_group 7
 	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     REMORAID,   40
+	db 100 percent,     TENTACOOL,   40
 
 TimeFishGroups:
 	;  day              nite
@@ -220,8 +220,8 @@ TimeFishGroups:
 	db FEEBAS,    40,  FEEBAS,    40 ; 9
 	db FEEBAS,     20,  FEEBAS,     20 ; 10
 	db FEEBAS,     40,  FEEBAS,     40 ; 11
-	db REMORAID,   20,  REMORAID,   20 ; 12
-	db REMORAID,   40,  REMORAID,   40 ; 13
+	db TENTACOOL,   20,  TENTACOOL,   20 ; 12
+	db TENTACOOL,   40,  TENTACOOL,   40 ; 13
 	db GYARADOS,   20,  GYARADOS,   20 ; 14
 	db GYARADOS,   40,  GYARADOS,   40 ; 15
 	db FEEBAS,    10,  FEEBAS,    10 ; 16
@@ -259,7 +259,7 @@ FishGroups_Names::
  Group9_Name:  db " Route 17@"
  Group10_Name: db " Whirl@"
  Group11_Name: db " Feebas@"
- Group12_Name: db " Remoraid@"
+ Group12_Name: db " Tentacool@"
  Group13_Name: db " Route 15@"
  
  GetFishGroupName:

@@ -988,7 +988,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -996,7 +996,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1004,7 +1004,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1016,7 +1016,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1024,7 +1024,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1032,7 +1032,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1044,7 +1044,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1052,7 +1052,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1060,7 +1060,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1072,7 +1072,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1080,7 +1080,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1088,7 +1088,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1100,7 +1100,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1108,7 +1108,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1116,7 +1116,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1128,7 +1128,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1136,7 +1136,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1144,7 +1144,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1156,7 +1156,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1164,7 +1164,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
@@ -1172,7 +1172,7 @@ JohtoGrassWildMons:
 	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
-	db 35, REMORAID
+	db 35, TENTACOOL
 	db 35, STARMIE
 	db 35, CROBAT
 	db 35, CORSOLA
