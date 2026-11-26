@@ -13,7 +13,6 @@ INCLUDE "data/pokemon/egg_move_pointers.asm"
 NoEggMoves:
 	db -1 ; end
 
-CyndaquilEggMoves:
 QuilavaEggMoves:
 TyphlosionEggMoves:
 	db EXTREMESPEED

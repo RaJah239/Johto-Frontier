@@ -42,7 +42,6 @@ AlphabeticalPokedexOrder:
 	db CRADILY
 	db CROBAT
 	db CROCONAW
-	db CYNDAQUIL
 	db DARKRAI
 	db DARTRIX
 	db DECIDUEYE

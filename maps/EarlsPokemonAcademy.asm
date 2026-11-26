@@ -402,7 +402,7 @@ FleeMonsNotebook:
 		line "Charmander,"
 		cont "Chikorita"
 		cont "Clefairy,"
-		cont "Cyndaquil,"
+		cont "Quilava,"
 		cont "Delibird,"
 		cont "Eevee,"
 		cont "Pikachu,"

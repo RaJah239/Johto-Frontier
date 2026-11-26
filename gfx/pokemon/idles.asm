@@ -1,4 +1,3 @@
-CyndaquilAnimationIdle:  INCLUDE "gfx/pokemon/cyndaquil/anim_idle.asm"
 QuilavaAnimationIdle:    INCLUDE "gfx/pokemon/quilava/anim_idle.asm"
 TyphlosionAnimationIdle: INCLUDE "gfx/pokemon/typhlosion/anim_idle.asm"
 TotodileAnimationIdle:   INCLUDE "gfx/pokemon/totodile/anim_idle.asm"

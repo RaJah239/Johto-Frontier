@@ -2,7 +2,6 @@
 
 EvosAttacksPointers::
 	table_width 2, EvosAttacksPointers
-	dw CyndaquilEvosAttacks
 	dw QuilavaEvosAttacks
 	dw TyphlosionEvosAttacks
 	dw TotodileEvosAttacks

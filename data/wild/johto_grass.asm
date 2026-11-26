@@ -935,7 +935,7 @@ JohtoGrassWildMons:
 	db 22, DODUO
 	db 22, PONYTA
 	db 22, SWABLU
-	db 5, CYNDAQUIL
+	db 5, PONYTA
 	; day
 	db 22, FLAAFFY
 	db 22, TAUROS
@@ -943,7 +943,7 @@ JohtoGrassWildMons:
 	db 22, DODUO
 	db 22, PONYTA
 	db 22, SWABLU
-	db 5, CYNDAQUIL
+	db 5, PONYTA
 	; nite
 	db 22, HOUNDOUR
 	db 22, HOOTHOOT
@@ -951,7 +951,7 @@ JohtoGrassWildMons:
 	db 22, TAUROS
 	db 22, MILTANK
 	db 22, SWABLU
-	db 5, CYNDAQUIL
+	db 5, PONYTA
 	end_grass_wildmons
 
 	def_grass_wildmons POWER_PLANT_OUTSIDE

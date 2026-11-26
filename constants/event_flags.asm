@@ -33,7 +33,7 @@
 	const EVENT_GOT_GOOD_ROD
 ; Johto story events
 	const EVENT_GOT_A_POKEMON_FROM_ELM
-	const EVENT_GOT_CYNDAQUIL_FROM_ELM
+	const EVENT_GOT_QUILAVA_FROM_ELM
 	const EVENT_GOT_TOTODILE_FROM_ELM
 	const EVENT_GOT_CHIKORITA_FROM_ELM
 	const EVENT_CHERRYGROVE_SACRED_ASH
@@ -712,7 +712,7 @@
 ; The map script command macros `disappear` and `appear` set/clear these flags and immediately apply the effect on visibility.
 ; The map script command macros `setevent` and `clearevent` set/clear these flags, and their effects will be seen when the map is reloaded.
 ; Johto itemballs
-	const EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
+	const EVENT_QUILAVA_POKEBALL_IN_ELMS_LAB
 	const EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
 	const EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
 	const EVENT_VIOLET_CITY_PP_UP

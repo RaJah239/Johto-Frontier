@@ -5,7 +5,6 @@ SometimesFleeMons:
 	db CHARMANDER
 	db CHIKORITA
 	db CLEFAIRY
-	db CYNDAQUIL
 	db DELIBIRD
 	db EEVEE
 	db FEEBAS

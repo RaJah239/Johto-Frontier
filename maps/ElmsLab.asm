@@ -27,7 +27,7 @@ ElmsLab_MapEvents:
 	porygonpc_event 0, 4, PAL_NPC_RED
 	object_event  5,  2, SPRITE_ELM, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ProfElmScript, -1
 	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, AideText_ExplainBalls, -1
-	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
+	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, QuilavaPokeBallScript, EVENT_QUILAVA_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
 	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
@@ -201,32 +201,32 @@ LabTryToLeaveScript:
 	applymovement PLAYER, ElmsLab_CantLeaveMovement
 	end
 
-CyndaquilPokeBallScript:
+QuilavaPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
 	isdialogueminimal
 	iftrue .skipthis2
 	reanchormap
-	pokepic CYNDAQUIL
-	cry CYNDAQUIL
+	pokepic QUILAVA
+	cry QUILAVA
 	waitbutton
 	closepokepic
 .skipthis2
 	opentext
-	writetextcheckdialogue TakeCyndaquilText, TakeCyndaquilTextMin
+	writetextcheckdialogue TakeQuilavaText, TakeQuilavaTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL1
-	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	setevent EVENT_GOT_QUILAVA_FROM_ELM
 	isdialogueminimal
 	iftrue .skipthis3
 	waitsfx
-	getmonname STRING_BUFFER_3, CYNDAQUIL
+	getmonname STRING_BUFFER_3, QUILAVA
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
 .skipthis3
-	givepoke CYNDAQUIL, 5, BERRY
+	givepoke QUILAVA, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iffalse .exit_this_scene2
@@ -234,7 +234,7 @@ CyndaquilPokeBallScript:
 	iffalse .exit_this_scene2
 	readvar VAR_FACING
 	ifequal RIGHT, ElmGivesPokedexScript
-	applymovement PLAYER, AfterCyndaquilMovement
+	applymovement PLAYER, AfterQuilavaMovement
 	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
@@ -242,14 +242,14 @@ CyndaquilPokeBallScript:
 .exit_this_scene2
 	end
 
-TakeCyndaquilText:
+TakeQuilavaText:
 	text "Elm: You'll take"
-	line "Cyndaquil, the"
+	line "Quilava, the"
 	cont "fire #mon?"
 	done
 
-TakeCyndaquilTextMin:
-	text "Take Cyndaquil?"
+TakeQuilavaTextMin:
+	text "Take Quilava?"
 	done
 
 ReceivedStarterText:
@@ -259,7 +259,7 @@ ReceivedStarterText:
 	text "!"
 	done
 
-AfterCyndaquilMovement:
+AfterQuilavaMovement:
 	step LEFT
 	step UP
 	turn_head UP
@@ -292,7 +292,7 @@ TotodilePokeBallScript:
 .skipthis5
 	givepoke TOTODILE, 5, BERRY
 	closetext
-	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
@@ -348,7 +348,7 @@ ChikoritaPokeBallScript:
 .skipthis7
 	givepoke CHIKORITA, 5, BERRY
 	closetext
-	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iffalse .exit_this_scene2

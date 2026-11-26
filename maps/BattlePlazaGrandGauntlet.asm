@@ -378,7 +378,7 @@ GrandGauntlet_WalkToQuestGiver:
 ; Keep at least six entries, otherwise the last slots may repeat.
 ; =========================================================================
 PartyKeeperSpeciesList:
-	db CYNDAQUIL
+	db QUILAVA
 	db TOTODILE
 	db CHIKORITA
 	db TOGEPI

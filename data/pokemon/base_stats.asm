@@ -32,7 +32,6 @@ ENDM
 BaseData::
 	table_width BASE_DATA_SIZE, BaseData
 
-INCLUDE "data/pokemon/base_stats/cyndaquil.asm"
 INCLUDE "data/pokemon/base_stats/quilava.asm"
 INCLUDE "data/pokemon/base_stats/typhlosion.asm"
 INCLUDE "data/pokemon/base_stats/totodile.asm"

@@ -325,7 +325,7 @@ SetAllUnownCaught:
 FillPokedex:
 	ld a, UNOWN_A
 	ld [wFirstUnownSeen], a
-	ld a, CYNDAQUIL
+	ld a, QUILAVA
 	ld [wScriptVar], a
 .loop
 	ld a, [wScriptVar]

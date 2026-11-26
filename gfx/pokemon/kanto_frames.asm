@@ -1,7 +1,6 @@
 KantoFrames: ; used only for BANK(KantoFrames)
 
 ; 151 mons
-CyndaquilFrames:  INCLUDE "gfx/pokemon/cyndaquil/frames.asm"
 QuilavaFrames:    INCLUDE "gfx/pokemon/quilava/frames.asm"
 TyphlosionFrames: INCLUDE "gfx/pokemon/typhlosion/frames.asm"
 TotodileFrames:   INCLUDE "gfx/pokemon/totodile/frames.asm"

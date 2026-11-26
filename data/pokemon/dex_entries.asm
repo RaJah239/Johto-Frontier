@@ -1,6 +1,5 @@
 SECTION "Pokedex Entries 001-064", ROMX
 
-CyndaquilPokedexEntry::  INCLUDE "data/pokemon/dex_entries/cyndaquil.asm"
 QuilavaPokedexEntry::    INCLUDE "data/pokemon/dex_entries/quilava.asm"
 TyphlosionPokedexEntry:: INCLUDE "data/pokemon/dex_entries/typhlosion.asm"
 TotodilePokedexEntry::   INCLUDE "data/pokemon/dex_entries/totodile.asm"

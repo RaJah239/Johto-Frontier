@@ -991,7 +991,7 @@ LassGroup:
 KrisGroup:
 	; KRIS (1)
 	db "KRIS@", TRAINERTYPE_NORMAL
-	db 5, CYNDAQUIL
+	db 5, QUILAVA
 	db -1 ; end
 
 PKMNTrainerGroup:

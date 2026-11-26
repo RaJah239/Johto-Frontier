@@ -142,33 +142,33 @@ SwarmGrassWildMons:
 	db 5, CLEFAIRY
 	db 5, CLEFAIRY
 
-; Cyndaquil swarm
+; Ponyta swarm
 	map_id ROUTE_11
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
 	; day
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
 	; nite
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
-	db 5, CYNDAQUIL
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
+	db 5, PONYTA
 
 ; Delibird swarm
 	map_id ICE_PATH_1F

@@ -17,7 +17,6 @@ INCLUDE "data/pokemon/evos_attacks_pointers.asm"
 
 EvosAttacks::
 
-CyndaquilEvosAttacks:
 	db EVOLVE_LEVEL, 16, QUILAVA
 QuilavaEvosAttacks:
 	db EVOLVE_LEVEL, 36, TYPHLOSION

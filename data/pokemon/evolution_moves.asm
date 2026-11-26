@@ -1,6 +1,5 @@
 EvolutionMoves::
  table_width 1, EvolutionMoves
-   db NO_MOVE      ; CYNDAQUIL
    db NO_MOVE      ; QUILAVA
    db NO_MOVE      ; TYPHLOSION
    db NO_MOVE      ; TOTODILE

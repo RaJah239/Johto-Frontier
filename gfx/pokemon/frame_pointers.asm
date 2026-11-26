@@ -1,6 +1,5 @@
 FramesPointers:
 	table_width 2, FramesPointers
-	dw CyndaquilFrames
 	dw QuilavaFrames
 	dw TyphlosionFrames
 	dw TotodileFrames

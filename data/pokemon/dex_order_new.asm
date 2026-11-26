@@ -2,7 +2,6 @@
 
 NewPokedexOrder:
 	table_width 1, NewPokedexOrder
-	db CYNDAQUIL
 	db QUILAVA
 	db TYPHLOSION
 	db TOTODILE

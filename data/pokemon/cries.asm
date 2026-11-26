@@ -6,7 +6,6 @@ ENDM
 PokemonCries::
 ; entries correspond to constants/pokemon_constants.asm
 	table_width MON_CRY_LENGTH, PokemonCries
-	mon_cry CRY_CYNDAQUIL,    839,   128 ; CYNDAQUIL
 	mon_cry CRY_CYNDAQUIL,    801,   288 ; QUILAVA
 	mon_cry CRY_TYPHLOSION,  3840,   212 ; TYPHLOSION
 	mon_cry CRY_TOTODILE,    1132,   232 ; TOTODILE
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 271
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 272
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 273
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 274
 	assert_table_length $ff

@@ -1,4 +1,3 @@
-CyndaquilAnimation:  INCLUDE "gfx/pokemon/cyndaquil/anim.asm"
 QuilavaAnimation:    INCLUDE "gfx/pokemon/quilava/anim.asm"
 TyphlosionAnimation: INCLUDE "gfx/pokemon/typhlosion/anim.asm"
 TotodileAnimation:   INCLUDE "gfx/pokemon/totodile/anim.asm"

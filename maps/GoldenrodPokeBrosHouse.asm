@@ -93,7 +93,7 @@ SwarmGrampsScript:
 	ifequal  2, .Charmander
 	ifequal  3, .Chikorita
 	ifequal  4, .Clefairy
-	ifequal  5, .Cyndaquil
+	ifequal  5, .Quilava
 	ifequal  6, .Delibird
 	ifequal  7, .Ditto
 	ifequal  8, .Eevee
@@ -173,12 +173,12 @@ SwarmGrampsScript:
 		cont "Mt.Mortar Outside!"
 		done
 
-.Cyndaquil:
+.Quilava:
 	setflag ENGINE_SWARM
 	swarm ROUTE_11
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Cyndaquil at"
+		line "Quilava at"
 		cont "Route 11!"
 		done
 
@@ -421,7 +421,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Charmander,"
 		cont "Chikorita"
 		cont "Clefairy,"
-		cont "Cyndaquil,"
+		cont "Quilava,"
 		cont "Delibird,"
 		cont "Ditto,"
 		cont "Eevee,"

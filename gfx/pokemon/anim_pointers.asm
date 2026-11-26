@@ -1,6 +1,5 @@
 AnimationPointers:
 	table_width 2, AnimationPointers
-	dw CyndaquilAnimation
 	dw QuilavaAnimation
 	dw TyphlosionAnimation
 	dw TotodileAnimation

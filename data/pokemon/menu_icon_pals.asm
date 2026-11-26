@@ -7,7 +7,6 @@ MonMenuIconPals:
 	table_width 1, MonMenuIconPals
 	;         normal, shiny
 	
-	icon_pals PINK,   PURPLE ; CYNDAQUIL
 	icon_pals PINK,   PURPLE ; QUILAVA
 	icon_pals PINK,   PURPLE ; TYPHLOSION
 	icon_pals BLUE,   TEAL   ; TOTODILE

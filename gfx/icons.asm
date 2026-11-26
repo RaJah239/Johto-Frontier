@@ -2,7 +2,6 @@ SECTION "Mon Icons 1", ROMX, ALIGN[4]
 
 ; 129 icons
 NullIcon::
-CyndaquilIcon::  INCBIN "gfx/icons/cyndaquil.2bpp"
 QuilavaIcon::    INCBIN "gfx/icons/quilava.2bpp"
 TyphlosionIcon:: INCBIN "gfx/icons/typhlosion.2bpp"
 TotodileIcon::   INCBIN "gfx/icons/totodile.2bpp"

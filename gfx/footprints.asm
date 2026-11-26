@@ -6,7 +6,6 @@ Footprints:
 ; Entries correspond to Pokémon species, two apiece, 8 tops then 8 bottoms
 	table_width LEN_1BPP_TILE * 4, Footprints
 
- INCBIN "gfx/footprints/cyndaquil.1bpp" 
  INCBIN "gfx/footprints/quilava.1bpp"
  INCBIN "gfx/footprints/typhlosion.1bpp"
  INCBIN "gfx/footprints/totodile.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 270
 	 INCBIN "gfx/footprints/blank.1bpp" ; 271
 	 INCBIN "gfx/footprints/blank.1bpp" ; 272
+	 INCBIN "gfx/footprints/blank.1bpp" ; 273
 	assert_table_length $100

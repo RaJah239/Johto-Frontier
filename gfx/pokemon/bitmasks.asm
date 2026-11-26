@@ -1,4 +1,3 @@
-CyndaquilBitmasks:  INCLUDE "gfx/pokemon/cyndaquil/bitmask.asm"
 QuilavaBitmasks:    INCLUDE "gfx/pokemon/quilava/bitmask.asm"
 TyphlosionBitmasks: INCLUDE "gfx/pokemon/typhlosion/bitmask.asm"
 TotodileBitmasks:   INCLUDE "gfx/pokemon/totodile/bitmask.asm"

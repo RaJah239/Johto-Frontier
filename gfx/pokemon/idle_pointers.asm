@@ -1,6 +1,5 @@
 AnimationIdlePointers:
 	table_width 2, AnimationIdlePointers
-	dw CyndaquilAnimationIdle
 	dw QuilavaAnimationIdle
 	dw TyphlosionAnimationIdle
 	dw TotodileAnimationIdle
