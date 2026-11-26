@@ -34,7 +34,7 @@
 ; Johto story events
 	const EVENT_GOT_A_POKEMON_FROM_ELM
 	const EVENT_GOT_QUILAVA_FROM_ELM
-	const EVENT_GOT_TOTODILE_FROM_ELM
+	const EVENT_GOT_CROCONAW_FROM_ELM
 	const EVENT_GOT_CHIKORITA_FROM_ELM
 	const EVENT_CHERRYGROVE_SACRED_ASH
 	const EVENT_EARLS_ACADEMY_LUCKY_EGG
@@ -713,7 +713,7 @@
 ; The map script command macros `setevent` and `clearevent` set/clear these flags, and their effects will be seen when the map is reloaded.
 ; Johto itemballs
 	const EVENT_QUILAVA_POKEBALL_IN_ELMS_LAB
-	const EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
+	const EVENT_CROCONAW_POKEBALL_IN_ELMS_LAB
 	const EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
 	const EVENT_VIOLET_CITY_PP_UP
 	const EVENT_VIOLET_CITY_RARE_CANDY

@@ -113,7 +113,7 @@ SwarmGrampsScript:
 	ifequal 22, .Teddiursa
 	ifequal 23, .Togepi
 	ifequal 24, .Torchic
-	ifequal 25, .Totodile
+	ifequal 25, .Croconaw
 	ifequal 26, .Turtwig
 	sjump .resample
 
@@ -353,12 +353,12 @@ SwarmGrampsScript:
 		cont "Route 10!"
 		done
 
-.Totodile:
+.Croconaw:
 	setflag ENGINE_SWARM
 	swarm ROUTE_14
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Totodile at"
+		line "Croconaw at"
 		cont "Route 14!"
 		done
 
@@ -441,6 +441,6 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Teddiursa,"
 		cont "Togepi,"
 		cont "Torchic,"
-		cont "Totodile and"
+		cont "Croconaw and"
 		cont "Turtwig."
 		done

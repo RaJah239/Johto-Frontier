@@ -4,7 +4,6 @@ SECTION "Mon Icons 1", ROMX, ALIGN[4]
 NullIcon::
 QuilavaIcon::    INCBIN "gfx/icons/quilava.2bpp"
 TyphlosionIcon:: INCBIN "gfx/icons/typhlosion.2bpp"
-TotodileIcon::   INCBIN "gfx/icons/totodile.2bpp"
 CroconawIcon::   INCBIN "gfx/icons/croconaw.2bpp"
 FeraligatrIcon:: INCBIN "gfx/icons/feraligatr.2bpp"
 ChikoritaIcon::  INCBIN "gfx/icons/chikorita.2bpp"

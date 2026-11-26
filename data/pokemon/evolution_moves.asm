@@ -2,7 +2,6 @@ EvolutionMoves::
  table_width 1, EvolutionMoves
    db NO_MOVE      ; QUILAVA
    db NO_MOVE      ; TYPHLOSION
-   db NO_MOVE      ; TOTODILE
    db NO_MOVE      ; CROCONAW
    db NO_MOVE      ; FERALIGATR
    db NO_MOVE      ; CHIKORITA

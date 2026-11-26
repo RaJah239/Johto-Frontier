@@ -63,7 +63,6 @@ GyaradosEvosAttacks:
 
 PorygonZEvosAttacks:
 BlisseyEvosAttacks:
-TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
 ChikoritaEvosAttacks:

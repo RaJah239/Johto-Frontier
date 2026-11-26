@@ -28,7 +28,7 @@ ElmsLab_MapEvents:
 	object_event  5,  2, SPRITE_ELM, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ProfElmScript, -1
 	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, AideText_ExplainBalls, -1
 	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, QuilavaPokeBallScript, EVENT_QUILAVA_POKEBALL_IN_ELMS_LAB
-	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
+	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, CroconawPokeBallScript, EVENT_CROCONAW_POKEBALL_IN_ELMS_LAB
 	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
 	object_event  7,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript2, -1
@@ -228,7 +228,7 @@ QuilavaPokeBallScript:
 .skipthis3
 	givepoke QUILAVA, 5, BERRY
 	closetext
-	checkevent EVENT_GOT_TOTODILE_FROM_ELM
+	checkevent EVENT_GOT_CROCONAW_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
@@ -265,38 +265,38 @@ AfterQuilavaMovement:
 	turn_head UP
 	step_end
 
-TotodilePokeBallScript:
+CroconawPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
 	isdialogueminimal
 	iftrue .skipthis4
 	reanchormap
-	pokepic TOTODILE
-	cry TOTODILE
+	pokepic CROCONAW
+	cry CROCONAW
 	waitbutton
 	closepokepic
 .skipthis4
 	opentext
-	writetextcheckdialogue TakeTotodileText, TakeTotodileTextMin
+	writetextcheckdialogue TakeCroconawText, TakeCroconawTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL2
-	setevent EVENT_GOT_TOTODILE_FROM_ELM
+	setevent EVENT_GOT_CROCONAW_FROM_ELM
 	isdialogueminimal
 	iftrue .skipthis5
 	waitsfx
-	getmonname STRING_BUFFER_3, TOTODILE
+	getmonname STRING_BUFFER_3, CROCONAW
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
 .skipthis5
-	givepoke TOTODILE, 5, BERRY
+	givepoke CROCONAW, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
-	applymovement PLAYER, AfterTotodileMovement
+	applymovement PLAYER, AfterCroconawMovement
 	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
@@ -304,17 +304,17 @@ TotodilePokeBallScript:
 .exit_this_scene2
 	end
 
-TakeTotodileText:
+TakeCroconawText:
 	text "Elm: Do you want"
-	line "Totodile, the"
+	line "Croconaw, the"
 	cont "water #mon?"
 	done
 
-TakeTotodileTextMin:
-	text "Take Totodile?"
+TakeCroconawTextMin:
+	text "Take Croconaw?"
 	done
 
-AfterTotodileMovement:
+AfterCroconawMovement:
 	step LEFT
 	step LEFT
 	step UP
@@ -350,7 +350,7 @@ ChikoritaPokeBallScript:
 	closetext
 	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
-	checkevent EVENT_GOT_TOTODILE_FROM_ELM
+	checkevent EVENT_GOT_CROCONAW_FROM_ELM
 	iffalse .exit_this_scene2
 	applymovement PLAYER, AfterChikoritaMovement
 	sjump ElmGivesPokedexScript

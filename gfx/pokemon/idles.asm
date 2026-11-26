@@ -1,6 +1,5 @@
 QuilavaAnimationIdle:    INCLUDE "gfx/pokemon/quilava/anim_idle.asm"
 TyphlosionAnimationIdle: INCLUDE "gfx/pokemon/typhlosion/anim_idle.asm"
-TotodileAnimationIdle:   INCLUDE "gfx/pokemon/totodile/anim_idle.asm"
 CroconawAnimationIdle:   INCLUDE "gfx/pokemon/croconaw/anim_idle.asm"
 FeraligatrAnimationIdle: INCLUDE "gfx/pokemon/feraligatr/anim_idle.asm"
 ChikoritaAnimationIdle:  INCLUDE "gfx/pokemon/chikorita/anim_idle.asm"

@@ -1299,7 +1299,7 @@ JohtoGrassWildMons:
 	db 25, GRANBULL
 	db 25, GALVANTULA
 	db 25, PRIMEAPE
-	db 5, TOTODILE
+	db 5, AZUMARILL
 	; day
 	db 25, GLIGAR
 	db 25, DODRIO
@@ -1307,7 +1307,7 @@ JohtoGrassWildMons:
 	db 25, GRANBULL
 	db 25, GALVANTULA
 	db 25, PRIMEAPE
-	db 5, TOTODILE
+	db 5, AZUMARILL
 	; nite
 	db 25, GLIGAR
 	db 25, GOLBAT
@@ -1315,7 +1315,7 @@ JohtoGrassWildMons:
 	db 25, HOUNDOOM
 	db 25, ARIADOS
 	db 25, PERSIAN
-	db 5, TOTODILE
+	db 5, AZUMARILL
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_15

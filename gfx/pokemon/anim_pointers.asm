@@ -2,7 +2,6 @@ AnimationPointers:
 	table_width 2, AnimationPointers
 	dw QuilavaAnimation
 	dw TyphlosionAnimation
-	dw TotodileAnimation
 	dw CroconawAnimation
 	dw FeraligatrAnimation
 	dw ChikoritaAnimation

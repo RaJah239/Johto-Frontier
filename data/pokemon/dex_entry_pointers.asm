@@ -3,7 +3,6 @@ PokedexDataPointerTable:
 	table_width 3, PokedexDataPointerTable
  	dba QuilavaPokedexEntry
  	dba TyphlosionPokedexEntry
- 	dba TotodilePokedexEntry
  	dba CroconawPokedexEntry
  	dba FeraligatrPokedexEntry
  	dba ChikoritaPokedexEntry

@@ -420,7 +420,7 @@ FleeMonsNotebook:
 		cont "Teddiursa,"
 		cont "Togepi,"
 		cont "Torchic,"
-		cont "Totodile and"
+		cont "Croconaw and"
 		cont "Turtwig."
 		done
 

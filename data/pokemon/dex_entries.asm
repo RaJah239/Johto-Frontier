@@ -2,7 +2,6 @@ SECTION "Pokedex Entries 001-064", ROMX
 
 QuilavaPokedexEntry::    INCLUDE "data/pokemon/dex_entries/quilava.asm"
 TyphlosionPokedexEntry:: INCLUDE "data/pokemon/dex_entries/typhlosion.asm"
-TotodilePokedexEntry::   INCLUDE "data/pokemon/dex_entries/totodile.asm"
 CroconawPokedexEntry::   INCLUDE "data/pokemon/dex_entries/croconaw.asm"
 FeraligatrPokedexEntry:: INCLUDE "data/pokemon/dex_entries/feraligatr.asm"
 ChikoritaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/chikorita.asm"

@@ -4,7 +4,6 @@ NewPokedexOrder:
 	table_width 1, NewPokedexOrder
 	db QUILAVA
 	db TYPHLOSION
-	db TOTODILE
 	db CROCONAW
 	db FERALIGATR
 	db CHIKORITA

@@ -18,6 +18,5 @@ SometimesFleeMons:
 	db TEDDIURSA
 	db TOGEPI
 	db TORCHIC
-	db TOTODILE
 	db TURTWIG
 	db -1 ; end

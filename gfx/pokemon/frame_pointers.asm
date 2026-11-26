@@ -2,7 +2,6 @@ FramesPointers:
 	table_width 2, FramesPointers
 	dw QuilavaFrames
 	dw TyphlosionFrames
-	dw TotodileFrames
 	dw CroconawFrames
 	dw FeraligatrFrames
 	dw ChikoritaFrames

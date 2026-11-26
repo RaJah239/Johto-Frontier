@@ -1,6 +1,5 @@
 QuilavaAnimation:    INCLUDE "gfx/pokemon/quilava/anim.asm"
 TyphlosionAnimation: INCLUDE "gfx/pokemon/typhlosion/anim.asm"
-TotodileAnimation:   INCLUDE "gfx/pokemon/totodile/anim.asm"
 CroconawAnimation:   INCLUDE "gfx/pokemon/croconaw/anim.asm"
 FeraligatrAnimation: INCLUDE "gfx/pokemon/feraligatr/anim.asm"
 ChikoritaAnimation:  INCLUDE "gfx/pokemon/chikorita/anim.asm"

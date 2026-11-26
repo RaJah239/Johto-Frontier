@@ -34,7 +34,6 @@ BaseData::
 
 INCLUDE "data/pokemon/base_stats/quilava.asm"
 INCLUDE "data/pokemon/base_stats/typhlosion.asm"
-INCLUDE "data/pokemon/base_stats/totodile.asm"
 INCLUDE "data/pokemon/base_stats/croconaw.asm"
 INCLUDE "data/pokemon/base_stats/feraligatr.asm"
 INCLUDE "data/pokemon/base_stats/chikorita.asm"

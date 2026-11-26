@@ -674,33 +674,33 @@ SwarmGrassWildMons:
 	db 5, TORCHIC
 	db 5, TORCHIC
 
-; Totodile swarm
+; Azumarill swarm
 	map_id ROUTE_14
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 	; day
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 	; nite
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
-	db 5, TOTODILE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 
 ; Turtwig swarm
 	map_id ROUTE_17

@@ -4,7 +4,6 @@ EvosAttacksPointers::
 	table_width 2, EvosAttacksPointers
 	dw QuilavaEvosAttacks
 	dw TyphlosionEvosAttacks
-	dw TotodileEvosAttacks
 	dw CroconawEvosAttacks
 	dw FeraligatrEvosAttacks
 	dw ChikoritaEvosAttacks

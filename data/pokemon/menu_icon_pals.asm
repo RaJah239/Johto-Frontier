@@ -9,7 +9,6 @@ MonMenuIconPals:
 	
 	icon_pals PINK,   PURPLE ; QUILAVA
 	icon_pals PINK,   PURPLE ; TYPHLOSION
-	icon_pals BLUE,   TEAL   ; TOTODILE
 	icon_pals BLUE,   TEAL   ; CROCONAW
 	icon_pals BLUE,   TEAL   ; FERALIGATR
 	icon_pals GREEN,  BROWN  ; CHIKORITA

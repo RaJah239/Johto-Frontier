@@ -2,7 +2,6 @@ BitmasksPointers:
 	table_width 2, BitmasksPointers
 	dw QuilavaBitmasks
 	dw TyphlosionBitmasks
-	dw TotodileBitmasks
 	dw CroconawBitmasks
 	dw FeraligatrBitmasks
 	dw ChikoritaBitmasks

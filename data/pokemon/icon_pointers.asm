@@ -4,7 +4,6 @@ IconPointers:
 	dw NullIcon
 	dw QuilavaIcon
 	dw TyphlosionIcon
-	dw TotodileIcon
 	dw CroconawIcon
 	dw FeraligatrIcon
 	dw ChikoritaIcon

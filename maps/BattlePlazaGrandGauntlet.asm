@@ -379,7 +379,7 @@ GrandGauntlet_WalkToQuestGiver:
 ; =========================================================================
 PartyKeeperSpeciesList:
 	db QUILAVA
-	db TOTODILE
+	db CROCONAW
 	db CHIKORITA
 	db TOGEPI
 	db CHARMANDER

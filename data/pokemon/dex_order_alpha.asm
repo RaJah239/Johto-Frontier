@@ -206,7 +206,6 @@ AlphabeticalPokedexOrder:
 	db TOGETIC
 	db TORCHIC
 	db TORTERRA
-	db TOTODILE
 	db TROPIUS
 	db TURTWIG
 	db TYPHLOSION

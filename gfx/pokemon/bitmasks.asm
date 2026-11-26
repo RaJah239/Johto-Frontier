@@ -1,6 +1,5 @@
 QuilavaBitmasks:    INCLUDE "gfx/pokemon/quilava/bitmask.asm"
 TyphlosionBitmasks: INCLUDE "gfx/pokemon/typhlosion/bitmask.asm"
-TotodileBitmasks:   INCLUDE "gfx/pokemon/totodile/bitmask.asm"
 CroconawBitmasks:   INCLUDE "gfx/pokemon/croconaw/bitmask.asm"
 FeraligatrBitmasks: INCLUDE "gfx/pokemon/feraligatr/bitmask.asm"
 ChikoritaBitmasks:  INCLUDE "gfx/pokemon/chikorita/bitmask.asm"

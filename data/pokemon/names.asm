@@ -2,7 +2,6 @@ PokemonNames::
 	table_width NAME_LENGTH - 1, PokemonNames
 	db "Quilava@@@"
 	db "Typhlosion"
-	db "Totodile@@"
 	db "Croconaw@@"
 	db "Feraligatr"
 	db "Chikorita@"
@@ -234,6 +233,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

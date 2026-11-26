@@ -7,8 +7,6 @@ PokemonPicPointers::
  	dba QuilavaBackpic
  	dba TyphlosionFrontpic
  	dba TyphlosionBackpic
- 	dba TotodileFrontpic
- 	dba TotodileBackpic
  	dba CroconawFrontpic
  	dba CroconawBackpic
  	dba FeraligatrFrontpic

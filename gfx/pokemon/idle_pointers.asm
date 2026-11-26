@@ -2,7 +2,6 @@ AnimationIdlePointers:
 	table_width 2, AnimationIdlePointers
 	dw QuilavaAnimationIdle
 	dw TyphlosionAnimationIdle
-	dw TotodileAnimationIdle
 	dw CroconawAnimationIdle
 	dw FeraligatrAnimationIdle
 	dw ChikoritaAnimationIdle
