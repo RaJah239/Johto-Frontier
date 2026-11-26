@@ -242,4 +242,5 @@ NewPokedexOrder:
 	db CYCLIZAR
 	db KROOKODILE
 	db RHYPERIOR
+	db MIMIKYU
 	assert_table_length NUM_POKEMON

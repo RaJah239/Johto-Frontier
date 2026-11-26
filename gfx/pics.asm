@@ -761,3 +761,5 @@ SECTION "Pics 33", ROMX
 
 RhyperiorFrontpic: INCBIN "gfx/pokemon/rhyperior/front.animated.2bpp.lz"
 RhyperiorBackpic: INCBIN "gfx/pokemon/rhyperior/back.2bpp.lz"
+MimikyuFrontpic: INCBIN "gfx/pokemon/mimikyu/front.animated.2bpp.lz"
+MimikyuBackpic: INCBIN "gfx/pokemon/mimikyu/back.2bpp.lz"

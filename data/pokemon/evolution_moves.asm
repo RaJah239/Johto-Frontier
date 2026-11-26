@@ -240,4 +240,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; CYCLIZAR
 	db NO_MOVE      ; KROOKODILE
 	db NO_MOVE      ; RHYPERIOR
+	db NO_MOVE      ; MIMIKYU
 	assert_table_length NUM_POKEMON
