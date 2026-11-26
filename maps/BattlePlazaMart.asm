@@ -24,7 +24,19 @@ BattlePlazaMart_MapScripts:
     def_callbacks
 
 BattlePlazaMartPorygonPCScript:
-    jumpstd PorygonPCScript
+    faceplayer
+    setval PORYGON
+    special SetMonAsSeen
+    ispokepicsonoroff
+    iftrue .skipthis
+    reanchormap
+    shinypokepic PORYGON
+    cry PORYGON
+    waitsfx
+    closepokepic
+    refreshmap
+.skipthis
+    jumpstd PCScript
 
 BattlePlazaMartTMCoinTraderScript:
     faceplayeropentext
