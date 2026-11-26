@@ -175,6 +175,7 @@ AlphabeticalPokedexOrder:
 	db ROTOM
 	db SABLEYE
 	db SALAMENCE
+	db SCEPTILE
 	db SCIZOR
 	db SCOLIPEDE
 	db SCYTHER

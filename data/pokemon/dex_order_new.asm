@@ -236,4 +236,5 @@ NewPokedexOrder:
 	db SWAMPERT
 	db JUMPLUFF
 	db GROVYLE
+	db SCEPTILE
 	assert_table_length NUM_POKEMON

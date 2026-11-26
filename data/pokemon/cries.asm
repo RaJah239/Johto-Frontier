@@ -240,6 +240,7 @@ PokemonCries::
 	mon_cry CRY_WOOPER, 0, 255 ; SWAMPERT
 	mon_cry CRY_SUNFLORA, 0, 255 ; JUMPLUFF
 	mon_cry CRY_SUNFLORA, 0, 255 ; GROVYLE
+	mon_cry CRY_SUNFLORA, 0, 255 ; SCEPTILE
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 269
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 270
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 271
 	assert_table_length $ff

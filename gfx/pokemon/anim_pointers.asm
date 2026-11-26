@@ -234,4 +234,5 @@ dw VulpixAnimation
 	dw SwampertAnimation
 	dw JumpluffAnimation
 	dw GrovyleAnimation
+	dw SceptileAnimation
 	assert_table_length NUM_POKEMON

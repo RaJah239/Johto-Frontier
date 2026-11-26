@@ -266,4 +266,5 @@ INCLUDE "data/pokemon/base_stats/marshtomp.asm"
 INCLUDE "data/pokemon/base_stats/swampert.asm"
 INCLUDE "data/pokemon/base_stats/jumpluff.asm"
 INCLUDE "data/pokemon/base_stats/grovyle.asm"
+INCLUDE "data/pokemon/base_stats/sceptile.asm"
 	assert_table_length NUM_POKEMON

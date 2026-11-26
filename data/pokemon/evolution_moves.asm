@@ -234,4 +234,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; SWAMPERT
 	db NO_MOVE      ; JUMPLUFF
 	db NO_MOVE      ; GROVYLE
+	db NO_MOVE      ; SCEPTILE
 	assert_table_length NUM_POKEMON
