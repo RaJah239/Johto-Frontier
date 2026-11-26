@@ -224,4 +224,5 @@ PokedexDataPointerTable:
 	dba SableyePokedexEntry
 	dba ShellderPokedexEntry
 	dba CloysterPokedexEntry
+	dba VikavoltPokedexEntry
 	assert_table_length NUM_POKEMON

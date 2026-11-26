@@ -255,4 +255,5 @@ INCLUDE "data/pokemon/base_stats/venusaur.asm"
 INCLUDE "data/pokemon/base_stats/sableye.asm"
 INCLUDE "data/pokemon/base_stats/shellder.asm"
 INCLUDE "data/pokemon/base_stats/cloyster.asm"
+INCLUDE "data/pokemon/base_stats/vikavolt.asm"
 	assert_table_length NUM_POKEMON

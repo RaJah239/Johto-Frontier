@@ -142,6 +142,7 @@ NewPokedexOrder:
 	db SABLEYE
 	db SHELLDER
 	db CLOYSTER
+	db VIKAVOLT
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

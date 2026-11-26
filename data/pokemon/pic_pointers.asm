@@ -452,6 +452,8 @@ PokemonPicPointers::
 	dba ShellderBackpic
 	dba CloysterFrontpic
 	dba CloysterBackpic
+	dba VikavoltFrontpic
+	dba VikavoltBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

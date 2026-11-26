@@ -223,10 +223,10 @@ db "Vulpix@@@@"
 	db "Sableye@@@"
 	db "Shellder@@"
 	db "Cloyster@@"
+	db "Vikavolt@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
