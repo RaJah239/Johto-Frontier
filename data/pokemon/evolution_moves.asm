@@ -213,4 +213,5 @@ EvolutionMoves::
    db NO_MOVE      ; HYDRAPPLE
    db NO_MOVE      ; ROSELIA
    db NO_MOVE      ; ROSERADE
+   db NO_MOVE      ; KADABRA
 	assert_table_length NUM_POKEMON

@@ -213,4 +213,5 @@ BitmasksPointers:
 	dw HydrappleBitmasks
 	dw RoseliaBitmasks
 	dw RoseradeBitmasks
+	dw KadabraBitmasks
 	assert_table_length NUM_POKEMON

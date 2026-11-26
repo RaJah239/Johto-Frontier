@@ -213,4 +213,5 @@ AnimationIdlePointers:
 	dw HydrappleAnimationIdle
 	dw RoseliaAnimationIdle
 	dw RoseradeAnimationIdle
+	dw KadabraAnimationIdle
 	assert_table_length NUM_POKEMON
