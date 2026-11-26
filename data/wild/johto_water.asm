@@ -174,7 +174,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 37, KINGDRA
 	db 37, LAPRAS
-	db 37, MANTINE
+	db 37, LAPRAS
 	end_water_wildmons
 
 	def_water_wildmons DRAGONS_DEN_B1F
@@ -201,21 +201,21 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_12
 	db 4 percent ; encounter rate
 	db 30, OCTILLERY
-	db 30, MANTINE
+	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_13
 	db 4 percent ; encounter rate
 	db 30, OCTILLERY
-	db 30, MANTINE
+	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons CIANWOOD_CITY
 	db 4 percent ; encounter rate
 	db 30, OCTILLERY
-	db 30, MANTINE
+	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
@@ -229,7 +229,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_14
 	db 4 percent ; encounter rate
 	db 30, LANTURN
-	db 30, MANTINE
+	db 30, LAPRAS
 	db 30, QUAGSIRE
 	end_water_wildmons
 
@@ -272,7 +272,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 37, KINGDRA
 	db 37, TANGROWTH
-	db 37, MANTINE
+	db 37, LAPRAS
 	end_water_wildmons
 
 	def_water_wildmons TOHJO_FALLS

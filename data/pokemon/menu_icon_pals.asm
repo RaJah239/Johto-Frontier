@@ -178,7 +178,6 @@ MonMenuIconPals:
 	icon_pals RED,    BROWN  ; OCTILLERY
 	icon_pals BLUE,   BLUE   ; CHINCHOU
 	icon_pals BLUE,   PURPLE ; LANTURN
-	icon_pals BLUE,   TEAL   ; MANTINE
 	icon_pals BLUE,   TEAL   ; TENTACOOL
 	icon_pals BLUE,   TEAL   ; TENTACRUEL
 	icon_pals BLUE,   PURPLE ; SEADRA

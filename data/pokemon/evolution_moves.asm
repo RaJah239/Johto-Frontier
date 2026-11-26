@@ -171,7 +171,6 @@ EvolutionMoves::
    db NO_MOVE      ; OCTILLERY
    db NO_MOVE      ; CHINCHOU
    db NO_MOVE      ; LANTURN
-   db NO_MOVE      ; MANTINE
    db NO_MOVE      ; TENTACOOL
    db NO_MOVE      ; TENTACRUEL
    db NO_MOVE      ; SEADRA

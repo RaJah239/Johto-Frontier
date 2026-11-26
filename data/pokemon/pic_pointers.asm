@@ -345,8 +345,6 @@ PokemonPicPointers::
  	dba ChinchouBackpic
  	dba LanturnFrontpic
  	dba LanturnBackpic
- 	dba MantineFrontpic
- 	dba MantineBackpic
  	dba TentacoolFrontpic
  	dba TentacoolBackpic
  	dba TentacruelFrontpic

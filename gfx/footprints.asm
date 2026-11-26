@@ -177,7 +177,6 @@ Footprints:
  INCBIN "gfx/footprints/octillery.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; CHINCHOU
  INCBIN "gfx/footprints/blank.1bpp" ; LANTURN
- INCBIN "gfx/footprints/blank.1bpp" ; MANTINE
  INCBIN "gfx/footprints/blank.1bpp" ; TENTACOOL
  INCBIN "gfx/footprints/blank.1bpp" ; TENTACRUEL
  INCBIN "gfx/footprints/blank.1bpp" ; SEADRA
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 264
 	 INCBIN "gfx/footprints/blank.1bpp" ; 265
 	 INCBIN "gfx/footprints/blank.1bpp" ; 266
+	 INCBIN "gfx/footprints/blank.1bpp" ; 267
 	assert_table_length $100

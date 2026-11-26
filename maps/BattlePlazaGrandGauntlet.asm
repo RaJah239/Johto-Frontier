@@ -450,7 +450,7 @@ PartyKeeperSpeciesList:
 	db STARYU
 	db REMORAID
 	db CHINCHOU
-	db MANTINE
+	db LAPRAS
 	db TENTACOOL
 	db LAPRAS
 	db SEADRA

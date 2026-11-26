@@ -173,7 +173,6 @@ NewPokedexOrder:
 	db OCTILLERY
 	db CHINCHOU
 	db LANTURN
-	db MANTINE
 	db TENTACOOL
 	db TENTACRUEL
 	db SEADRA

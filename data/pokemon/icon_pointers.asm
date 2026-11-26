@@ -173,7 +173,6 @@ IconPointers:
 	dw OctilleryIcon
 	dw ChinchouIcon
 	dw LanturnIcon
-	dw MantineIcon
 	dw TentacoolIcon
 	dw TentacruelIcon
 	dw SeadraIcon

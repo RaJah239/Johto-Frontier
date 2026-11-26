@@ -177,7 +177,6 @@ PokemonCries::
 	mon_cry CRY_TOTODILE,       0,   384 ; OCTILLERY
 	mon_cry CRY_CYNDAQUIL,    969,   320 ; CHINCHOU
 	mon_cry CRY_CYNDAQUIL,    720,   272 ; LANTURN
-	mon_cry CRY_MANTINE,     -190,   240 ; MANTINE
 	mon_cry CRY_VENONAT,        0,   256 ; TENTACOOL
 	mon_cry CRY_VENONAT,      238,   383 ; TENTACRUEL
 	mon_cry CRY_CLEFAIRY,      60,   129 ; SEADRA
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 265
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 266
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 267
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
 	assert_table_length $ff

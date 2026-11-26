@@ -173,7 +173,6 @@ EvosAttacksPointers::
 	dw OctilleryEvosAttacks
 	dw ChinchouEvosAttacks
 	dw LanturnEvosAttacks
-	dw MantineEvosAttacks
 	dw TentacoolEvosAttacks
 	dw TentacruelEvosAttacks
 	dw SeadraEvosAttacks

@@ -171,7 +171,6 @@ AnimationPointers:
 	dw OctilleryAnimation
 	dw ChinchouAnimation
 	dw LanturnAnimation
-	dw MantineAnimation
 	dw TentacoolAnimation
 	dw TentacruelAnimation
 	dw SeadraAnimation

@@ -171,7 +171,6 @@ FramesPointers:
 	dw OctilleryFrames
 	dw ChinchouFrames
 	dw LanturnFrames
-	dw MantineFrames
 	dw TentacoolFrames
 	dw TentacruelFrames
 	dw SeadraFrames

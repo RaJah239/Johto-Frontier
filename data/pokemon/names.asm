@@ -171,7 +171,6 @@ PokemonNames::
 	db "Octillery@"
 	db "Chinchou@@"
 	db "Lanturn@@@"
-	db "Mantine@@@"
 	db "Tentacool@"
 	db "Tentacruel"
 	db "Seadra@@@@"
@@ -241,6 +240,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

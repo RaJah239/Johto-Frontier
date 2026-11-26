@@ -7,7 +7,6 @@
 ;	db LAPRAS
 ;	db WOOPER
 ;	db QUAGSIRE
-;	db MANTINE
 ;	db CHINCHOU
 ;	db LANTURN
 	db -1 ; end

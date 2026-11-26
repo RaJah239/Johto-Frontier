@@ -228,7 +228,6 @@ RemoraidEvosAttacks:
 OctilleryEvosAttacks:
 ChinchouEvosAttacks:
 LanturnEvosAttacks:
-MantineEvosAttacks:
 TentacoolEvosAttacks:
 TentacruelEvosAttacks:
 SeadraEvosAttacks:

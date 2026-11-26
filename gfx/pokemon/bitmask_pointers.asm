@@ -171,7 +171,6 @@ BitmasksPointers:
 	dw OctilleryBitmasks
 	dw ChinchouBitmasks
 	dw LanturnBitmasks
-	dw MantineBitmasks
 	dw TentacoolBitmasks
 	dw TentacruelBitmasks
 	dw SeadraBitmasks

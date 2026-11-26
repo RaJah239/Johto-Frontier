@@ -172,7 +172,6 @@ PokedexDataPointerTable:
  	dba OctilleryPokedexEntry
  	dba ChinchouPokedexEntry
  	dba LanturnPokedexEntry
- 	dba MantinePokedexEntry
  	dba TentacoolPokedexEntry
  	dba TentacruelPokedexEntry
  	dba SeadraPokedexEntry

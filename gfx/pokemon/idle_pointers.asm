@@ -171,7 +171,6 @@ AnimationIdlePointers:
 	dw OctilleryAnimationIdle
 	dw ChinchouAnimationIdle
 	dw LanturnAnimationIdle
-	dw MantineAnimationIdle
 	dw TentacoolAnimationIdle
 	dw TentacruelAnimationIdle
 	dw SeadraAnimationIdle

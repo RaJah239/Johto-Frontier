@@ -7,7 +7,6 @@
 ;	db FEEBAS
 ;	db KINGDRA
 ;	db MAGIKARP
-;	db MANTINE
 ;	db OMANYTE
 
     db OMASTAR
