@@ -245,3 +245,5 @@ PolitoedIcon:: INCBIN "gfx/icons/politoed.2bpp"
 MawileIcon:: INCBIN "gfx/icons/mawile.2bpp"
 
 DuosionIcon:: INCBIN "gfx/icons/duosion.2bpp"
+
+ReuniclusIcon:: INCBIN "gfx/icons/reuniclus.2bpp"

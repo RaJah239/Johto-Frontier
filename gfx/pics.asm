@@ -660,3 +660,6 @@ MawileBackpic: INCBIN "gfx/pokemon/mawile/back.2bpp.lz"
 
 DuosionFrontpic: INCBIN "gfx/pokemon/duosion/front.animated.2bpp.lz"
 DuosionBackpic: INCBIN "gfx/pokemon/duosion/back.2bpp.lz"
+
+ReuniclusFrontpic: INCBIN "gfx/pokemon/reuniclus/front.animated.2bpp.lz"
+ReuniclusBackpic: INCBIN "gfx/pokemon/reuniclus/back.2bpp.lz"

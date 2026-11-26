@@ -146,6 +146,7 @@ AlphabeticalPokedexOrder:
 	db RAICHU
 	db RAIKOU
 	db RAPIDASH
+	db REUNICLUS
 	db RHYDON
 	db ROTOM
 	db SALAMENCE

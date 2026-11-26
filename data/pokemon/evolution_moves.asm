@@ -201,4 +201,5 @@ EvolutionMoves::
    db NO_MOVE      ; POLITOED
    db NO_MOVE      ; MAWILE
    db NO_MOVE      ; DUOSION
+   db NO_MOVE      ; REUNICLUS
 	assert_table_length NUM_POKEMON

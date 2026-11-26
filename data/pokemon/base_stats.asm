@@ -233,4 +233,5 @@ INCLUDE "data/pokemon/base_stats/poliwrath.asm"
 INCLUDE "data/pokemon/base_stats/politoed.asm"
 INCLUDE "data/pokemon/base_stats/mawile.asm"
 INCLUDE "data/pokemon/base_stats/duosion.asm"
+INCLUDE "data/pokemon/base_stats/reuniclus.asm"
 	assert_table_length NUM_POKEMON
