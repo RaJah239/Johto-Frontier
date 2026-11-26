@@ -91,7 +91,7 @@ JohtoGrassWildMons:
 	; morn
 	db 21, GOLBAT
 	db 21, WOOPER
-	db 21, RHYHORN
+	db 21, RHYDON
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
@@ -99,7 +99,7 @@ JohtoGrassWildMons:
 	; day
 	db 21, GOLBAT
 	db 21, WOOPER
-	db 21, RHYHORN
+	db 21, RHYDON
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
@@ -107,7 +107,7 @@ JohtoGrassWildMons:
 	; nite
 	db 21, GOLBAT
 	db 21, WOOPER
-	db 21, RHYHORN
+	db 21, RHYDON
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
@@ -119,7 +119,7 @@ JohtoGrassWildMons:
 	; morn
 	db 25, GOLBAT
 	db 25, QUAGSIRE
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
@@ -127,7 +127,7 @@ JohtoGrassWildMons:
 	; day
 	db 25, GOLBAT
 	db 25, QUAGSIRE
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
@@ -135,7 +135,7 @@ JohtoGrassWildMons:
 	; nite
 	db 25, GOLBAT
 	db 25, QUAGSIRE
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
@@ -372,7 +372,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE
@@ -380,7 +380,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE
@@ -388,7 +388,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, RHYHORN
+	db 25, RHYDON
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE

@@ -152,7 +152,6 @@ AlphabeticalPokedexOrder:
 	db RAIKOU
 	db RAPIDASH
 	db RHYDON
-	db RHYHORN
 	db ROTOM
 	db SALAMENCE
 	db SCIZOR

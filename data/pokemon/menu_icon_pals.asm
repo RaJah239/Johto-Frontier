@@ -63,7 +63,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  BLUE   ; AMPHAROS
 	icon_pals BLUE,   GREEN  ; MARILL
 	icon_pals BLUE,   BROWN  ; AZUMARILL
-	icon_pals GRAY,   BROWN  ; RHYHORN
 	icon_pals GRAY,   BROWN  ; RHYDON
 	icon_pals BLUE,   PINK   ; DRILBUR
 	icon_pals GRAY,   RED    ; EXCADRILL

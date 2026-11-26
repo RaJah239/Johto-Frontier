@@ -115,7 +115,6 @@ FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
 MarillEvosAttacks:
 AzumarillEvosAttacks:
-RhyhornEvosAttacks: ; lv 30 evo
 RhydonEvosAttacks:
 DrilburEvosAttacks: ; lv 25 evo
 ExcadrillEvosAttacks:

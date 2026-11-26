@@ -58,7 +58,6 @@ IconPointers:
 	dw AmpharosIcon
 	dw MarillIcon
 	dw AzumarillIcon
-	dw RhyhornIcon
 	dw RhydonIcon
 	dw DrilburIcon
 	dw ExcadrillIcon

@@ -58,7 +58,6 @@ NewPokedexOrder:
 	db AMPHAROS
 	db MARILL
 	db AZUMARILL
-	db RHYHORN
 	db RHYDON
 	db DRILBUR
 	db EXCADRILL

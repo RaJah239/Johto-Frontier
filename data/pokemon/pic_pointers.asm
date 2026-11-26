@@ -115,8 +115,6 @@ PokemonPicPointers::
  	dba MarillBackpic
  	dba AzumarillFrontpic
  	dba AzumarillBackpic
- 	dba RhyhornFrontpic
- 	dba RhyhornBackpic
  	dba RhydonFrontpic
  	dba RhydonBackpic
  	dba DrilburFrontpic

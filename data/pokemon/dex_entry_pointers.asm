@@ -57,7 +57,6 @@ PokedexDataPointerTable:
  	dba AmpharosPokedexEntry
  	dba MarillPokedexEntry
  	dba AzumarillPokedexEntry
- 	dba RhyhornPokedexEntry
  	dba RhydonPokedexEntry
  	dba DrilburPokedexEntry
  	dba ExcadrillPokedexEntry

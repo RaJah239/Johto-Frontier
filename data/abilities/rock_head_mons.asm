@@ -5,7 +5,6 @@
 
 ;	db ONIX
 ;	db STEELIX
-;	db RHYHORN
 ;	db RHYDON
 ;	db SUDOWOODO
 

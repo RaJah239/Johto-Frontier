@@ -404,7 +404,7 @@ PartyKeeperSpeciesList:
 	db FLAAFFY
 	db AZUMARILL
 	db MARILL
-	db RHYHORN
+	db RHYDON
 	db DRILBUR
 	db ONIX
 	db MAGIKARP

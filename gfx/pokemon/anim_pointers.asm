@@ -56,7 +56,6 @@ AnimationPointers:
 	dw AmpharosAnimation
 	dw MarillAnimation
 	dw AzumarillAnimation
-	dw RhyhornAnimation
 	dw RhydonAnimation
 	dw DrilburAnimation
 	dw ExcadrillAnimation

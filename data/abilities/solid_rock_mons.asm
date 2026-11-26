@@ -3,7 +3,6 @@
 
 SolidRockPokemon:
 ;	db ONIX
-;	db RHYHORN
 ;	db TORTERRA
 ;	db OMANYTE
 ;	db OMASTAR

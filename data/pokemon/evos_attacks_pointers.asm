@@ -58,7 +58,6 @@ EvosAttacksPointers::
 	dw AmpharosEvosAttacks
 	dw MarillEvosAttacks
 	dw AzumarillEvosAttacks
-	dw RhyhornEvosAttacks
 	dw RhydonEvosAttacks
 	dw DrilburEvosAttacks
 	dw ExcadrillEvosAttacks

@@ -56,7 +56,6 @@ PokemonNames::
 	db "Ampharos@@"
 	db "Marill@@@@"
 	db "Azumarill@"
-	db "Rhyhorn@@@"
 	db "Rhydon@@@@"
 	db "Drilbur@@@"
 	db "Excadrill@"
@@ -214,6 +213,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

@@ -56,7 +56,6 @@ EvolutionMoves::
    db NO_MOVE      ; AMPHAROS
    db NO_MOVE      ; MARILL
    db NO_MOVE      ; AZUMARILL
-   db NO_MOVE      ; RHYHORN
    db NO_MOVE      ; RHYDON
    db NO_MOVE      ; DRILBUR
    db NO_MOVE      ; EXCADRILL

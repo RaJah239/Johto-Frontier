@@ -56,7 +56,6 @@ AnimationIdlePointers:
 	dw AmpharosAnimationIdle
 	dw MarillAnimationIdle
 	dw AzumarillAnimationIdle
-	dw RhyhornAnimationIdle
 	dw RhydonAnimationIdle
 	dw DrilburAnimationIdle
 	dw ExcadrillAnimationIdle

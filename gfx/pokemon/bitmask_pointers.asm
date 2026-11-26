@@ -56,7 +56,6 @@ BitmasksPointers:
 	dw AmpharosBitmasks
 	dw MarillBitmasks
 	dw AzumarillBitmasks
-	dw RhyhornBitmasks
 	dw RhydonBitmasks
 	dw DrilburBitmasks
 	dw ExcadrillBitmasks

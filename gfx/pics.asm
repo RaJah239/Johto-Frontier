@@ -245,7 +245,6 @@ TwinsPic:            INCBIN "gfx/trainers/twins.2bpp.lz"
 TropiusBackpic:      INCBIN "gfx/pokemon/tropius/back.2bpp.lz"
 BeautiflyBackpic:    INCBIN "gfx/pokemon/beautifly/back.2bpp.lz"
 BayleefBackpic:      INCBIN "gfx/pokemon/bayleef/back.2bpp.lz"
-RhyhornFrontpic:     INCBIN "gfx/pokemon/rhyhorn/front.animated.2bpp.lz"
 RapidashBackpic:     INCBIN "gfx/pokemon/rapidash/back.2bpp.lz"
 DoduoBackpic:        INCBIN "gfx/pokemon/doduo/back.2bpp.lz"
 SnoverFrontpic:      INCBIN "gfx/pokemon/snover/front.animated.2bpp.lz"
@@ -529,7 +528,6 @@ UnownRBackpic:       INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
 
 
 SECTION "Pics 19", ROMX
-RhyhornBackpic:      INCBIN "gfx/pokemon/rhyhorn/back.2bpp.lz"
 PidgeottoFrontpic:   INCBIN "gfx/pokemon/pidgeotto/front.animated.2bpp.lz"
 SilcoonFrontpic:     INCBIN "gfx/pokemon/silcoon/front.animated.2bpp.lz"
 PonytaFrontpic:      INCBIN "gfx/pokemon/ponyta/front.animated.2bpp.lz"

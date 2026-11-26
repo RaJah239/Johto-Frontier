@@ -62,7 +62,6 @@ PokemonCries::
 	mon_cry CRY_AMPHAROS,    -124,   232 ; AMPHAROS
 	mon_cry CRY_MARILL,       283,   288 ; MARILL
 	mon_cry CRY_MARILL,       182,   384 ; AZUMARILL
-	mon_cry CRY_CHARMANDER,     0,   256 ; RHYHORN
 	mon_cry CRY_RHYDON,         0,   256 ; RHYDON
 	mon_cry CRY_TEDDIURSA,  -$018,  $0b3 ; DRILBUR Ax6
 	mon_cry CRY_NIDOQUEEN,  -$108,  $14d ; EXCADRILL Ax6
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 292
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 293
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 294
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 295
 	assert_table_length $ff

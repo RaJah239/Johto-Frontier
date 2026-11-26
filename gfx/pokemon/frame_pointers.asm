@@ -56,7 +56,6 @@ FramesPointers:
 	dw AmpharosFrames
 	dw MarillFrames
 	dw AzumarillFrames
-	dw RhyhornFrames
 	dw RhydonFrames
 	dw DrilburFrames
 	dw ExcadrillFrames
