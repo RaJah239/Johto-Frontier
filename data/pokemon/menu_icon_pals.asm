@@ -182,7 +182,6 @@ MonMenuIconPals:
 	icon_pals BLUE,   TEAL   ; TENTACOOL
 	icon_pals BLUE,   TEAL   ; TENTACRUEL
 	icon_pals BLUE,   GRAY   ; SEEL
-	icon_pals BLUE,   GRAY   ; DEWGONG
 	icon_pals BLUE,   TEAL   ; HORSEA
 	icon_pals BLUE,   PURPLE ; SEADRA
 	icon_pals BLUE,   PURPLE ; KINGDRA

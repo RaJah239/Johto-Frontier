@@ -5,7 +5,6 @@ MahoganyGym_MapEvents:
 
 	def_coord_events
 	coord_event  9, 16, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierRoxanneCheck
-	coord_event  3, 13, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierClarissaBattleCheck
 	coord_event  5, 10, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderRonaldCheck
 	coord_event  2,  5, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderDouglasCheck
 
@@ -17,7 +16,6 @@ MahoganyGym_MapEvents:
 	object_event  5,  3, SPRITE_PRYCE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, MahoganyGymPryceScript, -1
 	object_event  9, 17, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerSkierRoxanne, -1
 	object_event  5,  9, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderRonald, -1
-	object_event  2, 13, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, TrainerSkierClarissaBattle, -1
 	object_event  2,  4, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderDouglas, -1
 	object_event  7, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, MahoganyGymGuideScript, -1
 	object_event  4, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyGymZincScript, EVENT_MAHOGANY_GYM_FIVE_ZINCS
@@ -26,7 +24,6 @@ MahoganyGym_MapEvents:
 	const MAHOGANYGYM_PRYCE
 	const MAHOGANYGYM_BEAUTY1
 	const MAHOGANYGYM_ROCKER1
-	const MAHOGANYGYM_BEAUTY2
 	const MAHOGANYGYM_ROCKER2
 	const MAHOGANYGYM_GYM_GUIDE
 	const MAHOGANYGYM_POKE_BALL
@@ -301,68 +298,6 @@ TrainerSkierRoxanneBattle:
 SkierRoxanneBeatenText:
 	text "I wouldn't lose to"
 	line "you in skiing!"
-	done
-
-TrainerSkierClarissaBattle:
-	faceplayer
-	checkevent EVENT_BEAT_SKIER_CLARISSA
-	iftrue .AfterBattleText
-	special SaveMusic
-	playmusic MUSIC_BEAUTY_ENCOUNTER
-	sjump ClarissaIntroAndBattle
-
-.AfterBattleText:
-	jumpthistext
-		text "I shouldn't have"
-		line "been bragging"
-		cont "about my skiing…"
-		done
-
-TrainerSkierClarissaBattleCheck:
-	checkevent EVENT_BEAT_SKIER_CLARISSA
-	iftrue_end
-	special SaveMusic
-	playmusic MUSIC_BEAUTY_ENCOUNTER
-	showemote EMOTE_SHOCK, MAHOGANYGYM_BEAUTY2, 30
-	; fallthrough
-
-ClarissaIntroAndBattle:
-	showthistext
-		text "Check out my"
-		line "parallel turn!"
-		done
-	winlosstext SkierClarissaBeatenText, 0
-	readvar VAR_BADGES
-	ifgreater 7, .EightBadges
-	ifgreater 5, .SixOrSevenBadges
-	ifgreater 3, .FourOrFiveBadges
-	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge:
-	loadtrainer SKIER, CLARISSA1
-	sjump .StartBattle
-.TwoOrThreeBadges:
-	loadtrainer SKIER, CLARISSA2
-	sjump .StartBattle
-.FourOrFiveBadges:
-	loadtrainer SKIER, CLARISSA3
-	sjump .StartBattle
-.SixOrSevenBadges:
-	loadtrainer SKIER, CLARISSA4
-	sjump .StartBattle
-.EightBadges:
-	loadtrainer SKIER, CLARISSA5
-	; fallthrough
-
-.StartBattle:
-	startbattle
-	reloadmapafterbattle
-	special RestoreMusic
-	setevent EVENT_BEAT_SKIER_CLARISSA
-	end
-
-SkierClarissaBeatenText:
-	text "No! You made me"
-	line "wipe out!"
 	done
 
 TrainerBoarderRonald:

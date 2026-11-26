@@ -153,21 +153,21 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 35, TENTACRUEL
 	db 35, KINGDRA
-	db 35, DEWGONG
+	db 35, LAPRAS
 	end_water_wildmons
 
 	def_water_wildmons WHIRL_ISLAND_B2F
 	db 4 percent ; encounter rate
 	db 35, TENTACRUEL
 	db 35, KINGDRA
-	db 35, DEWGONG
+	db 35, LAPRAS
 	end_water_wildmons
 
 	def_water_wildmons WHIRL_ISLAND_LUGIA_CHAMBER
 	db 4 percent ; encounter rate
 	db 35, TENTACRUEL
 	db 35, KINGDRA
-	db 35, DEWGONG
+	db 35, LAPRAS
 	end_water_wildmons
 
 	def_water_wildmons SILVER_CAVE_ROOM_2

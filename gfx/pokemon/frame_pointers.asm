@@ -175,7 +175,6 @@ FramesPointers:
 	dw TentacoolFrames
 	dw TentacruelFrames
 	dw SeelFrames
-	dw DewgongFrames
 	dw HorseaFrames
 	dw SeadraFrames
 	dw KingdraFrames

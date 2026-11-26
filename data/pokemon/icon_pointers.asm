@@ -177,7 +177,6 @@ IconPointers:
 	dw TentacoolIcon
 	dw TentacruelIcon
 	dw SeelIcon
-	dw DewgongIcon
 	dw HorseaIcon
 	dw SeadraIcon
 	dw KingdraIcon

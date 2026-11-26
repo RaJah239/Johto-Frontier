@@ -232,7 +232,6 @@ MantineEvosAttacks:
 TentacoolEvosAttacks:
 TentacruelEvosAttacks:
 SeelEvosAttacks:
-DewgongEvosAttacks:
 HorseaEvosAttacks:
 SeadraEvosAttacks:
 KingdraEvosAttacks:

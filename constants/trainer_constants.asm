@@ -260,11 +260,6 @@ DEF KRIS EQU __trainer_class__
 	const ROXANNE3 ; mahogany gym trainer
 	const ROXANNE4 ; mahogany gym trainer
 	const ROXANNE5 ; mahogany gym trainer
-	const CLARISSA1 ; mahogany gym trainer
-	const CLARISSA2 ; mahogany gym trainer
-	const CLARISSA3 ; mahogany gym trainer
-	const CLARISSA4 ; mahogany gym trainer
-	const CLARISSA5 ; mahogany gym trainer
 
 	trainerclass TEACHER ; 22
 	const RAVEN1 ; olivine gym trainer

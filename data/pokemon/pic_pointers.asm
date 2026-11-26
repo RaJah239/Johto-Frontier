@@ -353,8 +353,6 @@ PokemonPicPointers::
  	dba TentacruelBackpic
  	dba SeelFrontpic
  	dba SeelBackpic
- 	dba DewgongFrontpic
- 	dba DewgongBackpic
  	dba HorseaFrontpic
  	dba HorseaBackpic
  	dba SeadraFrontpic

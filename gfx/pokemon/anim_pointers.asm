@@ -175,7 +175,6 @@ AnimationPointers:
 	dw TentacoolAnimation
 	dw TentacruelAnimation
 	dw SeelAnimation
-	dw DewgongAnimation
 	dw HorseaAnimation
 	dw SeadraAnimation
 	dw KingdraAnimation

@@ -181,7 +181,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; TENTACOOL
  INCBIN "gfx/footprints/blank.1bpp" ; TENTACRUEL
  INCBIN "gfx/footprints/blank.1bpp" ; SEEL
- INCBIN "gfx/footprints/blank.1bpp" ; DEWGONG
  INCBIN "gfx/footprints/blank.1bpp" ; HORSEA
  INCBIN "gfx/footprints/blank.1bpp" ; SEADRA
  INCBIN "gfx/footprints/blank.1bpp" ; KINGDRA
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 261
 	 INCBIN "gfx/footprints/blank.1bpp" ; 262
 	 INCBIN "gfx/footprints/blank.1bpp" ; 263
+	 INCBIN "gfx/footprints/blank.1bpp" ; 264
 	assert_table_length $100

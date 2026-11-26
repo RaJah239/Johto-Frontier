@@ -5,7 +5,6 @@
 ; as HydrationPokemon, engine/battle/ai/ability_lists.asm as HydrationPokemon_AI)
 
 ;	db SEEL
-;	db DEWGONG
 ;	db LAPRAS
     db VAPOREON
     db -1 ; end

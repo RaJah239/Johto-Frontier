@@ -2488,9 +2488,7 @@ INCLUDE "data/abilities/unaware_mons.asm"
 PolarFangorLightBallBoost:
 ; Return in hl the stat value at hl.
 
-; If the attacking monster is Seel or Dewgong and
-; it's holding a Meteor Mitts, or if it's Pikachu and
-; it's holding a Light Ball, double it.
+; If Pikachu is holding a Light Ball, double its Attack.
 	push bc
 	push de
 
@@ -2506,9 +2504,6 @@ PolarFangorLightBallBoost:
 	pop hl
 	cp PIKACHU
 	jr z, .lightball
-	lb bc, DEWGONG, SEEL
-	ld d, POLAR_FANG
-	call SpeciesItemBoost
 	jr .done
 
 .lightball

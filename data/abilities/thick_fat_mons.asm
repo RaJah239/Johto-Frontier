@@ -3,7 +3,6 @@
 
 ThickFatPokemon:
 ;    db SEEL
-;    db DEWGONG
 ;    db SNORLAX
 ;    db MARILL
 ;    db AZUMARILL

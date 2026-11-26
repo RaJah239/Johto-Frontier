@@ -175,7 +175,6 @@ AnimationIdlePointers:
 	dw TentacoolAnimationIdle
 	dw TentacruelAnimationIdle
 	dw SeelAnimationIdle
-	dw DewgongAnimationIdle
 	dw HorseaAnimationIdle
 	dw SeadraAnimationIdle
 	dw KingdraAnimationIdle

@@ -63,7 +63,6 @@ BlazikenFrontpic:    INCBIN "gfx/pokemon/blaziken/front.animated.2bpp.lz"
 WeezingFrontpic:     INCBIN "gfx/pokemon/weezing/front.animated.2bpp.lz"
 LucarioFrontpic:     INCBIN "gfx/pokemon/lucario/front.animated.2bpp.lz"
 SkarmoryFrontpic:    INCBIN "gfx/pokemon/skarmory/front.animated.2bpp.lz"
-DewgongFrontpic:     INCBIN "gfx/pokemon/dewgong/front.animated.2bpp.lz"
 
 
 SECTION "Pics 4", ROMX
@@ -527,7 +526,6 @@ HoundourBackpic:     INCBIN "gfx/pokemon/houndour/back.2bpp.lz"
 GibleBackpic:        INCBIN "gfx/pokemon/gible/back.2bpp.lz"
 SquirtleBackpic:     INCBIN "gfx/pokemon/squirtle/back.2bpp.lz"
 ShuckleBackpic:      INCBIN "gfx/pokemon/shuckle/back.2bpp.lz"
-DewgongBackpic:      INCBIN "gfx/pokemon/dewgong/back.2bpp.lz"
 UnownBFrontpic:      INCBIN "gfx/pokemon/unown_b/front.animated.2bpp.lz"
 SlowpokeBackpic:     INCBIN "gfx/pokemon/slowpoke/back.2bpp.lz"
 HaxorusBackpic:      INCBIN "gfx/pokemon/haxorus/back.2bpp.lz"

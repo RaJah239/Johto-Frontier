@@ -177,7 +177,6 @@ NewPokedexOrder:
 	db TENTACOOL
 	db TENTACRUEL
 	db SEEL
-	db DEWGONG
 	db HORSEA
 	db SEADRA
 	db KINGDRA

@@ -175,7 +175,6 @@ EvolutionMoves::
    db NO_MOVE      ; TENTACOOL
    db NO_MOVE      ; TENTACRUEL
    db NO_MOVE      ; SEEL
-   db NO_MOVE      ; DEWGONG
    db NO_MOVE      ; HORSEA
    db NO_MOVE      ; SEADRA
    db NO_MOVE      ; KINGDRA

@@ -47,7 +47,6 @@ AlphabeticalPokedexOrder:
 	db DARTRIX
 	db DECIDUEYE
 	db DELIBIRD
-	db DEWGONG
 	db DITTO
 	db DODRIO
 	db DODUO

@@ -747,8 +747,8 @@ MiracleSeedDesc:
 	next "type moves.@"
 
 PolarFangDesc:
-	db   "Doubles Dewgong's"
-	next "line Attack.@"
+	db   "No longer has"
+	next "a battle effect.@"
 
 FocusBandDesc:
 	db   "May prevent faint-"

@@ -985,7 +985,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_NW
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -993,7 +993,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1001,7 +1001,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1013,7 +1013,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_NE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1021,7 +1021,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1029,7 +1029,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1041,7 +1041,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_SW
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1049,7 +1049,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1057,7 +1057,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1069,7 +1069,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_CAVE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1077,7 +1077,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1085,7 +1085,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1097,7 +1097,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_SE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1105,7 +1105,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1113,7 +1113,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1125,7 +1125,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_B1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1133,7 +1133,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1141,7 +1141,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1153,7 +1153,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons WHIRL_ISLAND_B2F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1161,7 +1161,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; day
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
@@ -1169,7 +1169,7 @@ JohtoGrassWildMons:
 	db 35, CROBAT
 	db 35, CORSOLA
 	; nite
-	db 35, DEWGONG
+	db 35, LAPRAS
 	db 35, SEADRA
 	db 35, CORSOLA
 	db 35, OCTILLERY
