@@ -54,7 +54,6 @@ AnimationIdlePointers:
 	dw VictreebelAnimationIdle
 	dw FlaaffyAnimationIdle
 	dw AmpharosAnimationIdle
-	dw GolisopodAnimationIdle
 	dw MarillAnimationIdle
 	dw AzumarillAnimationIdle
 	dw RhyhornAnimationIdle

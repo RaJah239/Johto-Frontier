@@ -54,7 +54,6 @@ EvolutionMoves::
    db NO_MOVE      ; VICTREEBEL
    db NO_MOVE      ; FLAAFFY
    db NO_MOVE      ; AMPHAROS
-   db NO_MOVE      ; GOLISOPOD
    db NO_MOVE      ; MARILL
    db NO_MOVE      ; AZUMARILL
    db NO_MOVE      ; RHYHORN

@@ -25,9 +25,9 @@ JohtoWaterWildMons:
 
 	def_water_wildmons ROUTE_3
 	db 4 percent ; encounter rate
-	db 20, GOLISOPOD
-	db 20, GOLISOPOD
-	db 25, GOLISOPOD
+	db 20, AZUMARILL
+	db 20, AZUMARILL
+	db 25, AZUMARILL
 	end_water_wildmons
 
 	def_water_wildmons DARK_CAVE_VIOLET_ENTRANCE
@@ -68,21 +68,21 @@ JohtoWaterWildMons:
 	def_water_wildmons UNION_CAVE_1F
 	db 4 percent ; encounter rate
 	db 30, LANTURN
-	db 30, GOLISOPOD
+	db 30, AZUMARILL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons UNION_CAVE_B1F
 	db 4 percent ; encounter rate
 	db 30, LANTURN
-	db 30, GOLISOPOD
+	db 30, AZUMARILL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons UNION_CAVE_B2F
 	db 4 percent ; encounter rate
 	db 30, LANTURN
-	db 30, GOLISOPOD
+	db 30, AZUMARILL
 	db 30, TENTACRUEL
 	end_water_wildmons
 
@@ -236,7 +236,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_15
 	db 4 percent ; encounter rate
 	db 20, TENTACOOL
-	db 30, GOLISOPOD
+	db 30, AZUMARILL
 	db 30, AZUMARILL
 	end_water_wildmons
 
@@ -250,7 +250,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_16
 	db 4 percent ; encounter rate
 	db 20, TENTACOOL
-	db 30, GOLISOPOD
+	db 30, AZUMARILL
 	db 30, TANGROWTH
 	end_water_wildmons
 

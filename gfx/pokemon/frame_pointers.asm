@@ -54,7 +54,6 @@ FramesPointers:
 	dw VictreebelFrames
 	dw FlaaffyFrames
 	dw AmpharosFrames
-	dw GolisopodFrames
 	dw MarillFrames
 	dw AzumarillFrames
 	dw RhyhornFrames

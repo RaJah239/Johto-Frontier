@@ -63,7 +63,7 @@ JohtoGrassWildMons:
 	; morn
 	db 5, BELLSPROUT
 	db 7, SILCOON
-	db 5, GOLISOPOD
+	db 5, ARIADOS
 	db 7, CASCOON
 	db 5, FLAAFFY
 	db 5, PIDGEOTTO
@@ -71,13 +71,13 @@ JohtoGrassWildMons:
 	; day
 	db 5, BELLSPROUT
 	db 7, SILCOON
-	db 5, GOLISOPOD
+	db 5, ARIADOS
 	db 7, CASCOON
 	db 5, FLAAFFY
 	db 5, PIDGEOTTO
 	db 5, YANMA
 	; nite
-	db 5, GOLISOPOD
+	db 5, ARIADOS
 	db 7, WOOPER
 	db 5, SPINARAK
 	db 7, HOOTHOOT
@@ -430,7 +430,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, GOLISOPOD
+	db 15, ARIADOS
 	db 5, SLOWPOKE
 	; day
 	db 15, SLOWPOKE
@@ -438,7 +438,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, GOLISOPOD
+	db 15, ARIADOS
 	db 5, SLOWPOKE
 	; nite
 	db 15, SLOWPOKE
@@ -446,7 +446,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, GOLISOPOD
+	db 15, ARIADOS
 	db 5, SLOWPOKE
 	end_grass_wildmons
 
@@ -458,7 +458,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, GOLISOPOD
+	db 26, ARIADOS
 	db 26, SLOWBRO
 	; day
 	db 26, SLOWBRO
@@ -466,7 +466,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, GOLISOPOD
+	db 26, ARIADOS
 	db 26, SLOWBRO
 	; nite
 	db 26, SLOWBRO
@@ -474,7 +474,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, GOLISOPOD
+	db 26, ARIADOS
 	db 26, SLOWBRO
 	end_grass_wildmons
 
@@ -1355,7 +1355,7 @@ JohtoGrassWildMons:
 	db 30, PIDGEOT
 	db 30, BRELOOM
 	db 30, SCYTHER
-	db 30, GOLISOPOD
+	db 30, ARIADOS
 	; day
 	db 30, VICTREEBEL
 	db 30, TANGROWTH
@@ -1363,7 +1363,7 @@ JohtoGrassWildMons:
 	db 30, PIDGEOT
 	db 30, BRELOOM
 	db 30, SCYTHER
-	db 30, GOLISOPOD
+	db 30, ARIADOS
 	; nite
 	db 30, HYPNO
 	db 30, NOCTOWL
@@ -1371,7 +1371,7 @@ JohtoGrassWildMons:
 	db 30, QUAGSIRE
 	db 30, PRIMEAPE
 	db 30, HYPNO
-	db 30, GOLISOPOD
+	db 30, ARIADOS
 	end_grass_wildmons
 
 	def_grass_wildmons ICE_PATH_1F
@@ -1519,7 +1519,7 @@ JohtoGrassWildMons:
 	; morn
 	db 32, GABITE
 	db 32, HAXORUS
-	db 32, GOLISOPOD
+	db 32, ARIADOS
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
@@ -1527,7 +1527,7 @@ JohtoGrassWildMons:
 	; day
 	db 32, GABITE
 	db 32, HAXORUS
-	db 32, GOLISOPOD
+	db 32, ARIADOS
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
@@ -1535,7 +1535,7 @@ JohtoGrassWildMons:
 	; nite
 	db 32, GABITE
 	db 32, HAXORUS
-	db 32, GOLISOPOD
+	db 32, ARIADOS
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
@@ -1603,7 +1603,7 @@ JohtoGrassWildMons:
 	; morn
 	db 34, CROBAT
 	db 34, SLOWBRO
-	db 34, GOLISOPOD
+	db 34, ARIADOS
 	db 34, GLIGAR
 	db 34, EXCADRILL
 	db 34, QUAGSIRE
@@ -1611,7 +1611,7 @@ JohtoGrassWildMons:
 	; day
 	db 34, CROBAT
 	db 34, SLOWBRO
-	db 34, GOLISOPOD
+	db 34, ARIADOS
 	db 34, GLIGAR
 	db 34, EXCADRILL
 	db 34, QUAGSIRE
@@ -1619,7 +1619,7 @@ JohtoGrassWildMons:
 	; nite
 	db 34, CROBAT
 	db 34, SLOWBRO
-	db 34, GOLISOPOD
+	db 34, ARIADOS
 	db 34, GLIGAR
 	db 34, EXCADRILL
 	db 34, QUAGSIRE

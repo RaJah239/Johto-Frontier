@@ -77,7 +77,6 @@ AlphabeticalPokedexOrder:
 	db GLIGAR
 	db GLISCOR
 	db GOLBAT
-	db GOLISOPOD
 	db GRANBULL
 	db GRIMER
 	db GROWLITHE

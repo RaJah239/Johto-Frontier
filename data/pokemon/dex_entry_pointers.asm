@@ -55,7 +55,6 @@ PokedexDataPointerTable:
  	dba VictreebelPokedexEntry
  	dba FlaaffyPokedexEntry
  	dba AmpharosPokedexEntry
- 	dba GolisopodPokedexEntry
  	dba MarillPokedexEntry
  	dba AzumarillPokedexEntry
  	dba RhyhornPokedexEntry

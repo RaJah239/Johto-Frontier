@@ -93,7 +93,6 @@ ElectabuzzFrontpic:  INCBIN "gfx/pokemon/electabuzz/front.animated.2bpp.lz"
 YanmegaFrontpic:     INCBIN "gfx/pokemon/yanmega/front.animated.2bpp.lz"
 KingdraFrontpic:     INCBIN "gfx/pokemon/kingdra/front.animated.2bpp.lz"
 CharmeleonFrontpic:  INCBIN "gfx/pokemon/charmeleon/front.animated.2bpp.lz"
-GolisopodFrontpic:   INCBIN "gfx/pokemon/golisopod/front.animated.2bpp.lz"
 
 
 SECTION "Pics 6", ROMX
@@ -196,7 +195,6 @@ SwabluFrontpic:      INCBIN "gfx/pokemon/swablu/front.animated.2bpp.lz"
 ScolipedeBackpic:    INCBIN "gfx/pokemon/scolipede/back.2bpp.lz"
 KoffingFrontpic:     INCBIN "gfx/pokemon/koffing/front.animated.2bpp.lz"
 JoltikFrontpic:      INCBIN "gfx/pokemon/joltik/front.animated.2bpp.lz"
-GolisopodBackpic:    INCBIN "gfx/pokemon/golisopod/back.2bpp.lz"
 LanturnFrontpic:     INCBIN "gfx/pokemon/lanturn/front.animated.2bpp.lz"
 GalladeFrontpic:     INCBIN "gfx/pokemon/gallade/front.animated.2bpp.lz"
 AbomasnowFrontpic:   INCBIN "gfx/pokemon/abomasnow/front.animated.2bpp.lz"

@@ -56,7 +56,6 @@ NewPokedexOrder:
 	db VICTREEBEL
 	db FLAAFFY
 	db AMPHAROS
-	db GOLISOPOD
 	db MARILL
 	db AZUMARILL
 	db RHYHORN

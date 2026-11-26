@@ -113,7 +113,6 @@ WeepinbellEvosAttacks:
 VictreebelEvosAttacks:
 FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
-GolisopodEvosAttacks:
 MarillEvosAttacks:
 AzumarillEvosAttacks:
 RhyhornEvosAttacks: ; lv 30 evo

@@ -111,8 +111,6 @@ PokemonPicPointers::
  	dba FlaaffyBackpic
  	dba AmpharosFrontpic
  	dba AmpharosBackpic
- 	dba GolisopodFrontpic
- 	dba GolisopodBackpic
  	dba MarillFrontpic
  	dba MarillBackpic
  	dba AzumarillFrontpic

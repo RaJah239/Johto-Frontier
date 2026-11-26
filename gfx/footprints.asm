@@ -60,7 +60,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; VICTREEBEL
  INCBIN "gfx/footprints/flaaffy.1bpp"
  INCBIN "gfx/footprints/ampharos.1bpp"
- INCBIN "gfx/footprints/golisopod.1bpp"
  INCBIN "gfx/footprints/marill.1bpp"
  INCBIN "gfx/footprints/azumarill.1bpp" 
  INCBIN "gfx/footprints/rhyhorn.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 290
 	 INCBIN "gfx/footprints/blank.1bpp" ; 291
 	 INCBIN "gfx/footprints/blank.1bpp" ; 292
+	 INCBIN "gfx/footprints/blank.1bpp" ; 293
 	assert_table_length $100
