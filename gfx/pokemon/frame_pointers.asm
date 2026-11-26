@@ -211,4 +211,5 @@ FramesPointers:
 	dw AmoongussFrames
 	dw DipplinFrames
 	dw HydrappleFrames
+	dw RoseliaFrames
 	assert_table_length NUM_POKEMON

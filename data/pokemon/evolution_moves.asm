@@ -211,4 +211,5 @@ EvolutionMoves::
    db NO_MOVE      ; AMOONGUSS
    db NO_MOVE      ; DIPPLIN
    db NO_MOVE      ; HYDRAPPLE
+   db NO_MOVE      ; ROSELIA
 	assert_table_length NUM_POKEMON

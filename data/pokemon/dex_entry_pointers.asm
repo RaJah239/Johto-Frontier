@@ -212,4 +212,5 @@ PokedexDataPointerTable:
 	dba AmoongussPokedexEntry
 	dba DipplinPokedexEntry
 	dba HydrapplePokedexEntry
+	dba RoseliaPokedexEntry
 	assert_table_length NUM_POKEMON

@@ -155,6 +155,7 @@ AlphabeticalPokedexOrder:
 	db RAPIDASH
 	db REUNICLUS
 	db RHYDON
+	db ROSELIA
 	db ROTOM
 	db SALAMENCE
 	db SCIZOR

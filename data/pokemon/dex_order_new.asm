@@ -123,6 +123,7 @@ NewPokedexOrder:
 	db SCIZOR
 	db KLEAVOR
 	db HERACROSS
+	db ROSELIA
 	db MEOWTH
 	db PERSIAN
 	db SNUBBULL

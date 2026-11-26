@@ -218,6 +218,7 @@ MonMenuIconPals:
 	icon_pals GREEN, RED ; AMOONGUSS
 	icon_pals GREEN, RED ; DIPPLIN
 	icon_pals GREEN, RED ; HYDRAPPLE
+	icon_pals GREEN, PINK ; ROSELIA
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

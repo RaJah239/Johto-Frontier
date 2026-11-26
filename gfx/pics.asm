@@ -691,3 +691,6 @@ DipplinBackpic: INCBIN "gfx/pokemon/dipplin/back.2bpp.lz"
 
 HydrappleFrontpic: INCBIN "gfx/pokemon/hydrapple/front.animated.2bpp.lz"
 HydrappleBackpic: INCBIN "gfx/pokemon/hydrapple/back.2bpp.lz"
+
+RoseliaFrontpic: INCBIN "gfx/pokemon/roselia/front.animated.2bpp.lz"
+RoseliaBackpic: INCBIN "gfx/pokemon/roselia/back.2bpp.lz"
