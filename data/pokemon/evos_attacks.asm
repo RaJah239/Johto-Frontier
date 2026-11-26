@@ -125,7 +125,6 @@ GengarEvosAttacks:
 SwabluEvosAttacks:
 AltariaEvosAttacks:
 SmeargleEvosAttacks:
-GrowlitheEvosAttacks:
 ArcanineEvosAttacks:
 HoundourEvosAttacks:
 HoundoomEvosAttacks:

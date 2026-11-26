@@ -3,7 +3,7 @@ SpriteMons:
 	table_width 1, SpriteMons
 	db UNOWN
 	db TORTERRA
-	db GROWLITHE
+	db RAPIDASH
 	db TORTERRA ; was WEEDLE
 	db RAIKOU
 	db ENTEI

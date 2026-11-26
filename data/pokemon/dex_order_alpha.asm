@@ -78,7 +78,6 @@ AlphabeticalPokedexOrder:
 	db GOLBAT
 	db GRANBULL
 	db GRIMER
-	db GROWLITHE
 	db GYARADOS
 	db HARIYAMA
 	db HAUNTER

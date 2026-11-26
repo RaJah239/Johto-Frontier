@@ -15,12 +15,12 @@ GoldenrodMansion1F_MapEvents:
 
 	def_object_events
 	object_event  1,  5, SPRITE_GRANNY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CeladonMansionManager, -1
-	object_event  2,  6, SPRITE_GROWLITHE, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMansion1FGrowlithe, -1
+	object_event  2,  6, SPRITE_RAPIDASH, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMansion1FRapidash, -1
 	object_event  3,  4, SPRITE_CLEFAIRY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMansion1FClefairy, -1
 
 	object_const_def
 	const GOLDENRODMANSION1F_GRANNY
-	const GOLDENRODMANSION1F_GROWLITHE
+	const GOLDENRODMANSION1F_RAPIDASH
 	const GOLDENRODMANSION1F_CLEFAIRY
 
 GoldenrodMansion1F_MapScripts:
@@ -104,19 +104,19 @@ CeladonMansionManagersSuiteSign:
 		line "Owner's Suite"
 		done
 
-GoldenrodMansion1FGrowlithe:
-	setval GROWLITHE
+GoldenrodMansion1FRapidash:
+	setval RAPIDASH
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic GROWLITHE
-	cry GROWLITHE
+	pokepic RAPIDASH
+	cry RAPIDASH
 	waitbutton
 	closepokepic
 .skipthis
 	jumpthistext
-		text "Growlithe: Roff!"
+		text "Rapidash: Neigh!"
 		done
 
 GoldenrodMansion1FClefairy:

@@ -68,7 +68,6 @@ FramesPointers:
 	dw SwabluFrames
 	dw AltariaFrames
 	dw SmeargleFrames
-	dw GrowlitheFrames
 	dw ArcanineFrames
 	dw HoundourFrames
 	dw HoundoomFrames

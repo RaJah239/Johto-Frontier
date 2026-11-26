@@ -68,7 +68,6 @@ BitmasksPointers:
 	dw SwabluBitmasks
 	dw AltariaBitmasks
 	dw SmeargleBitmasks
-	dw GrowlitheBitmasks
 	dw ArcanineBitmasks
 	dw HoundourBitmasks
 	dw HoundoomBitmasks

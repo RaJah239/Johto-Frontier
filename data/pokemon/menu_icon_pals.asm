@@ -75,7 +75,6 @@ MonMenuIconPals:
 	icon_pals BLUE,   BROWN  ; SWABLU
 	icon_pals BLUE,   BROWN  ; ALTARIA
 	icon_pals BROWN,  GREEN  ; SMEARGLE
-	icon_pals RED,    BROWN  ; GROWLITHE
 	icon_pals RED,    BROWN  ; ARCANINE
 	icon_pals RED,    BLUE   ; HOUNDOUR
 	icon_pals RED,    BLUE   ; HOUNDOOM

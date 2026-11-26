@@ -139,8 +139,6 @@ PokemonPicPointers::
  	dba AltariaBackpic
  	dba SmeargleFrontpic
  	dba SmeargleBackpic
- 	dba GrowlitheFrontpic
- 	dba GrowlitheBackpic
  	dba ArcanineFrontpic
  	dba ArcanineBackpic
  	dba HoundourFrontpic

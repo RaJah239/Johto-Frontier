@@ -203,7 +203,7 @@ JohtoGrassWildMons:
 	; morn
 	db 8, BELLSPROUT
 	db 8, PIDGEOTTO
-	db 8, GROWLITHE
+	db 8, PONYTA
 	db 8, FLAAFFY
 	db 8, BUNEARY
 	db 8, YANMA
@@ -211,7 +211,7 @@ JohtoGrassWildMons:
 	; day
 	db 8, BELLSPROUT
 	db 8, PIDGEOTTO
-	db 8, GROWLITHE
+	db 8, PONYTA
 	db 8, FLAAFFY
 	db 8, BUNEARY
 	db 8, YANMA
@@ -538,7 +538,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 18, SNUBBULL
-	db 18, GROWLITHE
+	db 18, PONYTA
 	db 18, YANMA
 	db 18, PIDGEOTTO
 	db 18, DITTO
@@ -546,7 +546,7 @@ JohtoGrassWildMons:
 	db 5, DITTO 
 	; day
 	db 18, SNUBBULL
-	db 18, GROWLITHE
+	db 18, PONYTA
 	db 18, YANMA
 	db 18, PIDGEOTTO
 	db 18, DITTO
@@ -593,7 +593,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_9
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 20, GROWLITHE
+	db 20, PONYTA
 	db 20, PIDGEOTTO
 	db 20, MANKEY
 	db 20, DODUO
@@ -601,7 +601,7 @@ JohtoGrassWildMons:
 	db 20, TROPIUS
 	db 5, PIDGEOTTO
 	; day
-	db 20, GROWLITHE
+	db 20, PONYTA
 	db 20, PIDGEOTTO
 	db 20, MANKEY
 	db 20, DODUO

@@ -68,7 +68,6 @@ AnimationIdlePointers:
 	dw SwabluAnimationIdle
 	dw AltariaAnimationIdle
 	dw SmeargleAnimationIdle
-	dw GrowlitheAnimationIdle
 	dw ArcanineAnimationIdle
 	dw HoundourAnimationIdle
 	dw HoundoomAnimationIdle

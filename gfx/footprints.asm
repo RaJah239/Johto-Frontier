@@ -74,7 +74,6 @@ Footprints:
  INCBIN "gfx/footprints/swablu.1bpp" 
  INCBIN "gfx/footprints/altaria.1bpp" 
  INCBIN "gfx/footprints/smeargle.1bpp" 
- INCBIN "gfx/footprints/growlithe.1bpp"
  INCBIN "gfx/footprints/arcanine.1bpp"
  INCBIN "gfx/footprints/houndour.1bpp"
  INCBIN "gfx/footprints/houndoom.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 296
 	 INCBIN "gfx/footprints/blank.1bpp" ; 297
 	 INCBIN "gfx/footprints/blank.1bpp" ; 298
+	 INCBIN "gfx/footprints/blank.1bpp" ; 299
 	assert_table_length $100

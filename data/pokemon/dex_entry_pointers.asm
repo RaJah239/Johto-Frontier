@@ -69,7 +69,6 @@ PokedexDataPointerTable:
  	dba SwabluPokedexEntry
  	dba AltariaPokedexEntry
  	dba SmearglePokedexEntry
- 	dba GrowlithePokedexEntry
  	dba ArcaninePokedexEntry
  	dba HoundourPokedexEntry
  	dba HoundoomPokedexEntry

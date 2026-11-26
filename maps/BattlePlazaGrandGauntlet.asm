@@ -412,7 +412,7 @@ PartyKeeperSpeciesList:
 	db SWABLU
 	db ESPEON
 	db SMEARGLE
-	db GROWLITHE
+	db RAPIDASH
 	db HOUNDOUR
 	db WOOPER
 	db GLIGAR

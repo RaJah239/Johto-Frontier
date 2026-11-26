@@ -6,7 +6,6 @@
 
 ;	db QUILAVA
 ;	db TYPHLOSION
-;	db GROWLITHE
 ;	db ARCANINE
 ;	db HOUNDOUR
 ;	db HOUNDOOM

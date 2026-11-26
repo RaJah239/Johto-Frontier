@@ -70,7 +70,6 @@ NewPokedexOrder:
 	db SWABLU
 	db ALTARIA
 	db SMEARGLE
-	db GROWLITHE
 	db ARCANINE
 	db HOUNDOUR
 	db HOUNDOOM
