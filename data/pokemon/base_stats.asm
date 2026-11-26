@@ -269,4 +269,5 @@ INCLUDE "data/pokemon/base_stats/grovyle.asm"
 INCLUDE "data/pokemon/base_stats/sceptile.asm"
 INCLUDE "data/pokemon/base_stats/crabominable.asm"
 INCLUDE "data/pokemon/base_stats/dondozo.asm"
+INCLUDE "data/pokemon/base_stats/cyclizar.asm"
 	assert_table_length NUM_POKEMON

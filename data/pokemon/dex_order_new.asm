@@ -239,4 +239,5 @@ NewPokedexOrder:
 	db SCEPTILE
 	db CRABOMINABLE
 	db DONDOZO
+	db CYCLIZAR
 	assert_table_length NUM_POKEMON

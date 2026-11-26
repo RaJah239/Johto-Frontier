@@ -480,6 +480,8 @@ PokemonPicPointers::
 	dba CrabominableBackpic
 	dba DondozoFrontpic
 	dba DondozoBackpic
+	dba CyclizarFrontpic
+	dba CyclizarBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

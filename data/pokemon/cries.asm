@@ -243,6 +243,7 @@ PokemonCries::
 	mon_cry CRY_SUNFLORA, 0, 255 ; SCEPTILE
 	mon_cry CRY_SNEASLER, 0, 255 ; CRABOMINABLE
 	mon_cry CRY_LAPRAS, 0, 255 ; DONDOZO
+	mon_cry CRY_GIRAFARIG, 0, 255 ; CYCLIZAR
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 265
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 266
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 267
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
 	assert_table_length $ff

@@ -43,6 +43,7 @@ AlphabeticalPokedexOrder:
 	db CRADILY
 	db CROBAT
 	db CROCONAW
+	db CYCLIZAR
 	db DARKRAI
 	db DELIBIRD
 	db DHELMISE

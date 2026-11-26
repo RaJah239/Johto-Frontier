@@ -237,4 +237,5 @@ dw VulpixAnimationIdle
 	dw SceptileAnimationIdle
 	dw CrabominableAnimationIdle
 	dw DondozoAnimationIdle
+	dw CyclizarAnimationIdle
 	assert_table_length NUM_POKEMON

@@ -244,6 +244,7 @@ MonMenuIconPals:
 	icon_pals GREEN, PURPLE ; SCEPTILE
 	icon_pals BLUE, RED ; CRABOMINABLE
 	icon_pals BLUE, BLUE ; DONDOZO
+	icon_pals GREEN, GREEN ; CYCLIZAR
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
