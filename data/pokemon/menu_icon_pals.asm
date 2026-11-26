@@ -204,6 +204,7 @@ MonMenuIconPals:
 	icon_pals BLUE, TEAL ; GLACEON
 	icon_pals GREEN, BROWN ; LEAFEON
 	icon_pals BLUE, TEAL ; POLIWHIRL
+	icon_pals BLUE, TEAL ; POLIWRATH
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

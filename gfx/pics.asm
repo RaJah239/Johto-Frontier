@@ -648,3 +648,6 @@ LeafeonBackpic: INCBIN "gfx/pokemon/leafeon/back.2bpp.lz"
 
 PoliwhirlFrontpic: INCBIN "gfx/pokemon/poliwhirl/front.animated.2bpp.lz"
 PoliwhirlBackpic: INCBIN "gfx/pokemon/poliwhirl/back.2bpp.lz"
+
+PoliwrathFrontpic: INCBIN "gfx/pokemon/poliwrath/front.animated.2bpp.lz"
+PoliwrathBackpic: INCBIN "gfx/pokemon/poliwrath/back.2bpp.lz"

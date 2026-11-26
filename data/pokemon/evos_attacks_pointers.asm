@@ -199,4 +199,5 @@ EvosAttacksPointers::
 	dw GlaceonEvosAttacks
 	dw LeafeonEvosAttacks
 	dw PoliwhirlEvosAttacks
+	dw PoliwrathEvosAttacks
 	assert_table_length NUM_POKEMON

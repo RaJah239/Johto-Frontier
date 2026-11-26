@@ -197,4 +197,5 @@ EvolutionMoves::
    db NO_MOVE      ; GLACEON
    db NO_MOVE      ; LEAFEON
    db NO_MOVE      ; POLIWHIRL
+   db NO_MOVE      ; POLIWRATH
 	assert_table_length NUM_POKEMON

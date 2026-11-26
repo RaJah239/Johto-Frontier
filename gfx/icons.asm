@@ -237,3 +237,5 @@ GlaceonIcon:: INCBIN "gfx/icons/glaceon.2bpp"
 LeafeonIcon:: INCBIN "gfx/icons/leafeon.2bpp"
 
 PoliwhirlIcon:: INCBIN "gfx/icons/poliwhirl.2bpp"
+
+PoliwrathIcon:: INCBIN "gfx/icons/poliwrath.2bpp"

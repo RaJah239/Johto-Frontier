@@ -132,6 +132,7 @@ AlphabeticalPokedexOrder:
 	db PIKACHU
 	db PILOSWINE
 	db POLIWHIRL
+	db POLIWRATH
 	db PONYTA
 	db PORYGON
 	db PORYGON2
