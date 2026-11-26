@@ -22,7 +22,6 @@ FramesPointers:
 	dw SylveonFrames
 	dw UmbreonFrames
 	dw VaporeonFrames
-	dw TorchicFrames
 	dw CombuskenFrames
 	dw BlazikenFrames
 	dw FeebasFrames

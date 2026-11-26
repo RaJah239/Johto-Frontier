@@ -28,7 +28,6 @@ PokemonCries::
 	mon_cry CRY_VENONAT,     $0b0,  $16f ; SYLVEON Polisheddevs
 	mon_cry CRY_VENONAT,     -233,   240 ; UMBREON
 	mon_cry CRY_VENONAT,      170,   383 ; VAPOREON
-	mon_cry CRY_HOOTHOOT,    $0ff,  $0c8 ; TORCHIC Celadonk
 	mon_cry CRY_HOOTHOOT,    $0b9,  $124 ; COMBUSKEN Celadonk
 	mon_cry CRY_TYPHLOSION,  $f43,  $100 ; BLAZIKEN SourApple
 	mon_cry CRY_GRIMER,      $04d,  $0f0 ; FEEBAS SourApple
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 279
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 280
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 281
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 282
 	assert_table_length $ff

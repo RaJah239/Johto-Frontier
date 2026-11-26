@@ -22,7 +22,6 @@ BitmasksPointers:
 	dw SylveonBitmasks
 	dw UmbreonBitmasks
 	dw VaporeonBitmasks
-	dw TorchicBitmasks
 	dw CombuskenBitmasks
 	dw BlazikenBitmasks
 	dw FeebasBitmasks

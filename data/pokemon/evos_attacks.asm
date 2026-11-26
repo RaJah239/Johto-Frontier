@@ -82,7 +82,6 @@ FlareonEvosAttacks:
 JolteonEvosAttacks:
 VaporeonEvosAttacks:
 SylveonEvosAttacks:
-TorchicEvosAttacks:
 CombuskenEvosAttacks:
 BlazikenEvosAttacks:
 FeebasEvosAttacks:

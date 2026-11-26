@@ -23,7 +23,6 @@ PokedexDataPointerTable:
  	dba SylveonPokedexEntry
   	dba UmbreonPokedexEntry
    	dba VaporeonPokedexEntry
- 	dba TorchicPokedexEntry
  	dba CombuskenPokedexEntry
  	dba BlazikenPokedexEntry
  	dba FeebasPokedexEntry

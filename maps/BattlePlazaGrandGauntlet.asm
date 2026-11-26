@@ -387,7 +387,7 @@ PartyKeeperSpeciesList:
 	db TORTERRA
 	db PIKACHU
 	db EEVEE
-	db TORCHIC
+	db COMBUSKEN
 	db FEEBAS
 	db ROWLET
 	db RALTS

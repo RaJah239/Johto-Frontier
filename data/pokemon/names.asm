@@ -22,7 +22,6 @@ PokemonNames::
 	db "Sylveon@@@"
 	db "Umbreon@@@"
 	db "Vaporeon@@"
-	db "Torchic@@@"
 	db "Combusken@"
 	db "Blaziken@@"
 	db "Feebas@@@@"
@@ -227,6 +226,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

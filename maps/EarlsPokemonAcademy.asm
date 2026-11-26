@@ -419,7 +419,7 @@ FleeMonsNotebook:
 		cont "Wartortle,"
 		cont "Teddiursa,"
 		cont "Togetic,"
-		cont "Torchic,"
+		cont "Combusken,"
 		cont "Croconaw and"
 		cont "Torterra."
 		done

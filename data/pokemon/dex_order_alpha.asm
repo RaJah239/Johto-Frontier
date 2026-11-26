@@ -199,7 +199,6 @@ AlphabeticalPokedexOrder:
 	db TENTACRUEL
 	db TOGEKISS
 	db TOGETIC
-	db TORCHIC
 	db TORTERRA
 	db TROPIUS
 	db TYPHLOSION

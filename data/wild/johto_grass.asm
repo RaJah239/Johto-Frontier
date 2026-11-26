@@ -907,7 +907,7 @@ JohtoGrassWildMons:
 	db 22, DODUO
 	db 22, PONYTA
 	db 22, SWABLU
-	db 5, TORCHIC
+	db 5, COMBUSKEN
 	; day
 	db 22, FLAAFFY
 	db 22, TAUROS
@@ -915,7 +915,7 @@ JohtoGrassWildMons:
 	db 22, DODUO
 	db 22, PONYTA
 	db 22, SWABLU
-	db 5, TORCHIC
+	db 5, COMBUSKEN
 	; nite
 	db 22, HOUNDOUR
 	db 22, HOOTHOOT
@@ -923,7 +923,7 @@ JohtoGrassWildMons:
 	db 22, TAUROS
 	db 22, MILTANK
 	db 22, SWABLU
-	db 5, TORCHIC
+	db 5, COMBUSKEN
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_11

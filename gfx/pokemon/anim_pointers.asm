@@ -22,7 +22,6 @@ AnimationPointers:
 	dw SylveonAnimation
 	dw UmbreonAnimation
 	dw VaporeonAnimation
-	dw TorchicAnimation
 	dw CombuskenAnimation
 	dw BlazikenAnimation
 	dw FeebasAnimation

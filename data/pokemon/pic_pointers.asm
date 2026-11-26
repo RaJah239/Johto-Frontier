@@ -47,8 +47,6 @@ PokemonPicPointers::
  	dba UmbreonBackpic
  	dba VaporeonFrontpic
  	dba VaporeonBackpic
- 	dba TorchicFrontpic
- 	dba TorchicBackpic
  	dba CombuskenFrontpic
  	dba CombuskenBackpic
  	dba BlazikenFrontpic

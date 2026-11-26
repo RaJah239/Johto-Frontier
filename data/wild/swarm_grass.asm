@@ -646,33 +646,33 @@ SwarmGrassWildMons:
 	db 5, TOGETIC
 	db 5, TOGETIC
 
-; Torchic swarm
+; Combusken swarm
 	map_id ROUTE_10
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
 	; day
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
 	; nite
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
+	db 5, COMBUSKEN
 
 ; Azumarill swarm
 	map_id ROUTE_14

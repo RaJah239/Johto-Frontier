@@ -29,7 +29,6 @@ MonMenuIconPals:
 	icon_pals PINK,   BLUE   ; SYLVEON
 	icon_pals BROWN,  BLUE   ; UMBREON
 	icon_pals BLUE,   PURPLE ; VAPOREON
-	icon_pals RED,    BROWN  ; TORCHIC
 	icon_pals RED,    RED    ; COMBUSKEN
 	icon_pals RED,    RED    ; BLAZIKEN
 	icon_pals BLUE,   PURPLE ; FEEBAS

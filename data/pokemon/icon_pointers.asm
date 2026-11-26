@@ -24,7 +24,6 @@ IconPointers:
 	dw SylveonIcon
 	dw UmbreonIcon
 	dw VaporeonIcon
-	dw TorchicIcon
 	dw CombuskenIcon
 	dw BlazikenIcon
 	dw FeebasIcon

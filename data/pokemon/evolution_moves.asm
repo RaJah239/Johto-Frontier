@@ -22,7 +22,6 @@ EvolutionMoves::
    db NO_MOVE      ; SYLVEON
    db NO_MOVE      ; UMBREON
    db NO_MOVE      ; VAPOREON
-   db NO_MOVE      ; TORCHIC
    db NO_MOVE      ; COMBUSKEN
    db NO_MOVE      ; BLAZIKEN
    db NO_MOVE      ; FEEBAS

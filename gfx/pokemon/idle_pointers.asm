@@ -22,7 +22,6 @@ AnimationIdlePointers:
 	dw SylveonAnimationIdle
 	dw UmbreonAnimationIdle
 	dw VaporeonAnimationIdle
-	dw TorchicAnimationIdle
 	dw CombuskenAnimationIdle
 	dw BlazikenAnimationIdle
 	dw FeebasAnimationIdle

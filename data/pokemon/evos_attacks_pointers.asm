@@ -24,7 +24,6 @@ EvosAttacksPointers::
 	dw SylveonEvosAttacks
 	dw UmbreonEvosAttacks
 	dw VaporeonEvosAttacks
-	dw TorchicEvosAttacks
 	dw CombuskenEvosAttacks
 	dw BlazikenEvosAttacks
 	dw FeebasEvosAttacks

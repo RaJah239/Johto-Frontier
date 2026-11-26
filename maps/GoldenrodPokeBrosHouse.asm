@@ -112,7 +112,7 @@ SwarmGrampsScript:
 	ifequal 21, .Wartortle
 	ifequal 22, .Teddiursa
 	ifequal 23, .Togetic
-	ifequal 24, .Torchic
+	ifequal 24, .Combusken
 	ifequal 25, .Croconaw
 	ifequal 26, .Torterra
 	sjump .resample
@@ -344,12 +344,12 @@ SwarmGrampsScript:
 		cont "Silver Outside!"
 		done
 
-.Torchic:
+.Combusken:
 	setflag ENGINE_SWARM
 	swarm ROUTE_10
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Torchic at"
+		line "Combusken at"
 		cont "Route 10!"
 		done
 
@@ -440,7 +440,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Wartortle,"
 		cont "Teddiursa,"
 		cont "Togetic,"
-		cont "Torchic,"
+		cont "Combusken,"
 		cont "Croconaw and"
 		cont "Torterra."
 		done

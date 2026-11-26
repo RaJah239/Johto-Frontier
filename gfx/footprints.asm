@@ -28,7 +28,6 @@ Footprints:
  INCBIN "gfx/footprints/sylveon.1bpp"
  INCBIN "gfx/footprints/umbreon.1bpp"
  INCBIN "gfx/footprints/vaporeon.1bpp"
- INCBIN "gfx/footprints/torchic.1bpp"
  INCBIN "gfx/footprints/combusken.1bpp"
  INCBIN "gfx/footprints/blaziken.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; FEEBAS
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 278
 	 INCBIN "gfx/footprints/blank.1bpp" ; 279
 	 INCBIN "gfx/footprints/blank.1bpp" ; 280
+	 INCBIN "gfx/footprints/blank.1bpp" ; 281
 	assert_table_length $100

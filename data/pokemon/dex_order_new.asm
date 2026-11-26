@@ -24,7 +24,6 @@ NewPokedexOrder:
 	db SYLVEON
 	db UMBREON
 	db VAPOREON
-	db TORCHIC
 	db COMBUSKEN
 	db BLAZIKEN
 	db FEEBAS
