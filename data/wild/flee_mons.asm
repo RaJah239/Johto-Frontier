@@ -8,7 +8,6 @@ SometimesFleeMons:
 	db CYNDAQUIL
 	db DELIBIRD
 	db EEVEE
-	db ELEKID
 	db FEEBAS
 	db HOUNDOUR
 	db MEOWTH

@@ -160,7 +160,6 @@ NewPokedexOrder:
 	db TAUROS
 	db VOLTORB
 	db ELECTRODE
-	db ELEKID
 	db ELECTABUZZ
 	db MAGNETON
 	db MAGNEZONE

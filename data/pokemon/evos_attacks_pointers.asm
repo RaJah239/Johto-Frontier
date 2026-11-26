@@ -160,7 +160,6 @@ EvosAttacksPointers::
 	dw TaurosEvosAttacks
 	dw VoltorbEvosAttacks
 	dw ElectrodeEvosAttacks
-	dw ElekidEvosAttacks
 	dw ElectabuzzEvosAttacks
 	dw MagnetonEvosAttacks
 	dw MagnezoneEvosAttacks

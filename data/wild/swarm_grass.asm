@@ -254,33 +254,33 @@ SwarmGrassWildMons:
 	db 5, EEVEE
 	db 5, EEVEE
 
-; Elekid swarm
+; Pikachu swarm
 	map_id POWER_PLANT_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
 	; day
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
 	; nite
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
-	db 5, ELEKID
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
+	db 5, PIKACHU
 
 ; Houndour swarm
 	map_id ROUTE_8

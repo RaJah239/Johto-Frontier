@@ -291,7 +291,7 @@ JohtoGrassWildMons:
 	db 10, DODUO
 	db 10, MARILL
 	db 10, MAREEP
-	db 5, ELEKID
+	db 5, PIKACHU
 	; day
 	db 10, SUNKERN
 	db 10, BUNEARY
@@ -299,7 +299,7 @@ JohtoGrassWildMons:
 	db 10, DODUO
 	db 10, MARILL
 	db 10, MAREEP
-	db 5, ELEKID
+	db 5, PIKACHU
 	; nite
 	db 10, WOOPER
 	db 10, GASTLY
@@ -307,7 +307,7 @@ JohtoGrassWildMons:
 	db 10, HOOTHOOT
 	db 10, MARILL
 	db 10, SPINARAK
-	db 5, ELEKID
+	db 5, PIKACHU
 	end_grass_wildmons
 
 	def_grass_wildmons UNION_CAVE_1F
@@ -963,7 +963,7 @@ JohtoGrassWildMons:
 	db 24, TROPIUS
 	db 24, YANMA
 	db 24, LOPUNNY
-	db 5, ELEKID
+	db 5, PIKACHU
 	; day
 	db 24, VOLTORB
 	db 24, PIKACHU
@@ -971,7 +971,7 @@ JohtoGrassWildMons:
 	db 24, TROPIUS
 	db 24, YANMA
 	db 24, LOPUNNY
-	db 5, ELEKID
+	db 5, PIKACHU
 	; nite
 	db 24, VOLTORB
 	db 24, PIKACHU
@@ -979,7 +979,7 @@ JohtoGrassWildMons:
 	db 24, TROPIUS
 	db 24, YANMA
 	db 24, LOPUNNY
-	db 5, ELEKID
+	db 5, PIKACHU
 	end_grass_wildmons
 
 	def_grass_wildmons WHIRL_ISLAND_NW

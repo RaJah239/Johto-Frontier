@@ -159,7 +159,6 @@ PokedexDataPointerTable:
  	dba TaurosPokedexEntry
  	dba VoltorbPokedexEntry
  	dba ElectrodePokedexEntry
- 	dba ElekidPokedexEntry
  	dba ElectabuzzPokedexEntry
  	dba MagnetonPokedexEntry
  	dba MagnezonePokedexEntry

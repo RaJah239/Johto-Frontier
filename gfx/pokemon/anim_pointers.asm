@@ -158,7 +158,6 @@ AnimationPointers:
 	dw TaurosAnimation
 	dw VoltorbAnimation
 	dw ElectrodeAnimation
-	dw ElekidAnimation
 	dw ElectabuzzAnimation
 	dw MagnetonAnimation
 	dw MagnezoneAnimation

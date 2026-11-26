@@ -158,7 +158,6 @@ EvolutionMoves::
    db NO_MOVE      ; TAUROS
    db NO_MOVE      ; VOLTORB
    db NO_MOVE      ; ELECTRODE
-   db NO_MOVE      ; ELEKID
    db NO_MOVE      ; ELECTABUZZ
    db NO_MOVE      ; MAGNETON
    db NO_MOVE      ; MAGNEZONE

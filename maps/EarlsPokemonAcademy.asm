@@ -405,7 +405,7 @@ FleeMonsNotebook:
 		cont "Cyndaquil,"
 		cont "Delibird,"
 		cont "Eevee,"
-		cont "Elekid,"
+		cont "Pikachu,"
 		cont "Feebas,"
 		cont "Houndour,"
 		cont "Larvitar,"

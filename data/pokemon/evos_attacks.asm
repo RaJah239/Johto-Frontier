@@ -215,7 +215,6 @@ MiltankEvosAttacks:
 TaurosEvosAttacks:
 VoltorbEvosAttacks:
 ElectrodeEvosAttacks:
-ElekidEvosAttacks:
 ElectabuzzEvosAttacks:
 MagnetonEvosAttacks:
 MagnezoneEvosAttacks:

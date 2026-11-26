@@ -319,8 +319,6 @@ PokemonPicPointers::
  	dba VoltorbBackpic
  	dba ElectrodeFrontpic
  	dba ElectrodeBackpic
- 	dba ElekidFrontpic
- 	dba ElekidBackpic
  	dba ElectabuzzFrontpic
  	dba ElectabuzzBackpic
  	dba MagnetonFrontpic

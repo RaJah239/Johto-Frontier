@@ -24,7 +24,7 @@ DEF prob_total = 0
 ; Magby
 	prob 10
 	prob 2
-; Elekid
+; Pikachu
 	prob 12
 	prob 2
 ; Tyrogue

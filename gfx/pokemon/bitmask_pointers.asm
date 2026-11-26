@@ -158,7 +158,6 @@ BitmasksPointers:
 	dw TaurosBitmasks
 	dw VoltorbBitmasks
 	dw ElectrodeBitmasks
-	dw ElekidBitmasks
 	dw ElectabuzzBitmasks
 	dw MagnetonBitmasks
 	dw MagnezoneBitmasks

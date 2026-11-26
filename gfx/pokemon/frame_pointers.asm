@@ -158,7 +158,6 @@ FramesPointers:
 	dw TaurosFrames
 	dw VoltorbFrames
 	dw ElectrodeFrames
-	dw ElekidFrames
 	dw ElectabuzzFrames
 	dw MagnetonFrames
 	dw MagnezoneFrames

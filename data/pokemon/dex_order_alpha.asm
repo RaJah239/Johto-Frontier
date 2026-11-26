@@ -59,7 +59,6 @@ AlphabeticalPokedexOrder:
 	db EEVEE
 	db ELECTABUZZ
 	db ELECTRODE
-	db ELEKID
 	db ENTEI
 	db ESPEON
 	db EXCADRILL

@@ -443,7 +443,7 @@ PartyKeeperSpeciesList:
 	db MILTANK
 	db TAUROS
 	db VOLTORB
-	db ELEKID
+	db PIKACHU
 	db PIKACHU
 	db SHUCKLE
 	db CORSOLA

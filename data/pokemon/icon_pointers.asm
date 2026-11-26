@@ -160,7 +160,6 @@ IconPointers:
 	dw TaurosIcon
 	dw VoltorbIcon
 	dw ElectrodeIcon
-	dw ElekidIcon
 	dw ElectabuzzIcon
 	dw MagnetonIcon
 	dw MagnezoneIcon

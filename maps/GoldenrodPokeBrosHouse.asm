@@ -97,7 +97,7 @@ SwarmGrampsScript:
 	ifequal  6, .Delibird
 	ifequal  7, .Ditto
 	ifequal  8, .Eevee
-	ifequal  9, .Elekid
+	ifequal  9, .Pikachu
 	ifequal 10, .Feebas
 	ifequal 11, .Houndour
 	ifequal 12, .Larvitar
@@ -209,12 +209,12 @@ SwarmGrampsScript:
 		cont "Ruins of Alph!"
 		done
 
-.Elekid:
+.Pikachu:
 	setflag ENGINE_SWARM
 	swarm POWER_PLANT_OUTSIDE
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Elekid at Power"
+		line "Pikachu at Power"
 		cont "Plant Outside!"
 		done
 
@@ -425,7 +425,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Delibird,"
 		cont "Ditto,"
 		cont "Eevee,"
-		cont "Elekid,"
+		cont "Pikachu,"
 		cont "Feebas,"
 		cont "Houndour,"
 		cont "Larvitar,"

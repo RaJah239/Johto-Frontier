@@ -158,7 +158,6 @@ AnimationIdlePointers:
 	dw TaurosAnimationIdle
 	dw VoltorbAnimationIdle
 	dw ElectrodeAnimationIdle
-	dw ElekidAnimationIdle
 	dw ElectabuzzAnimationIdle
 	dw MagnetonAnimationIdle
 	dw MagnezoneAnimationIdle
