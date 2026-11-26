@@ -211,7 +211,6 @@ IconPointers:
 	dw SkarmoryIcon
 	dw AggronIcon
 	dw AegislashIcon
-	dw NidokingIcon
 	dw MisdreavusIcon
 	dw MismagiusIcon
 	dw ChanseyIcon

@@ -210,7 +210,6 @@ PokedexDataPointerTable:
  	dba SkarmoryPokedexEntry
  	dba AggronPokedexEntry
  	dba AegislashPokedexEntry
-   	dba NidokingPokedexEntry
  	dba MisdreavusPokedexEntry
  	dba MismagiusPokedexEntry
  	dba ChanseyPokedexEntry

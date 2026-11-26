@@ -215,7 +215,6 @@ PokemonCries::
 	mon_cry CRY_AMPHAROS,    2217,   384 ; SKARMORY
 	mon_cry CRY_RAICHU,      $100,  $136 ; AGGRON
 	mon_cry CRY_WEEDLE,      $2fe,   $51 ; AEGISLASH
-	mon_cry CRY_RAICHU,         0,   256 ; NIDOKING
 	mon_cry CRY_HOOTHOOT,     304,   232 ; MISDREAVUS
 	mon_cry CRY_HOOTHOOT,    $1b4,  $1e8 ; MISMAGIUS
 	mon_cry CRY_PIDGEOTTO,     10,   320 ; CHANSEY
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 256
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 257
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
 	assert_table_length $ff

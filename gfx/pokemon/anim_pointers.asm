@@ -209,7 +209,6 @@ AnimationPointers:
 	dw SkarmoryAnimation
 	dw AggronAnimation
 	dw AegislashAnimation
-	dw NidokingAnimation
 	dw MisdreavusAnimation
 	dw MismagiusAnimation
 	dw ChanseyAnimation

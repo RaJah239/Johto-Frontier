@@ -1634,7 +1634,7 @@ JohtoGrassWildMons:
 	db 34, DRAPION
 	db 34, GALVANTULA
 	db 34, MR__MIME
-	db 34, NIDOKING
+	db 34, DONPHAN
 	db 34, CHANSEY
 	; day
 	db 34, YANMEGA
@@ -1642,7 +1642,7 @@ JohtoGrassWildMons:
 	db 34, DRAPION
 	db 34, GALVANTULA
 	db 34, MR__MIME
-	db 34, NIDOKING
+	db 34, DONPHAN
 	db 34, CHANSEY
 	; nite
 	db 34, YANMEGA
@@ -1650,7 +1650,7 @@ JohtoGrassWildMons:
 	db 34, DRAPION
 	db 34, GALVANTULA
 	db 34, AEGISLASH
-	db 34, NIDOKING
+	db 34, DONPHAN
 	db 34, CHANSEY
 	end_grass_wildmons
 

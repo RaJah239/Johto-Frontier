@@ -216,7 +216,6 @@ MonMenuIconPals:
 	icon_pals GRAY,   BROWN  ; SKARMORY
 	icon_pals GRAY,   GREEN  ; AGGRON
 	icon_pals PURPLE, RED    ; AEGISLASH
-	icon_pals PURPLE, BLUE   ; NIDOKING
 	icon_pals PURPLE, BROWN  ; MISDREAVUS
 	icon_pals PURPLE, BROWN  ; MISMAGIUS
 	icon_pals PINK,   GREEN  ; CHANSEY

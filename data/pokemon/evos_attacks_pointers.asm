@@ -211,7 +211,6 @@ EvosAttacksPointers::
 	dw SkarmoryEvosAttacks
 	dw AggronEvosAttacks
 	dw AegislashEvosAttacks
-	dw NidokingEvosAttacks
 	dw MisdreavusEvosAttacks
 	dw MismagiusEvosAttacks
 	dw ChanseyEvosAttacks

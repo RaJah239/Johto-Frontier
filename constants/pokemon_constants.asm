@@ -239,46 +239,45 @@ DEF JOHTO_POKEMON EQU const_value
 	const SKARMORY   ; cf
 	const AGGRON     ; d0
 	const AEGISLASH  ; d1
-	const NIDOKING   ; d2
-	const MISDREAVUS ; d3
-	const MISMAGIUS  ; d4
-	const CHANSEY    ; d5
-	const BLISSEY    ; d6
-	const SNORLAX    ; d7
-	const TYRANITAR  ; d8
-	const SALAMENCE  ; d9
-	const METAGROSS  ; da
-	const HAXORUS    ; db
-	const PORYGON    ; dc
-	const PORYGON2   ; dd
-	const PORYGONZ   ; de
-	const OMANYTE    ; df
-	const OMASTAR    ; e0
-	const LILEEP     ; e1
-	const CRADILY    ; e2
-	const AERODACTYL ; e3
-	const ROTOM      ; e4
-	const ABSOL      ; e5
-	const DURALUDON  ; e6
-	const GHOLDENGO  ; e7
-	const DARKRAI    ; e8
-	const ARTICUNO   ; e9
-	const ZAPDOS     ; ea
-	const MOLTRES    ; eb
-	const LUGIA      ; ec
-	const RAIKOU     ; ed
-	const ENTEI      ; ee
-	const SUICUNE    ; ef
-	const HO_OH      ; f0
-	const UNOWN      ; f1
-	const NOWN       ; f2
-	const JIRACHI    ; f3
-	const CELEBI     ; f4
-	const DITTO      ; f5
-	const MEW        ; f6
-	const MEWTWO     ; f7
+	const MISDREAVUS ; d2
+	const MISMAGIUS  ; d3
+	const CHANSEY    ; d4
+	const BLISSEY    ; d5
+	const SNORLAX    ; d6
+	const TYRANITAR  ; d7
+	const SALAMENCE  ; d8
+	const METAGROSS  ; d9
+	const HAXORUS    ; da
+	const PORYGON    ; db
+	const PORYGON2   ; dc
+	const PORYGONZ   ; dd
+	const OMANYTE    ; de
+	const OMASTAR    ; df
+	const LILEEP     ; e0
+	const CRADILY    ; e1
+	const AERODACTYL ; e2
+	const ROTOM      ; e3
+	const ABSOL      ; e4
+	const DURALUDON  ; e5
+	const GHOLDENGO  ; e6
+	const DARKRAI    ; e7
+	const ARTICUNO   ; e8
+	const ZAPDOS     ; e9
+	const MOLTRES    ; ea
+	const LUGIA      ; eb
+	const RAIKOU     ; ec
+	const ENTEI      ; ed
+	const SUICUNE    ; ee
+	const HO_OH      ; ef
+	const UNOWN      ; f0
+	const NOWN       ; f1
+	const JIRACHI    ; f2
+	const CELEBI     ; f3
+	const DITTO      ; f4
+	const MEW        ; f5
+	const MEWTWO     ; f6
 DEF NUM_POKEMON EQU const_value - 1
-	const EGG        ; f8
+	const EGG        ; f7
 
 ; Unown forms
 ; indexes for:

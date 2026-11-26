@@ -211,7 +211,6 @@ NewPokedexOrder:
 	db SKARMORY
 	db AGGRON
 	db AEGISLASH
-	db NIDOKING
 	db MISDREAVUS
 	db MISMAGIUS
 	db CHANSEY

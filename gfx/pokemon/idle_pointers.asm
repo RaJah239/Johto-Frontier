@@ -209,7 +209,6 @@ AnimationIdlePointers:
 	dw SkarmoryAnimationIdle
 	dw AggronAnimationIdle
 	dw AegislashAnimationIdle
-	dw NidokingAnimationIdle
 	dw MisdreavusAnimationIdle
 	dw MismagiusAnimationIdle
 	dw ChanseyAnimationIdle

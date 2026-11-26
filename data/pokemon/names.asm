@@ -209,7 +209,6 @@ PokemonNames::
 	db "Skarmory@@"
 	db "Aggron@@@@"
 	db "Aegislash@"
-	db "Nidoking@@"
 	db "Misdreavus"
 	db "Mismagius@"
 	db "Chansey@@@"
@@ -250,6 +249,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

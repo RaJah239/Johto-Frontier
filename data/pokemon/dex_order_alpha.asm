@@ -143,7 +143,6 @@ AlphabeticalPokedexOrder:
 	db MR__MIME
 	db MUK
 	db NATU
-	db NIDOKING
 	db NOCTOWL
 	db NOWN
 	db OCTILLERY

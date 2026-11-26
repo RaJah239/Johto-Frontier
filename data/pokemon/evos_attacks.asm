@@ -266,7 +266,6 @@ BronzongEvosAttacks:
 SkarmoryEvosAttacks:
 AggronEvosAttacks:
 AegislashEvosAttacks:
-NidokingEvosAttacks:
 MisdreavusEvosAttacks:
 MismagiusEvosAttacks:
 SnorlaxEvosAttacks:

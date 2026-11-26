@@ -209,7 +209,6 @@ EvolutionMoves::
    db NO_MOVE      ; SKARMORY
    db NO_MOVE      ; AGGRON
    db NO_MOVE      ; AEGISLASH
-   db NO_MOVE      ; NIDOKING
    db NO_MOVE      ; MISDREAVUS
    db NO_MOVE      ; MISMAGIUS
    db NO_MOVE      ; CHANSEY

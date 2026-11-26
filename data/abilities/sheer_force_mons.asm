@@ -2,5 +2,4 @@
 ; without the effect (engine/abilities/sheer_force.asm)
 
 SheerForcePokemon:
-    db NIDOKING
     db -1 ; end

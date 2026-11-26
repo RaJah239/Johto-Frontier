@@ -209,7 +209,6 @@ BitmasksPointers:
 	dw SkarmoryBitmasks
 	dw AggronBitmasks
 	dw AegislashBitmasks
-	dw NidokingBitmasks
 	dw MisdreavusBitmasks
 	dw MismagiusBitmasks
 	dw ChanseyBitmasks

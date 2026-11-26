@@ -2,6 +2,5 @@
 ; and 0.75x on opposite gender.
 
 RivalryPokemon:
-;    db NIDOKING
 ;    db HAXORUS
     db -1

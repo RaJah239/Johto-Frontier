@@ -421,8 +421,6 @@ PokemonPicPointers::
  	dba AggronBackpic
   	dba AegislashFrontpic
  	dba AegislashBackpic
- 	dba NidokingFrontpic
- 	dba NidokingBackpic
  	dba MisdreavusFrontpic
  	dba MisdreavusBackpic
  	dba MismagiusFrontpic

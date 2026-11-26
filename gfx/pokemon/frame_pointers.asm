@@ -209,7 +209,6 @@ FramesPointers:
 	dw SkarmoryFrames
 	dw AggronFrames
 	dw AegislashFrames
-	dw NidokingFrames
 	dw MisdreavusFrames
 	dw MismagiusFrames
 	dw ChanseyFrames

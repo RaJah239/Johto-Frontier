@@ -215,7 +215,6 @@ Footprints:
  INCBIN "gfx/footprints/skarmory.1bpp"
  INCBIN "gfx/footprints/aggron.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; AEGISLASH
- INCBIN "gfx/footprints/nidoking.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; MISDREAVUS
  INCBIN "gfx/footprints/blank.1bpp" ; MISMAGIUS
  INCBIN "gfx/footprints/chansey.1bpp"  
@@ -262,4 +261,5 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 255
  INCBIN "gfx/footprints/blank.1bpp" ; 256
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
+	 INCBIN "gfx/footprints/blank.1bpp" ; 258
 	assert_table_length $100

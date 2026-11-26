@@ -397,7 +397,6 @@ GetGender:
 	cp JYNX
 	jr z, .AlwaysFemale
 ; always male
-	cp NIDOKING
 	jr z, .AlwaysMale
 	cp TAUROS
 	jr z, .AlwaysMale
