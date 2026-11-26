@@ -183,6 +183,7 @@ Tenacity_Activate:
 	ret z
 	ShowActivationOrEntryOrKOAbilityPopup TenacityText
 	call TurnEndAbility_CureStatus
+	farcall CalcPokemonStats
 	ld hl, TenacityHealingText
 	jmp StdBattleTextbox
 
