@@ -104,6 +104,7 @@ AlphabeticalPokedexOrder:
 	db LUCARIO
 	db LUGIA
 	db LUNATONE
+	db MACHOKE
 	db MAGIKARP
 	db MAGNETON
 	db MAGNEZONE

@@ -204,4 +204,5 @@ AnimationIdlePointers:
 	dw ReuniclusAnimationIdle
 	dw CottoneeAnimationIdle
 	dw WhimsicottAnimationIdle
+	dw MachokeAnimationIdle
 	assert_table_length NUM_POKEMON

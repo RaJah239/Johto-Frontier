@@ -204,4 +204,5 @@ EvolutionMoves::
    db NO_MOVE      ; REUNICLUS
    db NO_MOVE      ; COTTONEE
    db NO_MOVE      ; WHIMSICOTT
+   db NO_MOVE      ; MACHOKE
 	assert_table_length NUM_POKEMON

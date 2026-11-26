@@ -86,6 +86,7 @@ NewPokedexOrder:
 	db QUAGSIRE
 	db GLIGAR
 	db GLISCOR
+	db MACHOKE
 	db GABITE
 	db GARCHOMP
 	db DODUO

@@ -204,10 +204,10 @@ PokemonNames::
 	db "Reuniclus@"
 	db "Cottonee@@"
 	db "Whimsicott"
+	db "Machoke@@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

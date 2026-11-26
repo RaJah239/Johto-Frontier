@@ -204,4 +204,5 @@ AnimationPointers:
 	dw ReuniclusAnimation
 	dw CottoneeAnimation
 	dw WhimsicottAnimation
+	dw MachokeAnimation
 	assert_table_length NUM_POKEMON
