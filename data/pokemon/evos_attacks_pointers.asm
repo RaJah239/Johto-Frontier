@@ -69,7 +69,6 @@ EvosAttacksPointers::
 	dw GengarEvosAttacks
 	dw SwabluEvosAttacks
 	dw AltariaEvosAttacks
-	dw XatuEvosAttacks
 	dw SmeargleEvosAttacks
 	dw GrowlitheEvosAttacks
 	dw ArcanineEvosAttacks

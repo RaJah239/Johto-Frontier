@@ -205,7 +205,6 @@ AlphabeticalPokedexOrder:
 	db WHIRLIPEDE
 	db WOOPER
 	db WURMPLE
-	db XATU
 	db YANMA
 	db YANMEGA
 	db ZAPDOS

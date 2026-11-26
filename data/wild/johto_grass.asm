@@ -678,7 +678,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -686,7 +686,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -694,7 +694,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -706,7 +706,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -714,7 +714,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -722,7 +722,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -734,7 +734,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -742,7 +742,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -750,7 +750,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -762,7 +762,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -770,7 +770,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -778,7 +778,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -790,7 +790,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -798,7 +798,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -806,7 +806,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -818,7 +818,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -826,7 +826,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -834,7 +834,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -846,7 +846,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -854,7 +854,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -862,7 +862,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -874,7 +874,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -882,7 +882,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; day
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE
@@ -890,7 +890,7 @@ JohtoGrassWildMons:
 	db 37, GENGAR
 	; nite
 	db 37, MISMAGIUS
-	db 37, XATU
+	db 37, HOOTHOOT
 	db 37, FROSLASS
 	db 37, SCOLIPEDE
 	db 37, CHANDELURE

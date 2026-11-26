@@ -393,7 +393,6 @@ PicnickerPic:        INCBIN "gfx/trainers/picnicker.2bpp.lz"
 YanmegaBackpic:      INCBIN "gfx/pokemon/yanmega/back.2bpp.lz"
 SuperNerdPic:        INCBIN "gfx/trainers/super_nerd.2bpp.lz"
 HaunterBackpic:      INCBIN "gfx/pokemon/haunter/back.2bpp.lz"
-XatuBackpic:         INCBIN "gfx/pokemon/xatu/back.2bpp.lz"
 RedPic:              INCBIN "gfx/trainers/red.2bpp.lz"
 Porygon2Backpic:     INCBIN "gfx/pokemon/porygon2/back.2bpp.lz"
 JasminePic:          INCBIN "gfx/trainers/jasmine.2bpp.lz"
@@ -576,7 +575,6 @@ MismagiusFrontpic:   INCBIN "gfx/pokemon/mismagius/front.animated.2bpp.lz"
 
 
 SECTION "Pics 23", ROMX
-XatuFrontpic:        INCBIN "gfx/pokemon/xatu/front.animated.2bpp.lz"
 DonphanFrontpic:     INCBIN "gfx/pokemon/donphan/front.animated.2bpp.lz"
 
 

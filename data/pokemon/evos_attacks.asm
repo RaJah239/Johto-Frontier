@@ -124,7 +124,6 @@ HaunterEvosAttacks:
 GengarEvosAttacks:
 SwabluEvosAttacks:
 AltariaEvosAttacks:
-XatuEvosAttacks:
 SmeargleEvosAttacks:
 GrowlitheEvosAttacks:
 ArcanineEvosAttacks:

@@ -67,7 +67,6 @@ PokemonNames::
 	db "Gengar@@@@"
 	db "Swablu@@@@"
 	db "Altaria@@@"
-	db "Xatu@@@@@@"
 	db "Smeargle@@"
 	db "Growlithe@"
 	db "Arcanine@@"
@@ -210,6 +209,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

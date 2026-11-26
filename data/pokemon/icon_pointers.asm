@@ -69,7 +69,6 @@ IconPointers:
 	dw GengarIcon
 	dw SwabluIcon
 	dw AltariaIcon
-	dw XatuIcon
 	dw SmeargleIcon
 	dw GrowlitheIcon
 	dw ArcanineIcon
