@@ -259,7 +259,6 @@ SnoverEvosAttacks:
 AbomasnowEvosAttacks:
 BaltoyEvosAttacks:
 ClaydolEvosAttacks:
-RioluEvosAttacks:
 LucarioEvosAttacks:
 BronzorEvosAttacks:
 BronzongEvosAttacks:

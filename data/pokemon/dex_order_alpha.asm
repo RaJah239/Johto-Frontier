@@ -170,7 +170,6 @@ AlphabeticalPokedexOrder:
 	db REMORAID
 	db RHYDON
 	db RHYHORN
-	db RIOLU
 	db ROTOM
 	db ROWLET
 	db SALAMENCE

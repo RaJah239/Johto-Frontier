@@ -208,7 +208,6 @@ PokemonCries::
 	mon_cry CRY_NATU,        $a5e,  $160 ; ABOMASNOW SourApple
 	mon_cry CRY_SEEL,        $130,  $060 ; BALTOY SourApple
 	mon_cry CRY_CLEFFA,      $e88,  $140 ; CLAYDOL SourApple
-	mon_cry CRY_SUNFLORA,    $702,  $100 ; RIOLU AzureKeys
 	mon_cry CRY_SLUGMA,     -$25c,  $0e0 ; LUCARIO AzureKeys
 	mon_cry CRY_EKANS,       $101,  $086 ; BRONZOR Ax6
 	mon_cry CRY_EKANS,       $12a,  $170 ; BRONZONG Ax6
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 257
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 260
 	assert_table_length $ff

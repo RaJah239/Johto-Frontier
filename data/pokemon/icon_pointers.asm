@@ -204,7 +204,6 @@ IconPointers:
 	dw AbomasnowIcon
 	dw BaltoyIcon
 	dw ClaydolIcon
-	dw RioluIcon
 	dw LucarioIcon
 	dw BronzorIcon
 	dw BronzongIcon

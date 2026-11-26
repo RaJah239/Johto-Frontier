@@ -202,7 +202,6 @@ AnimationIdlePointers:
 	dw AbomasnowAnimationIdle
 	dw BaltoyAnimationIdle
 	dw ClaydolAnimationIdle
-	dw RioluAnimationIdle
 	dw LucarioAnimationIdle
 	dw BronzorAnimationIdle
 	dw BronzongAnimationIdle

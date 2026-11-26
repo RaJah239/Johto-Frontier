@@ -209,7 +209,6 @@ MonMenuIconPals:
 	icon_pals GREEN,  BLUE   ; ABOMASNOW
 	icon_pals RED,    BLUE   ; BALTOY
 	icon_pals PINK,   BROWN  ; CLAYDOL
-	icon_pals BLUE,   RED    ; RIOLU
 	icon_pals BLUE,   RED    ; LUCARIO
 	icon_pals BLUE,   GREEN  ; BRONZOR
 	icon_pals BLUE,   GREEN  ; BRONZONG

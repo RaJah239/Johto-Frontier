@@ -33,8 +33,8 @@ MountMortarB1F_MapScripts:
 
 MountMortarB1FKiyoScript:
 	faceplayeropentext
-	checkevent EVENT_GOT_RIOLU_FROM_KIYO
-	iftrue .GotRiolu
+	checkevent EVENT_GOT_PRIMEAPE_FROM_KIYO
+	iftrue .GotPrimeape
 	checkevent EVENT_BEAT_BLACKBELT_KIYO
 	iftrue .BeatKiyo
 	writethistext
@@ -79,17 +79,17 @@ MountMortarB1FKiyoScript:
 	ifequal PARTY_LENGTH, .NoRoom
 	writethistext
 		text "<PLAYER> received"
-		line "Riolu."
+		line "Primeape."
 		done
 	playsound SFX_CAUGHT_MON
 	waitsfx
-	givepoke RIOLU, 5
-	setevent EVENT_GOT_RIOLU_FROM_KIYO
-	writetext RioluReceivedText
+	givepoke PRIMEAPE, 5
+	setevent EVENT_GOT_PRIMEAPE_FROM_KIYO
+	writetext PrimeapeReceivedText
 	waitendtext
 
-.GotRiolu:
-	writetext RioluReceivedText
+.GotPrimeape:
+	writetext PrimeapeReceivedText
 	promptbutton
 	writethistext
 		text "Up for a rematch?"
@@ -114,8 +114,8 @@ MountMortarB1FKiyoScript:
 	line "I'm beaten!"
 	done
 
-RioluReceivedText:
-	text "Riolu is a"
+PrimeapeReceivedText:
+	text "Primeape is a"
 	line "fighting-type."
 
 	para "It evolves into a"

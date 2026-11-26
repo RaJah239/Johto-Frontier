@@ -203,7 +203,6 @@ PokedexDataPointerTable:
  	dba AbomasnowPokedexEntry
  	dba BaltoyPokedexEntry
  	dba ClaydolPokedexEntry
- 	dba RioluPokedexEntry
  	dba LucarioPokedexEntry
  	dba BronzorPokedexEntry
  	dba BronzongPokedexEntry

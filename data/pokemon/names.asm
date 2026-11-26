@@ -202,7 +202,6 @@ PokemonNames::
 	db "Abomasnow@"
 	db "Baltoy@@@@"
 	db "Claydol@@@"
-	db "Riolu@@@@@"
 	db "Lucario@@@"
 	db "Bronzor@@@"
 	db "Bronzong@@"
@@ -249,6 +248,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

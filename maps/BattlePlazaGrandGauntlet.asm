@@ -466,7 +466,7 @@ PartyKeeperSpeciesList:
 	db SNEASEL
 	db SNOVER
 	db BALTOY
-	db RIOLU
+	db PRIMEAPE
 	db BRONZOR
 	db SKARMORY
 	db MISDREAVUS

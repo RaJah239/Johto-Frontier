@@ -208,7 +208,6 @@ Footprints:
  INCBIN "gfx/footprints/abomasnow.1bpp"
  INCBIN "gfx/footprints/dot.1bpp" ; BALTOY
  INCBIN "gfx/footprints/claydol.1bpp"
- INCBIN "gfx/footprints/riolu.1bpp"
  INCBIN "gfx/footprints/lucario.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; BRONZOR
  INCBIN "gfx/footprints/blank.1bpp" ; BRONZONG
@@ -262,4 +261,5 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 256
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
 	 INCBIN "gfx/footprints/blank.1bpp" ; 258
+	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	assert_table_length $100

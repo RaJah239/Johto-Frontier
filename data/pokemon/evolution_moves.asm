@@ -202,7 +202,6 @@ EvolutionMoves::
    db NO_MOVE      ; ABOMASNOW
    db NO_MOVE      ; BALTOY
    db NO_MOVE      ; CLAYDOL
-   db NO_MOVE      ; RIOLU
    db NO_MOVE      ; LUCARIO
    db NO_MOVE      ; BRONZOR
    db NO_MOVE      ; BRONZONG

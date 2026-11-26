@@ -422,33 +422,33 @@ SwarmGrassWildMons:
 	db 5, RALTS
 	db 5, RALTS
 
-; Riolu swarm
+; Primeape swarm
 	map_id UNION_CAVE_1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
 	; day
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
 	; nite
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
-	db 5, RIOLU
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
+	db 5, PRIMEAPE
 
 ; Rowlet swarm
 	map_id ROUTE_2

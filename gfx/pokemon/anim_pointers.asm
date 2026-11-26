@@ -202,7 +202,6 @@ AnimationPointers:
 	dw AbomasnowAnimation
 	dw BaltoyAnimation
 	dw ClaydolAnimation
-	dw RioluAnimation
 	dw LucarioAnimation
 	dw BronzorAnimation
 	dw BronzongAnimation

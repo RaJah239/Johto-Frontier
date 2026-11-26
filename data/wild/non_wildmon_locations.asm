@@ -117,7 +117,6 @@ GiftMons::
 	specialencounter PIKACHU, 	EVENT_GOT_DURACELL, 				          ROUTE_7_GOLDENROD_GATE, KenyaEvent_Str
 	specialencounter MAGIKARP, 	EVENT_GOT_DRATINI, 				              DRAGON_SHRINE, ExtremespeedDratini_Str
 	specialencounter EEVEE,	 	EVENT_GOT_EEVEE,                              BILLS_FAMILYS_HOUSE, BillsEevee_Str
-	specialencounter RIOLU, 	EVENT_GOT_RIOLU_FROM_KIYO,                    MOUNT_MORTAR_1F_OUTSIDE, TyrogueEvent_Str
 	; specialencounter AERODACTYL,EVENT_GAVE_SCIENTIST_OLD_AMBER,             RUINS_OF_ALPH_RESEARCH_CENTER, OldAmberEvent_Str
 	; specialencounter LILEEP, 	EVENT_GAVE_SCIENTIST_ROOT_FOSSIL,             RUINS_OF_ALPH_RESEARCH_CENTER, DomeFossil_Str
 	; specialencounter OMANYTE, 	EVENT_GAVE_SCIENTIST_HELIX_FOSSIL,        RUINS_OF_ALPH_RESEARCH_CENTER, HelixFossil_Str

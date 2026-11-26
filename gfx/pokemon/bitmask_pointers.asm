@@ -202,7 +202,6 @@ BitmasksPointers:
 	dw AbomasnowBitmasks
 	dw BaltoyBitmasks
 	dw ClaydolBitmasks
-	dw RioluBitmasks
 	dw LucarioBitmasks
 	dw BronzorBitmasks
 	dw BronzongBitmasks

@@ -319,7 +319,7 @@ JohtoGrassWildMons:
 	db 12, SWINUB
 	db 12, GLIGAR
 	db 12, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; day
 	db 12, MAKUHITA
 	db 12, GIBLE
@@ -327,7 +327,7 @@ JohtoGrassWildMons:
 	db 12, SWINUB
 	db 12, GLIGAR
 	db 12, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; nite
 	db 12, MAKUHITA
 	db 12, GIBLE
@@ -335,7 +335,7 @@ JohtoGrassWildMons:
 	db 12, SWINUB
 	db 12, GLIGAR
 	db 12, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	end_grass_wildmons
 
 	def_grass_wildmons UNION_CAVE_B1F
@@ -347,7 +347,7 @@ JohtoGrassWildMons:
 	db 25, SWINUB
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; day
 	db 25, MAKUHITA
 	db 25, GABITE
@@ -355,7 +355,7 @@ JohtoGrassWildMons:
 	db 25, SWINUB
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; nite
 	db 25, MAKUHITA
 	db 25, GABITE
@@ -363,7 +363,7 @@ JohtoGrassWildMons:
 	db 25, SWINUB
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	end_grass_wildmons
 
 	def_grass_wildmons UNION_CAVE_B2F
@@ -375,7 +375,7 @@ JohtoGrassWildMons:
 	db 25, RHYHORN
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; day
 	db 25, MAKUHITA
 	db 25, GABITE
@@ -383,7 +383,7 @@ JohtoGrassWildMons:
 	db 25, RHYHORN
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	; nite
 	db 25, MAKUHITA
 	db 25, GABITE
@@ -391,7 +391,7 @@ JohtoGrassWildMons:
 	db 25, RHYHORN
 	db 25, GLIGAR
 	db 25, ONIX
-	db 5, RIOLU
+	db 5, PRIMEAPE
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_5

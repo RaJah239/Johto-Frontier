@@ -407,8 +407,6 @@ PokemonPicPointers::
  	dba BaltoyBackpic
  	dba ClaydolFrontpic
  	dba ClaydolBackpic
- 	dba RioluFrontpic
- 	dba RioluBackpic
  	dba LucarioFrontpic
  	dba LucarioBackpic
  	dba BronzorFrontpic

@@ -204,7 +204,6 @@ NewPokedexOrder:
 	db ABOMASNOW
 	db BALTOY
 	db CLAYDOL
-	db RIOLU
 	db LUCARIO
 	db BRONZOR
 	db BRONZONG

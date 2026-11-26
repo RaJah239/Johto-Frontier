@@ -104,7 +104,7 @@ SwarmGrampsScript:
 	ifequal 13, .Meowth
 	ifequal 14, .Phanpy
 	ifequal 15, .Ralts
-	ifequal 16, .Riolu
+	ifequal 16, .Primeape
 	ifequal 17, .Rowlet
 	ifequal 18, .Shroomish
 	ifequal 19, .Smoochum
@@ -272,12 +272,12 @@ SwarmGrampsScript:
 		cont "Route 1!"
 		done
 
-.Riolu:
+.Primeape:
 	setflag ENGINE_SWARM
 	swarm UNION_CAVE_1F
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Riolu at"
+		line "Primeape at"
 		cont "Union Cave 1F!"
 		done
 
@@ -432,7 +432,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Meowth,"
 		cont "Phanpy,"
 		cont "Ralts,"
-		cont "Riolu,"
+		cont "Primeape,"
 		cont "Rowlet,"
 		cont "Shroomish,"
 		cont "Smoochum,"

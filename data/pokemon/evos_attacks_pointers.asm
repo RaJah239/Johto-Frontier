@@ -204,7 +204,6 @@ EvosAttacksPointers::
 	dw AbomasnowEvosAttacks
 	dw BaltoyEvosAttacks
 	dw ClaydolEvosAttacks
-	dw RioluEvosAttacks
 	dw LucarioEvosAttacks
 	dw BronzorEvosAttacks
 	dw BronzongEvosAttacks

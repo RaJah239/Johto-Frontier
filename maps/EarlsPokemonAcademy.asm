@@ -412,7 +412,7 @@ FleeMonsNotebook:
 		cont "Meowth,"
 		cont "Phanpy,"
 		cont "Ralts,"
-		cont "Riolu,"
+		cont "Primeape,"
 		cont "Rowlet,"
 		cont "Smoochum,"
 		cont "Snubbull,"

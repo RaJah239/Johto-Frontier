@@ -202,7 +202,6 @@ FramesPointers:
 	dw AbomasnowFrames
 	dw BaltoyFrames
 	dw ClaydolFrames
-	dw RioluFrames
 	dw LucarioFrames
 	dw BronzorFrames
 	dw BronzongFrames

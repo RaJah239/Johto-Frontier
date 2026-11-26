@@ -9,7 +9,6 @@ UnshakenPokemon:
 ;    db SNEASLER
 ;    db SNORUNT
 ;    db GLALIE
-;    db RIOLU
 ;    db LUCARIO
 ;    db ANNIHILAPE
 ;    db DROWZEE

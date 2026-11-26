@@ -419,8 +419,6 @@ INCBIN "gfx/pokemon/baltoy/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/baltoy/shiny.pal"
 INCBIN "gfx/pokemon/claydol/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/claydol/shiny.pal"
-INCBIN "gfx/pokemon/riolu/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/riolu/shiny.pal"
 INCBIN "gfx/pokemon/lucario/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/lucario/shiny.pal"
 INCBIN "gfx/pokemon/bronzor/front.gbcpal", middle_colors
@@ -556,6 +554,10 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 
+	RGB 23, 23, 23
+	RGB 17, 17, 17
+	RGB 23, 23, 23
+	RGB 17, 17, 17
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 	RGB 23, 23, 23
