@@ -95,7 +95,6 @@ BitmasksPointers:
 	dw DrapionBitmasks
 	dw LarvestaBitmasks
 	dw VolcaronaBitmasks
-	dw IronMothBitmasks
 	dw TropiusBitmasks
 	dw MankeyBitmasks
 	dw PrimeapeBitmasks

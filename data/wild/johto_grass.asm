@@ -1729,7 +1729,7 @@ JohtoGrassWildMons:
 	db 37, MUK
 	db 37, TOGETIC
 	; nite
-	db 37, IRON_MOTH
+	db 37, VOLCARONA
 	db 37, HOUNDOOM
 	db 37, WEEZING
 	db 37, MUK

@@ -99,7 +99,6 @@ SkorupiPokedexEntry::    INCLUDE "data/pokemon/dex_entries/skorupi.asm"
 DrapionPokedexEntry::    INCLUDE "data/pokemon/dex_entries/drapion.asm"
 LarvestaPokedexEntry::   INCLUDE "data/pokemon/dex_entries/larvesta.asm"
 VolcaronaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/volcarona.asm"
-IronMothPokedexEntry::   INCLUDE "data/pokemon/dex_entries/iron_moth.asm"
 TropiusPokedexEntry::    INCLUDE "data/pokemon/dex_entries/tropius.asm"
 
 

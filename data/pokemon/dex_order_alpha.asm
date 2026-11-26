@@ -85,7 +85,6 @@ AlphabeticalPokedexOrder:
 	db HOUNDOOM
 	db HOUNDOUR
 	db HYPNO
-	db IRON_MOTH
 	db JIRACHI
 	db JOLTEON
 	db JOLTIK

@@ -95,7 +95,6 @@ EvolutionMoves::
    db NO_MOVE      ; DRAPION
    db NO_MOVE      ; LARVESTA
    db NO_MOVE      ; VOLCARONA
-   db NO_MOVE      ; IRON_MOTH
    db NO_MOVE      ; TROPIUS
    db NO_MOVE      ; MANKEY
    db NO_MOVE      ; PRIMEAPE

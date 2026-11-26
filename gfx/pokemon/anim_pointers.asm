@@ -95,7 +95,6 @@ AnimationPointers:
 	dw DrapionAnimation
 	dw LarvestaAnimation
 	dw VolcaronaAnimation
-	dw IronMothAnimation
 	dw TropiusAnimation
 	dw MankeyAnimation
 	dw PrimeapeAnimation

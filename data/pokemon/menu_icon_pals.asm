@@ -102,7 +102,6 @@ MonMenuIconPals:
 	icon_pals PURPLE, RED    ; DRAPION
 	icon_pals RED,    GRAY   ; LARVESTA
 	icon_pals RED,    BROWN  ; VOLCARONA
-	icon_pals RED,    BROWN  ; IRON_MOTH TODOTEXT
 	icon_pals GREEN,  GREEN  ; TROPIUS
 	icon_pals BROWN,  BROWN  ; MANKEY
 	icon_pals BROWN,  GREEN  ; PRIMEAPE

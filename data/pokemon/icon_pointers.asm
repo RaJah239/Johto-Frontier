@@ -97,7 +97,6 @@ IconPointers:
 	dw DrapionIcon
 	dw LarvestaIcon
 	dw VolcaronaIcon
-	dw VolcaronaIcon ; IronMothIcon
 	dw TropiusIcon
 	dw MankeyIcon
 	dw PrimeapeIcon

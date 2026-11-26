@@ -193,8 +193,6 @@ PokemonPicPointers::
  	dba LarvestaBackpic
  	dba VolcaronaFrontpic
  	dba VolcaronaBackpic
- 	dba IronMothFrontpic
- 	dba IronMothBackpic
  	dba TropiusFrontpic
  	dba TropiusBackpic
  	dba MankeyFrontpic

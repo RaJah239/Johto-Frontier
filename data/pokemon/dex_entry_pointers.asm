@@ -96,7 +96,6 @@ PokedexDataPointerTable:
  	dba DrapionPokedexEntry
  	dba LarvestaPokedexEntry
  	dba VolcaronaPokedexEntry
- 	dba IronMothPokedexEntry
  	dba TropiusPokedexEntry
  	dba MankeyPokedexEntry
  	dba PrimeapePokedexEntry

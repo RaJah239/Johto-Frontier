@@ -97,7 +97,6 @@ EvosAttacksPointers::
 	dw DrapionEvosAttacks
 	dw LarvestaEvosAttacks
 	dw VolcaronaEvosAttacks
-	dw IronMothEvosAttacks
 	dw TropiusEvosAttacks
 	dw MankeyEvosAttacks
 	dw PrimeapeEvosAttacks

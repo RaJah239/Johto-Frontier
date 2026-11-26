@@ -638,11 +638,9 @@ VaporeonFrontpic:    INCBIN "gfx/pokemon/vaporeon/front.animated.2bpp.lz"
 VaporeonBackpic:     INCBIN "gfx/pokemon/vaporeon/back.2bpp.lz"
 UrsalunaBFrontpic:   INCBIN "gfx/pokemon/ursaluna_b/front.animated.2bpp.lz"
 UrsalunaBBackpic:    INCBIN "gfx/pokemon/ursaluna_b/back.2bpp.lz"
-IronMothFrontpic:    INCBIN "gfx/pokemon/iron_moth/front.animated.2bpp.lz"
 
 
 SECTION "Pics 29", ROMX
-IronMothBackpic:     INCBIN "gfx/pokemon/iron_moth/back.2bpp.lz"
 MrMimeFrontpic:      INCBIN "gfx/pokemon/mr_mime/front.animated.2bpp.lz"
 MrMimeBackpic:       INCBIN "gfx/pokemon/mr_mime/back.2bpp.lz"
 AggronFrontpic:      INCBIN "gfx/pokemon/aggron/front.animated.2bpp.lz"
