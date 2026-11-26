@@ -155,8 +155,6 @@ PokemonPicPointers::
  	dba GabiteBackpic
  	dba GarchompFrontpic
  	dba GarchompBackpic
- 	dba HariyamaFrontpic
- 	dba HariyamaBackpic
  	dba DoduoFrontpic
  	dba DoduoBackpic
  	dba DodrioFrontpic

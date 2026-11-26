@@ -76,7 +76,6 @@ AnimationIdlePointers:
 	dw GliscorAnimationIdle
 	dw GabiteAnimationIdle
 	dw GarchompAnimationIdle
-	dw HariyamaAnimationIdle
 	dw DoduoAnimationIdle
 	dw DodrioAnimationIdle
 	dw PonytaAnimationIdle

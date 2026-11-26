@@ -133,7 +133,6 @@ GligarEvosAttacks:
 GliscorEvosAttacks:
 GabiteEvosAttacks:
 GarchompEvosAttacks:
-HariyamaEvosAttacks:
 DoduoEvosAttacks:
 DodrioEvosAttacks:
 PonytaEvosAttacks:

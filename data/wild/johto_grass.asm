@@ -1185,7 +1185,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; day
@@ -1193,7 +1193,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; nite
@@ -1201,7 +1201,7 @@ JohtoGrassWildMons:
 	db 25, LUNATONE
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	end_grass_wildmons
@@ -1213,7 +1213,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; day
@@ -1221,7 +1221,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; nite
@@ -1229,7 +1229,7 @@ JohtoGrassWildMons:
 	db 25, LUNATONE
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	end_grass_wildmons
@@ -1241,7 +1241,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; day
@@ -1249,7 +1249,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; nite
@@ -1257,7 +1257,7 @@ JohtoGrassWildMons:
 	db 25, LUNATONE
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	end_grass_wildmons
@@ -1269,7 +1269,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; day
@@ -1277,7 +1277,7 @@ JohtoGrassWildMons:
 	db 25, SOLROCK
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	; nite
@@ -1285,7 +1285,7 @@ JohtoGrassWildMons:
 	db 25, LUNATONE
 	db 25, GOLBAT
 	db 25, GLIGAR
-	db 25, HARIYAMA
+	db 25, PRIMEAPE
 	db 25, EXCADRILL
 	db 25, CLEFAIRY
 	end_grass_wildmons

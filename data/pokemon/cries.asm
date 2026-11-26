@@ -82,7 +82,6 @@ PokemonCries::
 	mon_cry CRY_NIDOQUEEN,   $73d,  $1b0 ; GLISCOR AzureKeys
 	mon_cry CRY_NIDORAN_F,   $e15,  $200 ; GABITE SourApple
 	mon_cry CRY_RAICHU,      $f1f,  $130 ; GARCHOMP SourApple
-	mon_cry CRY_MUK,         $e22,  $1d0 ; HARIYAMA SourApple
 	mon_cry CRY_DIGLETT,      187,   129 ; DODUO
 	mon_cry CRY_DIGLETT,      153,   160 ; DODRIO
 	mon_cry CRY_WEEPINBELL,     0,   256 ; PONYTA
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 301
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 302
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 303
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 304
 	assert_table_length $ff

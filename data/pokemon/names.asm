@@ -76,7 +76,6 @@ PokemonNames::
 	db "Gliscor@@@"
 	db "Gabite@@@@"
 	db "Garchomp@@"
-	db "Hariyama@@"
 	db "Doduo@@@@@"
 	db "Dodrio@@@@"
 	db "Ponyta@@@@"
@@ -205,6 +204,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

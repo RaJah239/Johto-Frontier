@@ -6,7 +6,6 @@ ThickFatPokemon:
 ;    db MARILL
 ;    db AZUMARILL
 ;    db MILTANK
-;    db HARIYAMA
 ;    db PILOSWINE
 ;    db MAMOSWINE
     db -1

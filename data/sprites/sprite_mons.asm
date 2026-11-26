@@ -26,7 +26,7 @@ SpriteMons:
 	db AMPHAROS
 	db TENTACOOL
 	db MILTANK ; in use
-	db HARIYAMA ; in use
+	db PRIMEAPE ; in use
 	db ELECTRODE
 	db LAPRAS
 	db RHYDON ; in use

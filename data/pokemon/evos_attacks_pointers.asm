@@ -78,7 +78,6 @@ EvosAttacksPointers::
 	dw GliscorEvosAttacks
 	dw GabiteEvosAttacks
 	dw GarchompEvosAttacks
-	dw HariyamaEvosAttacks
 	dw DoduoEvosAttacks
 	dw DodrioEvosAttacks
 	dw PonytaEvosAttacks

@@ -78,7 +78,6 @@ NewPokedexOrder:
 	db GLISCOR
 	db GABITE
 	db GARCHOMP
-	db HARIYAMA
 	db DODUO
 	db DODRIO
 	db PONYTA

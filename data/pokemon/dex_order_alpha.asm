@@ -77,7 +77,6 @@ AlphabeticalPokedexOrder:
 	db GRANBULL
 	db GRIMER
 	db GYARADOS
-	db HARIYAMA
 	db HAUNTER
 	db HAXORUS
 	db HERACROSS

@@ -83,7 +83,6 @@ MonMenuIconPals:
 	icon_pals PURPLE, BLUE   ; GLISCOR
 	icon_pals BLUE,   BLUE   ; GABITE
 	icon_pals BLUE,   GRAY   ; GARCHOMP
-	icon_pals BROWN,  RED    ; HARIYAMA
 	icon_pals BROWN,  TEAL   ; DODUO
 	icon_pals BROWN,  TEAL   ; DODRIO
 	icon_pals RED,    BLUE   ; PONYTA

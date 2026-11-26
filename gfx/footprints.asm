@@ -82,7 +82,6 @@ Footprints:
  INCBIN "gfx/footprints/gliscor.1bpp"
  INCBIN "gfx/footprints/gabite.1bpp"
  INCBIN "gfx/footprints/garchomp.1bpp"
- INCBIN "gfx/footprints/hariyama.1bpp"
  INCBIN "gfx/footprints/doduo.1bpp"
  INCBIN "gfx/footprints/dodrio.1bpp"
  INCBIN "gfx/footprints/ponyta.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 300
 	 INCBIN "gfx/footprints/blank.1bpp" ; 301
 	 INCBIN "gfx/footprints/blank.1bpp" ; 302
+	 INCBIN "gfx/footprints/blank.1bpp" ; 303
 	assert_table_length $100
