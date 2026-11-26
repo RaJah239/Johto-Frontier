@@ -243,7 +243,6 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	 INCBIN "gfx/footprints/blank.1bpp" ; 260
 	 INCBIN "gfx/footprints/blank.1bpp" ; 261
-	 INCBIN "gfx/footprints/blank.1bpp" ; 262
 	 INCBIN "gfx/footprints/blank.1bpp" ; 263
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; KROOKODILE (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; RHYPERIOR (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; MIMIKYU (no supplied footprint)
+	 INCBIN "gfx/footprints/blank.1bpp" ; DUGTRIO_A (no supplied footprint)
 	assert_table_length $100

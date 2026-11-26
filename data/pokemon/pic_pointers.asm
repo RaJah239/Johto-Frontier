@@ -488,6 +488,8 @@ PokemonPicPointers::
 	dba RhyperiorBackpic
 	dba MimikyuFrontpic
 	dba MimikyuBackpic
+	dba DugtrioAFrontpic
+	dba DugtrioABackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

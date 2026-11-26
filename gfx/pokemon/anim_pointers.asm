@@ -241,4 +241,5 @@ dw VulpixAnimation
 	dw KrookodileAnimation
 	dw RhyperiorAnimation
 	dw MimikyuAnimation
+	dw DugtrioAAnimation
 	assert_table_length NUM_POKEMON

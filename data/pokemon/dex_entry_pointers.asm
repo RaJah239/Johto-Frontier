@@ -242,4 +242,5 @@ PokedexDataPointerTable:
 	dba KrookodilePokedexEntry
 	dba RhyperiorPokedexEntry
 	dba MimikyuPokedexEntry
+	dba DugtrioAPokedexEntry
 	assert_table_length NUM_POKEMON

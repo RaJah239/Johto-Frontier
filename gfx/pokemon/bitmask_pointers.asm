@@ -241,4 +241,5 @@ dw VulpixBitmasks
 	dw KrookodileBitmasks
 	dw RhyperiorBitmasks
 	dw MimikyuBitmasks
+	dw DugtrioABitmasks
 	assert_table_length NUM_POKEMON

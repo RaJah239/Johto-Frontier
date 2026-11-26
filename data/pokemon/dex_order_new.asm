@@ -243,4 +243,5 @@ NewPokedexOrder:
 	db KROOKODILE
 	db RHYPERIOR
 	db MIMIKYU
+	db DUGTRIO_A
 	assert_table_length NUM_POKEMON

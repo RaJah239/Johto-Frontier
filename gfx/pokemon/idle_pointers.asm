@@ -241,4 +241,5 @@ dw VulpixAnimationIdle
 	dw KrookodileAnimationIdle
 	dw RhyperiorAnimationIdle
 	dw MimikyuAnimationIdle
+	dw DugtrioAAnimationIdle
 	assert_table_length NUM_POKEMON

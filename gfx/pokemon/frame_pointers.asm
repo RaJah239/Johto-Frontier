@@ -241,4 +241,5 @@ dw VulpixFrames
 	dw KrookodileFrames
 	dw RhyperiorFrames
 	dw MimikyuFrames
+	dw DugtrioAFrames
 	assert_table_length NUM_POKEMON

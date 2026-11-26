@@ -248,6 +248,7 @@ MonMenuIconPals:
 	icon_pals BROWN, RED ; KROOKODILE
 	icon_pals BROWN, BROWN ; RHYPERIOR
 	icon_pals BROWN, RED ; MIMIKYU
+	icon_pals BROWN, BROWN ; DUGTRIO_A
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

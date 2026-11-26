@@ -504,3 +504,8 @@ MimikyuEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, SPLASH
 	db 0 ; no more level-up moves
+
+DugtrioAEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, SPLASH
+	db 0 ; no more level-up moves

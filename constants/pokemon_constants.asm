@@ -271,6 +271,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const KROOKODILE ; ef
 	const RHYPERIOR ; f0
 	const MIMIKYU ; f1
+	const DUGTRIO_A ; f2
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 
