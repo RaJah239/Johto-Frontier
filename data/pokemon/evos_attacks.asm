@@ -73,7 +73,6 @@ CharmeleonEvosAttacks:
 CharizardEvosAttacks:
 WartortleEvosAttacks:
 BlastoiseEvosAttacks:
-GrotleEvosAttacks:
 TorterraEvosAttacks:
 PikachuEvosAttacks:
 RaichuEvosAttacks:

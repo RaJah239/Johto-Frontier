@@ -1,7 +1,6 @@
 ; List of all Pokemon that cannot be critical hit
 
 CritGuardPokemon:
-;    db GROTLE
 ;    db TORTERRA
 ;    db SKORUPI
 ;    db DRAPION

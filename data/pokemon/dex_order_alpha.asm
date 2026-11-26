@@ -82,7 +82,6 @@ AlphabeticalPokedexOrder:
 	db GOLISOPOD
 	db GRANBULL
 	db GRIMER
-	db GROTLE
 	db GROWLITHE
 	db GYARADOS
 	db HARIYAMA

@@ -12,7 +12,6 @@ AnimationIdlePointers:
 	dw CharizardAnimationIdle
 	dw WartortleAnimationIdle
 	dw BlastoiseAnimationIdle
-	dw GrotleAnimationIdle
 	dw TorterraAnimationIdle
 	dw PikachuAnimationIdle
 	dw RaichuAnimationIdle

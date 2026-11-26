@@ -12,7 +12,6 @@ BitmasksPointers:
 	dw CharizardBitmasks
 	dw WartortleBitmasks
 	dw BlastoiseBitmasks
-	dw GrotleBitmasks
 	dw TorterraBitmasks
 	dw PikachuBitmasks
 	dw RaichuBitmasks

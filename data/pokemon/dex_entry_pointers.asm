@@ -13,7 +13,6 @@ PokedexDataPointerTable:
  	dba CharizardPokedexEntry
  	dba WartortlePokedexEntry
  	dba BlastoisePokedexEntry
- 	dba GrotlePokedexEntry
  	dba TorterraPokedexEntry
  	dba PikachuPokedexEntry
  	dba RaichuPokedexEntry

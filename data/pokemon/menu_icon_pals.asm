@@ -19,7 +19,6 @@ MonMenuIconPals:
 	icon_pals RED,    GRAY   ; CHARIZARD
 	icon_pals BLUE,   TEAL   ; WARTORTLE
 	icon_pals BLUE,   PURPLE ; BLASTOISE
-	icon_pals GREEN,  PURPLE ; GROTLE
 	icon_pals GREEN,  PURPLE ; TORTERRA
 	icon_pals RED,    RED    ; PIKACHU
 	icon_pals RED,    BROWN  ; RAICHU

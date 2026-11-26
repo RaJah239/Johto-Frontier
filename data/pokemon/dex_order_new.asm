@@ -14,7 +14,6 @@ NewPokedexOrder:
 	db CHARIZARD
 	db WARTORTLE
 	db BLASTOISE
-	db GROTLE
 	db TORTERRA
 	db PIKACHU
 	db RAICHU

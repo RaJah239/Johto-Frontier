@@ -12,7 +12,6 @@ FramesPointers:
 	dw CharizardFrames
 	dw WartortleFrames
 	dw BlastoiseFrames
-	dw GrotleFrames
 	dw TorterraFrames
 	dw PikachuFrames
 	dw RaichuFrames
