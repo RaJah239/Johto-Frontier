@@ -286,7 +286,6 @@ GholdengoEvosAttacks:
 DarkraiEvosAttacks:
 RegirockEvosAttacks:
 RegiceEvosAttacks:
-RegisteelEvosAttacks:
 ArticunoEvosAttacks:
 ZapdosEvosAttacks:
 MoltresEvosAttacks:

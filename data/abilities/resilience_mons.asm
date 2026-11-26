@@ -7,6 +7,5 @@
 ;	db TENTACRUEL
 ;	db REGIROCK
 ;	db REGICE
-;	db REGISTEEL
     db METAGROSS
     db -1 ; end

@@ -304,7 +304,6 @@ ENDC
 	jr z, .master_ball_fails
 	cp REGICE
 	jr z, .master_ball_fails
-	cp REGISTEEL
 	jr z, .master_ball_fails
 	cp ARTICUNO
 	jr z, .master_ball_fails

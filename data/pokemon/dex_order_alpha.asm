@@ -170,7 +170,6 @@ AlphabeticalPokedexOrder:
 	db RAPIDASH
 	db REGICE
 	db REGIROCK
-	db REGISTEEL
 	db REMORAID
 	db RHYDON
 	db RHYHORN

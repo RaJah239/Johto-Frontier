@@ -471,8 +471,6 @@ PokemonPicPointers::
  	dba RegirockBackpic
  	dba RegiceFrontpic
  	dba RegiceBackpic
- 	dba RegisteelFrontpic
- 	dba RegisteelBackpic
  	dba ArticunoFrontpic
  	dba ArticunoBackpic
  	dba ZapdosFrontpic

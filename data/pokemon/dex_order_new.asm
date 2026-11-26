@@ -236,7 +236,6 @@ NewPokedexOrder:
 	db DARKRAI
 	db REGIROCK
 	db REGICE
-	db REGISTEEL
 	db ARTICUNO
 	db ZAPDOS
 	db MOLTRES

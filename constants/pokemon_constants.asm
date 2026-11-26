@@ -264,24 +264,23 @@ DEF JOHTO_POKEMON EQU const_value
 	const DARKRAI    ; e8
 	const REGIROCK   ; e9
 	const REGICE     ; ea
-	const REGISTEEL  ; eb
-	const ARTICUNO   ; ec
-	const ZAPDOS     ; ed
-	const MOLTRES    ; ee
-	const LUGIA      ; ef
-	const RAIKOU     ; f0
-	const ENTEI      ; f1
-	const SUICUNE    ; f2
-	const HO_OH      ; f3
-	const UNOWN      ; f4
-	const NOWN       ; f5
-	const JIRACHI    ; f6
-	const CELEBI     ; f7
-	const DITTO      ; f8
-	const MEW        ; f9
-	const MEWTWO     ; fa
+	const ARTICUNO   ; eb
+	const ZAPDOS     ; ec
+	const MOLTRES    ; ed
+	const LUGIA      ; ee
+	const RAIKOU     ; ef
+	const ENTEI      ; f0
+	const SUICUNE    ; f1
+	const HO_OH      ; f2
+	const UNOWN      ; f3
+	const NOWN       ; f4
+	const JIRACHI    ; f5
+	const CELEBI     ; f6
+	const DITTO      ; f7
+	const MEW        ; f8
+	const MEWTWO     ; f9
 DEF NUM_POKEMON EQU const_value - 1
-	const EGG        ; fb
+	const EGG        ; fa
 
 ; Unown forms
 ; indexes for:
