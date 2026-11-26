@@ -515,7 +515,7 @@ JohtoGrassWildMons:
 	db 17, TANGELA
 	db 17, PIDGEY
 	db 17, BUNEARY
-	db 5, TOGEPI 
+	db 5, TOGETIC
 	; day
 	db 17, SNUBBULL
 	db 17, MEOWTH
@@ -523,7 +523,7 @@ JohtoGrassWildMons:
 	db 17, TANGELA
 	db 17, PIDGEY
 	db 17, BUNEARY
-	db 5, TOGEPI 
+	db 5, TOGETIC
 	; nite
 	db 17, DROWZEE
 	db 17, DITTO
@@ -531,7 +531,7 @@ JohtoGrassWildMons:
 	db 17, MEOWTH
 	db 17, SNUBBULL
 	db 17, HOOTHOOT
-	db 5, TOGEPI 
+	db 5, TOGETIC
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_7
@@ -1719,7 +1719,7 @@ JohtoGrassWildMons:
 	db 37, VOLCARONA
 	db 37, WEEZING
 	db 37, MUK
-	db 37, TOGEPI
+	db 37, TOGETIC
 	; day
 	db 37, DONPHAN
 	db 37, SNEASLER
@@ -1727,7 +1727,7 @@ JohtoGrassWildMons:
 	db 37, VOLCARONA
 	db 37, WEEZING
 	db 37, MUK
-	db 37, TOGEPI
+	db 37, TOGETIC
 	; nite
 	db 37, IRON_MOTH
 	db 37, HOUNDOOM
@@ -1735,7 +1735,7 @@ JohtoGrassWildMons:
 	db 37, MUK
 	db 37, CHANDELURE
 	db 37, UMBREON
-	db 37, TOGEPI
+	db 37, TOGETIC
 	end_grass_wildmons
 
 	def_grass_wildmons SILVER_CAVE_ROOM_1

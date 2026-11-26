@@ -111,7 +111,7 @@ SwarmGrampsScript:
 	ifequal 20, .Snubbull
 	ifequal 21, .Squirtle
 	ifequal 22, .Teddiursa
-	ifequal 23, .Togepi
+	ifequal 23, .Togetic
 	ifequal 24, .Torchic
 	ifequal 25, .Croconaw
 	ifequal 26, .Turtwig
@@ -335,12 +335,12 @@ SwarmGrampsScript:
 		cont "Dark Cave, West!"
 		done
 
-.Togepi:
+.Togetic:
 	setflag ENGINE_SWARM
 	swarm SILVER_CAVE_OUTSIDE
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Togepi at Mt."
+		line "Togetic at Mt."
 		cont "Silver Outside!"
 		done
 
@@ -439,7 +439,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Snubbull,"
 		cont "Squirtle,"
 		cont "Teddiursa,"
-		cont "Togepi,"
+		cont "Togetic,"
 		cont "Torchic,"
 		cont "Croconaw and"
 		cont "Turtwig."

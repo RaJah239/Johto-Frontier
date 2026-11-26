@@ -32,7 +32,7 @@ StdScripts::
 	add_stdscript GymStatue1Script
 	add_stdscript GymStatue2Script
 	add_stdscript ReceiveItemScript
-	add_stdscript ReceiveTogepiEggScript
+	add_stdscript ReceiveTogeticEggScript
 	add_stdscript PCScript
 	add_stdscript GameCornerCoinVendorScript
 	add_stdscript HappinessCheckScript
@@ -658,7 +658,7 @@ ReceiveItemScript:
 	waitsfx
 	end
 
-ReceiveTogepiEggScript:
+ReceiveTogeticEggScript:
 	special SetReceivedEggName
 	waitsfx
 	farwritetext ReceivedItemText

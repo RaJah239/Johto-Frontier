@@ -6,7 +6,6 @@ PokemonNames::
 	db "Feraligatr"
 	db "Bayleef@@@"
 	db "Meganium@@"
-	db "Togepi@@@@"
 	db "Togetic@@@"
 	db "Togekiss@@"
 	db "Charmander"
@@ -232,6 +231,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

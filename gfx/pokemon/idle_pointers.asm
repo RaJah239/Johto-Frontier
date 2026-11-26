@@ -6,7 +6,6 @@ AnimationIdlePointers:
 	dw FeraligatrAnimationIdle
 	dw BayleefAnimationIdle
 	dw MeganiumAnimationIdle
-	dw TogepiAnimationIdle
 	dw TogeticAnimationIdle
 	dw TogekissAnimationIdle
 	dw CharmanderAnimationIdle

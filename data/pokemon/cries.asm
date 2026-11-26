@@ -12,7 +12,6 @@ PokemonCries::
 	mon_cry CRY_TOTODILE,    1020,   384 ; FERALIGATR
 	mon_cry CRY_CHIKORITA,    -34,   288 ; BAYLEEF
 	mon_cry CRY_CHIKORITA,   -183,   512 ; MEGANIUM
-	mon_cry CRY_TOGEPI,        16,   256 ; TOGEPI
 	mon_cry CRY_TOGETIC,       59,    56 ; TOGETIC
 	mon_cry CRY_TOGETIC,       59,    56 ; TOGEKISS
 	mon_cry CRY_CHARMANDER,    96,   192 ; CHARMANDER
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 274
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 275
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 276
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 277
 	assert_table_length $ff

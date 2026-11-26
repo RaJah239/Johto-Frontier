@@ -618,33 +618,33 @@ SwarmGrassWildMons:
 	db 5, TEDDIURSA
 	db 5, TEDDIURSA
 
-; Togepi swarm
+; Togetic swarm
 	map_id SILVER_CAVE_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
 	; day
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
 	; nite
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
-	db 5, TOGEPI
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
+	db 5, TOGETIC
 
 ; Torchic swarm
 	map_id ROUTE_10

@@ -67,7 +67,6 @@ CroconawEvosAttacks:
 FeraligatrEvosAttacks:
 BayleefEvosAttacks:
 MeganiumEvosAttacks:
-TogepiEvosAttacks:
 TogeticEvosAttacks:
 TogekissEvosAttacks:
 CharmanderEvosAttacks:

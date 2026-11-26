@@ -25,7 +25,7 @@ MrPokemonsHouse_MapScripts:
 
 MrPokemonsHouse_MrPokemonScript:
 	faceplayeropentext
-	checkevent EVENT_MR_POKEMON_TOGEPI_EGG
+	checkevent EVENT_MR_POKEMON_TOGETIC_EGG
 	iffalse .CollectThisEggFirst
 	writetextcheckdialogue MrPokemonTradesSilverLeafText, MrPokemonTradesSilverLeafTextMin
 	yesorno
@@ -51,9 +51,9 @@ MrPokemonsHouse_MrPokemonScript:
 	promptbutton
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .PartyFull
-	giveegg TOGEPI, EGG_LEVEL
-	callstd ReceiveTogepiEggScript
-	setevent EVENT_MR_POKEMON_TOGEPI_EGG
+	giveegg TOGETIC, EGG_LEVEL
+	callstd ReceiveTogeticEggScript
+	setevent EVENT_MR_POKEMON_TOGETIC_EGG
 .LifeIsDelightful:
 	jumpthisopenedtext
 		text "It's a good life!"

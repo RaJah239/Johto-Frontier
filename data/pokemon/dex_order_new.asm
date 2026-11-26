@@ -8,7 +8,6 @@ NewPokedexOrder:
 	db FERALIGATR
 	db BAYLEEF
 	db MEGANIUM
-	db TOGEPI
 	db TOGETIC
 	db TOGEKISS
 	db CHARMANDER

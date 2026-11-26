@@ -8,7 +8,6 @@ IconPointers:
 	dw FeraligatrIcon
 	dw BayleefIcon
 	dw MeganiumIcon
-	dw TogepiIcon
 	dw TogeticIcon
 	dw TogekissIcon
 	dw CharmanderIcon

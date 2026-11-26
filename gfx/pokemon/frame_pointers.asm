@@ -6,7 +6,6 @@ FramesPointers:
 	dw FeraligatrFrames
 	dw BayleefFrames
 	dw MeganiumFrames
-	dw TogepiFrames
 	dw TogeticFrames
 	dw TogekissFrames
 	dw CharmanderFrames

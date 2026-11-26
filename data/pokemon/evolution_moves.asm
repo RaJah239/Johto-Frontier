@@ -6,7 +6,6 @@ EvolutionMoves::
    db NO_MOVE      ; FERALIGATR
    db NO_MOVE      ; BAYLEEF
    db NO_MOVE      ; MEGANIUM
-   db NO_MOVE      ; TOGEPI
    db NO_MOVE      ; TOGETIC
    db NO_MOVE      ; TOGEKISS
    db NO_MOVE      ; CHARMANDER

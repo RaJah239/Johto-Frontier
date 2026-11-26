@@ -13,7 +13,6 @@ MonMenuIconPals:
 	icon_pals BLUE,   TEAL   ; FERALIGATR
 	icon_pals GREEN,  BROWN  ; BAYLEEF
 	icon_pals GREEN,  BROWN  ; MEGANIUM
-	icon_pals RED,    BLUE   ; TOGEPI
 	icon_pals RED,    BLUE   ; TOGETIC
 	icon_pals PINK,   BLUE   ; TOGEKISS
 	icon_pals RED,    BROWN  ; CHARMANDER

@@ -8,7 +8,6 @@ EvosAttacksPointers::
 	dw FeraligatrEvosAttacks
 	dw BayleefEvosAttacks
 	dw MeganiumEvosAttacks
-	dw TogepiEvosAttacks
 	dw TogeticEvosAttacks
 	dw TogekissEvosAttacks
 	dw CharmanderEvosAttacks

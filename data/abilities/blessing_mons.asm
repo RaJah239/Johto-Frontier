@@ -6,7 +6,6 @@
 
 ;	db CHANSEY
 ;	db BLISSEY
-;	db TOGEPI
 ;	db TOGETIC
 ;	db TOGEKISS
     db -1 ; end

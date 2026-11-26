@@ -6,7 +6,6 @@ BitmasksPointers:
 	dw FeraligatrBitmasks
 	dw BayleefBitmasks
 	dw MeganiumBitmasks
-	dw TogepiBitmasks
 	dw TogeticBitmasks
 	dw TogekissBitmasks
 	dw CharmanderBitmasks

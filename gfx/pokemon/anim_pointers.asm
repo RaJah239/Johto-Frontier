@@ -6,7 +6,6 @@ AnimationPointers:
 	dw FeraligatrAnimation
 	dw BayleefAnimation
 	dw MeganiumAnimation
-	dw TogepiAnimation
 	dw TogeticAnimation
 	dw TogekissAnimation
 	dw CharmanderAnimation

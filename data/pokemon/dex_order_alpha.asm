@@ -201,7 +201,6 @@ AlphabeticalPokedexOrder:
 	db TENTACOOL
 	db TENTACRUEL
 	db TOGEKISS
-	db TOGEPI
 	db TOGETIC
 	db TORCHIC
 	db TORTERRA

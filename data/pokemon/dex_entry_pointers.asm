@@ -7,7 +7,6 @@ PokedexDataPointerTable:
  	dba FeraligatrPokedexEntry
  	dba BayleefPokedexEntry
  	dba MeganiumPokedexEntry
- 	dba TogepiPokedexEntry
  	dba TogeticPokedexEntry
  	dba TogekissPokedexEntry
  	dba CharmanderPokedexEntry

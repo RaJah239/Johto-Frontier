@@ -15,8 +15,6 @@ PokemonPicPointers::
  	dba BayleefBackpic
  	dba MeganiumFrontpic
  	dba MeganiumBackpic
- 	dba TogepiFrontpic
- 	dba TogepiBackpic
  	dba TogeticFrontpic
  	dba TogeticBackpic
  	dba TogekissFrontpic

@@ -381,7 +381,7 @@ PartyKeeperSpeciesList:
 	db QUILAVA
 	db CROCONAW
 	db BAYLEEF
-	db TOGEPI
+	db TOGETIC
 	db CHARMANDER
 	db SQUIRTLE
 	db TURTWIG

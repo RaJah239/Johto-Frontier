@@ -418,7 +418,7 @@ FleeMonsNotebook:
 		cont "Snubbull,"
 		cont "Squirtle,"
 		cont "Teddiursa,"
-		cont "Togepi,"
+		cont "Togetic,"
 		cont "Torchic,"
 		cont "Croconaw and"
 		cont "Turtwig."
