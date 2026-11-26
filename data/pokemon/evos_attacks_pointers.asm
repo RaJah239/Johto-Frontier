@@ -220,4 +220,5 @@ EvosAttacksPointers::
 dw VulpixEvosAttacks
 	dw NinetalesEvosAttacks
 	dw NinetalesAEvosAttacks
+	dw IvysaurEvosAttacks
 	assert_table_length NUM_POKEMON

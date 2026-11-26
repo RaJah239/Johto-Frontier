@@ -92,6 +92,7 @@ AlphabeticalPokedexOrder:
 	db HOUNDOUR
 	db HYDRAPPLE
 	db HYPNO
+	db IVYSAUR
 	db JIRACHI
 	db JOLTEON
 	db JOLTIK

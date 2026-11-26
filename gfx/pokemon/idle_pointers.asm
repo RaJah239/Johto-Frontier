@@ -218,4 +218,5 @@ dw AlakazamAnimationIdle
 dw VulpixAnimationIdle
 	dw NinetalesAnimationIdle
 	dw NinetalesAAnimationIdle
+	dw IvysaurAnimationIdle
 	assert_table_length NUM_POKEMON

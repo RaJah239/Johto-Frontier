@@ -442,6 +442,8 @@ PokemonPicPointers::
 	dba NinetalesBackpic
 	dba NinetalesAFrontpic
 	dba NinetalesABackpic
+	dba IvysaurFrontpic
+	dba IvysaurBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

@@ -218,4 +218,5 @@ AnimationPointers:
 dw VulpixAnimation
 	dw NinetalesAnimation
 	dw NinetalesAAnimation
+	dw IvysaurAnimation
 	assert_table_length NUM_POKEMON

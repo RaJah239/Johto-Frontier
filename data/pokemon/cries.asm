@@ -224,6 +224,7 @@ PokemonCries::
 	mon_cry CRY_VULPIX, 0, 255 ; VULPIX
 	mon_cry CRY_VULPIX, 0, 255 ; NINETALES
 	mon_cry CRY_VULPIX, 0, 255 ; NINETALES_A
+	mon_cry CRY_BULBASAUR, 0, 255 ; IVYSAUR
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 284
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 285
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 286
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 287
 	assert_table_length $ff

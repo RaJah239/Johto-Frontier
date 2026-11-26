@@ -137,6 +137,7 @@ NewPokedexOrder:
 	db VULPIX
 	db NINETALES
 	db NINETALES_A
+	db IVYSAUR
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING
