@@ -216,4 +216,5 @@ BitmasksPointers:
 	dw KadabraBitmasks
 dw AlakazamBitmasks
 dw VulpixBitmasks
+	dw NinetalesBitmasks
 	assert_table_length NUM_POKEMON

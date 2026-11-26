@@ -216,10 +216,10 @@ PokemonNames::
 	db "Kadabra@@@"
 	db "Alakazam@@"
 db "Vulpix@@@@"
+	db "Ninetales@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

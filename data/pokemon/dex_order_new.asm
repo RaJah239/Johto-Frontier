@@ -135,6 +135,7 @@ NewPokedexOrder:
 	db HYPNO
 	db MR__MIME
 	db VULPIX
+	db NINETALES
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

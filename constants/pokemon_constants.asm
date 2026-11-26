@@ -246,6 +246,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const KADABRA ; d6
 	const ALAKAZAM ; d7
 	const VULPIX ; d8
+	const NINETALES ; d9
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

@@ -222,6 +222,7 @@ PokemonCries::
 	mon_cry CRY_PSYDUCK, 0, 255 ; KADABRA
 	mon_cry CRY_PSYDUCK, 0, 255 ; ALAKAZAM
 	mon_cry CRY_VULPIX, 0, 255 ; VULPIX
+	mon_cry CRY_VULPIX, 0, 255 ; NINETALES
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 286
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 287
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 288
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 289
+
 	assert_table_length $ff

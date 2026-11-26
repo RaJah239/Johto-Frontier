@@ -218,4 +218,5 @@ EvosAttacksPointers::
 	dw KadabraEvosAttacks
 	dw AlakazamEvosAttacks
 dw VulpixEvosAttacks
+	dw NinetalesEvosAttacks
 	assert_table_length NUM_POKEMON

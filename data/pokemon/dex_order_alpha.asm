@@ -130,6 +130,7 @@ AlphabeticalPokedexOrder:
 	db MISMAGIUS
 	db MOLTRES
 	db MR__MIME
+	db NINETALES
 	db MUK
 	db NOCTOWL
 	db NOWN

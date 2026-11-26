@@ -216,4 +216,5 @@ AnimationIdlePointers:
 	dw KadabraAnimationIdle
 dw AlakazamAnimationIdle
 dw VulpixAnimationIdle
+	dw NinetalesAnimationIdle
 	assert_table_length NUM_POKEMON

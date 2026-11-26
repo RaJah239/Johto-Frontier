@@ -216,4 +216,5 @@ EvolutionMoves::
    db NO_MOVE      ; KADABRA
    db NO_MOVE      ; ALAKAZAM
 db NO_MOVE      ; VULPIX
+	db NO_MOVE      ; NINETALES
 	assert_table_length NUM_POKEMON

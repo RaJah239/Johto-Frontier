@@ -248,4 +248,5 @@ INCLUDE "data/pokemon/base_stats/roserade.asm"
 INCLUDE "data/pokemon/base_stats/kadabra.asm"
 INCLUDE "data/pokemon/base_stats/alakazam.asm"
 INCLUDE "data/pokemon/base_stats/vulpix.asm"
+INCLUDE "data/pokemon/base_stats/ninetales.asm"
 	assert_table_length NUM_POKEMON

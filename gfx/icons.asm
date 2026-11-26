@@ -274,3 +274,4 @@ KadabraIcon:: INCBIN "gfx/icons/kadabra.2bpp"
 
 AlakazamIcon:: INCBIN "gfx/icons/alakazam.2bpp"
 VulpixIcon:: INCBIN "gfx/icons/vulpix.2bpp"
+NinetalesIcon:: INCBIN "gfx/icons/ninetales.2bpp"
