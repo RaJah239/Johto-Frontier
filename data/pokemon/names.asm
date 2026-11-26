@@ -245,10 +245,10 @@ db "Vulpix@@@@"
 	db "Magmortar@"
 	db "Primarina@"
 	db "Exploud@@@"
+	db "Tyrantrum@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

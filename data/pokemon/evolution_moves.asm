@@ -245,4 +245,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; MAGMORTAR
 	db NO_MOVE      ; PRIMARINA
 	db NO_MOVE      ; EXPLOUD
+	db NO_MOVE      ; TYRANTRUM
 	assert_table_length NUM_POKEMON

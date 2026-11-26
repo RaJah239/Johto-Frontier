@@ -224,6 +224,7 @@ AlphabeticalPokedexOrder:
 	db TORTERRA
 	db TYPHLOSION
 	db TYRANITAR
+	db TYRANTRUM
 	db UMBREON
 	db UNOWN
 	db URSALUNA

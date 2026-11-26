@@ -275,6 +275,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const MAGMORTAR ; f3
 	const PRIMARINA ; f4
 	const EXPLOUD ; f5
+	const TYRANTRUM ; f6
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

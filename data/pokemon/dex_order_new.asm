@@ -247,4 +247,5 @@ NewPokedexOrder:
 	db MAGMORTAR
 	db PRIMARINA
 	db EXPLOUD
+	db TYRANTRUM
 	assert_table_length NUM_POKEMON
