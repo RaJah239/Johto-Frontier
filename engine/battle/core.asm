@@ -1041,8 +1041,6 @@ ResidualDamage:
 
 	call GetEighthMaxHP
 	call SubtractHPFromUser
-	call HasUserFainted
-	jr nz, .not_seeded
 	ld a, $1
 	ldh [hBGMapMode], a
 	call RestoreHP
