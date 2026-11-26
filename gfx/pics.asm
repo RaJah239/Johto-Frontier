@@ -735,3 +735,5 @@ SECTION "Pics 32", ROMX
 
 DhelmiseFrontpic: INCBIN "gfx/pokemon/dhelmise/front.animated.2bpp.lz"
 DhelmiseBackpic: INCBIN "gfx/pokemon/dhelmise/back.2bpp.lz"
+DragalgeFrontpic: INCBIN "gfx/pokemon/dragalge/front.animated.2bpp.lz"
+DragalgeBackpic: INCBIN "gfx/pokemon/dragalge/back.2bpp.lz"

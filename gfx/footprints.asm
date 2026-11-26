@@ -257,9 +257,9 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 273
 	 INCBIN "gfx/footprints/blank.1bpp" ; 274
 	 INCBIN "gfx/footprints/blank.1bpp" ; 275
-	 INCBIN "gfx/footprints/blank.1bpp" ; 276
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
 	 INCBIN "gfx/footprints/blank.1bpp" ; EELEKTROSS (shared empty reference footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; DHELMISE (no supplied footprint)
+	 INCBIN "gfx/footprints/dragalge.1bpp"
 	assert_table_length $100

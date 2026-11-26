@@ -228,4 +228,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; DUSKNOIR
 	db NO_MOVE      ; EELEKTROSS
 	db NO_MOVE      ; DHELMISE
+	db NO_MOVE      ; DRAGALGE
 	assert_table_length NUM_POKEMON

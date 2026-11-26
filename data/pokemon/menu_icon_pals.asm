@@ -235,6 +235,7 @@ MonMenuIconPals:
 	icon_pals PURPLE, GRAY ; DUSKNOIR
 	icon_pals BLUE, GREEN ; EELEKTROSS
 	icon_pals GREEN, BROWN ; DHELMISE
+	icon_pals PURPLE, GREEN ; DRAGALGE
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

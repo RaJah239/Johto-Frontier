@@ -230,4 +230,5 @@ NewPokedexOrder:
 	db MEWTWO
 	db EELEKTROSS
 	db DHELMISE
+	db DRAGALGE
 	assert_table_length NUM_POKEMON
