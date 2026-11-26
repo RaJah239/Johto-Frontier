@@ -187,7 +187,6 @@ IconPointers:
 	dw SolrockIcon
 	dw LunatoneIcon
 	dw StantlerIcon
-	dw WyrdeerIcon
 	dw DelibirdIcon
 	dw JynxIcon
 	dw SnoruntIcon

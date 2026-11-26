@@ -191,7 +191,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; SOLROCK
  INCBIN "gfx/footprints/blank.1bpp" ; LUNATONE
  INCBIN "gfx/footprints/stantler.1bpp"
- INCBIN "gfx/footprints/wyrdeer.1bpp"
  INCBIN "gfx/footprints/delibird.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; JYNX
  INCBIN "gfx/footprints/snorunt.1bpp"  
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	 INCBIN "gfx/footprints/blank.1bpp" ; 260
 	 INCBIN "gfx/footprints/blank.1bpp" ; 261
+	 INCBIN "gfx/footprints/blank.1bpp" ; 262
 	assert_table_length $100

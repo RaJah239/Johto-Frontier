@@ -186,7 +186,6 @@ PokedexDataPointerTable:
  	dba SolrockPokedexEntry
  	dba LunatonePokedexEntry
  	dba StantlerPokedexEntry
- 	dba WyrdeerPokedexEntry
  	dba DelibirdPokedexEntry
  	dba JynxPokedexEntry
  	dba SnoruntPokedexEntry

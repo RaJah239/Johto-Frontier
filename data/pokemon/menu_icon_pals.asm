@@ -192,7 +192,6 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; SOLROCK
 	icon_pals RED,    BLUE   ; LUNATONE
 	icon_pals BROWN,  GREEN  ; STANTLER
-	icon_pals GRAY,   GREEN  ; WYRDEER
 	icon_pals RED,    PURPLE ; DELIBIRD
 	icon_pals PINK,   PURPLE ; JYNX
 	icon_pals BROWN,  TEAL   ; SNORUNT

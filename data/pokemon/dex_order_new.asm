@@ -187,7 +187,6 @@ NewPokedexOrder:
 	db SOLROCK
 	db LUNATONE
 	db STANTLER
-	db WYRDEER
 	db DELIBIRD
 	db JYNX
 	db SNORUNT

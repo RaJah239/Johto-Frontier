@@ -242,7 +242,6 @@ ClefableEvosAttacks:
 SolrockEvosAttacks:
 LunatoneEvosAttacks:
 StantlerEvosAttacks:
-WyrdeerEvosAttacks:
 DelibirdEvosAttacks:
 JynxEvosAttacks:
 SnoruntEvosAttacks:

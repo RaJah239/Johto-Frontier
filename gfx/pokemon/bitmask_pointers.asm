@@ -185,7 +185,6 @@ BitmasksPointers:
 	dw SolrockBitmasks
 	dw LunatoneBitmasks
 	dw StantlerBitmasks
-	dw WyrdeerBitmasks
 	dw DelibirdBitmasks
 	dw JynxBitmasks
 	dw SnoruntBitmasks

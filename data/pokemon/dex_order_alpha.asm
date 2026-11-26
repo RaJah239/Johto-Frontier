@@ -239,7 +239,6 @@ AlphabeticalPokedexOrder:
 	db WIMPOD
 	db WOOPER
 	db WURMPLE
-	db WYRDEER
 	db XATU
 	db YANMA
 	db YANMEGA

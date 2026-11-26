@@ -185,7 +185,6 @@ EvolutionMoves::
    db NO_MOVE      ; SOLROCK
    db NO_MOVE      ; LUNATONE
    db NO_MOVE      ; STANTLER
-   db NO_MOVE      ; WYRDEER
    db NO_MOVE      ; DELIBIRD
    db NO_MOVE      ; JYNX
    db NO_MOVE      ; SNORUNT

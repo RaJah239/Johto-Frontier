@@ -1713,7 +1713,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons SILVER_CAVE_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 37, WYRDEER
+	db 37, STANTLER
 	db 37, SNEASLER
 	db 37, SYLVEON
 	db 37, VOLCARONA
@@ -1721,7 +1721,7 @@ JohtoGrassWildMons:
 	db 37, MUK
 	db 37, TOGEPI
 	; day
-	db 37, WYRDEER
+	db 37, STANTLER
 	db 37, SNEASLER
 	db 37, SYLVEON
 	db 37, VOLCARONA

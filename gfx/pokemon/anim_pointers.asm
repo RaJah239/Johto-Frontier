@@ -185,7 +185,6 @@ AnimationPointers:
 	dw SolrockAnimation
 	dw LunatoneAnimation
 	dw StantlerAnimation
-	dw WyrdeerAnimation
 	dw DelibirdAnimation
 	dw JynxAnimation
 	dw SnoruntAnimation

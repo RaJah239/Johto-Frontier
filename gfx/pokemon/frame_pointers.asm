@@ -185,7 +185,6 @@ FramesPointers:
 	dw SolrockFrames
 	dw LunatoneFrames
 	dw StantlerFrames
-	dw WyrdeerFrames
 	dw DelibirdFrames
 	dw JynxFrames
 	dw SnoruntFrames
