@@ -450,33 +450,33 @@ SwarmGrassWildMons:
 	db 5, PRIMEAPE
 	db 5, PRIMEAPE
 
-; Rowlet swarm
+; Buneary swarm
 	map_id ROUTE_2
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
 	; day
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
 	; nite
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
-	db 5, ROWLET
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
+	db 5, BUNEARY
 
 ; Shroomish swarm
 	map_id ILEX_FOREST

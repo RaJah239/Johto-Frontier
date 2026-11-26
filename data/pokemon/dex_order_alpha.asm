@@ -160,7 +160,6 @@ AlphabeticalPokedexOrder:
 	db RHYDON
 	db RHYHORN
 	db ROTOM
-	db ROWLET
 	db SALAMENCE
 	db SCIZOR
 	db SCOLIPEDE

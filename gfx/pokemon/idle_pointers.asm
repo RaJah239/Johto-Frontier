@@ -26,7 +26,6 @@ AnimationIdlePointers:
 	dw BlazikenAnimationIdle
 	dw FeebasAnimationIdle
 	dw MiloticAnimationIdle
-	dw RowletAnimationIdle
 	dw DartrixAnimationIdle
 	dw DecidueyeAnimationIdle
 	dw RaltsAnimationIdle

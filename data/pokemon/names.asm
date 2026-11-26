@@ -26,7 +26,6 @@ PokemonNames::
 	db "Blaziken@@"
 	db "Feebas@@@@"
 	db "Milotic@@@"
-	db "Rowlet@@@@"
 	db "Dartrix@@@"
 	db "Decidueye@"
 	db "Ralts@@@@@"
@@ -226,6 +225,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

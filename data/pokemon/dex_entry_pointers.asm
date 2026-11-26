@@ -27,7 +27,6 @@ PokedexDataPointerTable:
  	dba BlazikenPokedexEntry
  	dba FeebasPokedexEntry
  	dba MiloticPokedexEntry
- 	dba RowletPokedexEntry
  	dba DartrixPokedexEntry
  	dba DecidueyePokedexEntry
  	dba RaltsPokedexEntry

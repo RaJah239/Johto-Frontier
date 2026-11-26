@@ -105,7 +105,7 @@ SwarmGrampsScript:
 	ifequal 14, .Phanpy
 	ifequal 15, .Ralts
 	ifequal 16, .Primeape
-	ifequal 17, .Rowlet
+	ifequal 17, .Buneary
 	ifequal 18, .Shroomish
 	ifequal 19, .Jynx
 	ifequal 20, .Snubbull
@@ -281,12 +281,12 @@ SwarmGrampsScript:
 		cont "Union Cave 1F!"
 		done
 
-.Rowlet:
+.Buneary:
 	setflag ENGINE_SWARM
 	swarm ROUTE_2
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Rowlet at"
+		line "Buneary at"
 		cont "Route 2!"
 		done
 
@@ -433,7 +433,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Phanpy,"
 		cont "Ralts,"
 		cont "Primeape,"
-		cont "Rowlet,"
+		cont "Buneary,"
 		cont "Shroomish,"
 		cont "Jynx,"
 		cont "Snubbull,"

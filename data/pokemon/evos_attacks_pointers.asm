@@ -28,7 +28,6 @@ EvosAttacksPointers::
 	dw BlazikenEvosAttacks
 	dw FeebasEvosAttacks
 	dw MiloticEvosAttacks
-	dw RowletEvosAttacks
 	dw DartrixEvosAttacks
 	dw DecidueyeEvosAttacks
 	dw RaltsEvosAttacks

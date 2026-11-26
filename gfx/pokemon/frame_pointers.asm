@@ -26,7 +26,6 @@ FramesPointers:
 	dw BlazikenFrames
 	dw FeebasFrames
 	dw MiloticFrames
-	dw RowletFrames
 	dw DartrixFrames
 	dw DecidueyeFrames
 	dw RaltsFrames

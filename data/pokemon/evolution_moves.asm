@@ -26,7 +26,6 @@ EvolutionMoves::
    db NO_MOVE      ; BLAZIKEN
    db NO_MOVE      ; FEEBAS
    db NO_MOVE      ; MILOTIC
-   db NO_MOVE      ; ROWLET
    db NO_MOVE      ; DARTRIX
    db NO_MOVE      ; DECIDUEYE
    db NO_MOVE      ; RALTS

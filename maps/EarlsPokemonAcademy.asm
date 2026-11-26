@@ -413,7 +413,7 @@ FleeMonsNotebook:
 		cont "Phanpy,"
 		cont "Ralts,"
 		cont "Primeape,"
-		cont "Rowlet,"
+		cont "Buneary,"
 		cont "Jynx,"
 		cont "Snubbull,"
 		cont "Wartortle,"

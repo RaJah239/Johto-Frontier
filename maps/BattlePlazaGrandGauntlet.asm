@@ -389,7 +389,7 @@ PartyKeeperSpeciesList:
 	db EEVEE
 	db COMBUSKEN
 	db FEEBAS
-	db ROWLET
+	db BUNEARY
 	db RALTS
 	db WURMPLE
 	db YANMA

@@ -10,7 +10,6 @@ SometimesFleeMons:
 	db MEOWTH
 	db PHANPY
 	db RALTS
-	db ROWLET
 	db SNUBBULL
 	db TEDDIURSA
 	db -1 ; end

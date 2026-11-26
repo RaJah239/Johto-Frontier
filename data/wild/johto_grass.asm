@@ -39,7 +39,7 @@ JohtoGrassWildMons:
 	db 4, BUNEARY
 	db 4, PIDGEY
 	db 4, SUNKERN
-	db 5, ROWLET
+	db 5, BUNEARY
 	; day
 	db 4, PIKACHU
 	db 4, WURMPLE
@@ -47,7 +47,7 @@ JohtoGrassWildMons:
 	db 4, BUNEARY
 	db 4, PIDGEY
 	db 4, SUNKERN
-	db 5, ROWLET
+	db 5, BUNEARY
 	; nite
 	db 4, HOOTHOOT
 	db 4, ZUBAT
@@ -55,7 +55,7 @@ JohtoGrassWildMons:
 	db 4, WURMPLE
 	db 4, PIKACHU
 	db 4, JOLTIK
-	db 5, ROWLET
+	db 5, BUNEARY
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_3

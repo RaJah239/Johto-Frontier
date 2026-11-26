@@ -26,7 +26,6 @@ AnimationPointers:
 	dw BlazikenAnimation
 	dw FeebasAnimation
 	dw MiloticAnimation
-	dw RowletAnimation
 	dw DartrixAnimation
 	dw DecidueyeAnimation
 	dw RaltsAnimation

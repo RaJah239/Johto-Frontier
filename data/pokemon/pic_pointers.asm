@@ -55,8 +55,6 @@ PokemonPicPointers::
  	dba FeebasBackpic
  	dba MiloticFrontpic
  	dba MiloticBackpic
- 	dba RowletFrontpic
- 	dba RowletBackpic
  	dba DartrixFrontpic
  	dba DartrixBackpic
  	dba DecidueyeFrontpic
