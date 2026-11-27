@@ -795,8 +795,8 @@ EggTicketDesc:
 	next "rod trade corner.@"
 
 BellsproutCallDesc:
-	db   "Calls a BELLSPROUT to"
-	next "ensnare #mon.@"
+	db   "A Bellsprout"
+	next "ensnares #mon.@"
 
 StardustDesc:
 	db   "Pretty, red sand."
