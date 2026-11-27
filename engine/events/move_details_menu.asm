@@ -1,3 +1,5 @@
+DEF MOVE_DETAILS_PP_TILE EQU $5f
+
 MoveDetailsMenu_SetupScreen:
 	call CopyMenuHeader
 	xor a
@@ -19,7 +21,11 @@ MoveDetailsMenu_SetupScreen:
 	call Get2bppViaHDMA
 
 	; needed for the level symbol on the party-mon variant
-	farjp LoadStatsScreenPageTilesGFX
+	farcall LoadStatsScreenPageTilesGFX
+	ld de, StatsScreenPageTilesGFX + ($3e - $31) tiles
+	ld hl, vTiles2 tile MOVE_DETAILS_PP_TILE
+	lb bc, BANK(StatsScreenPageTilesGFX), 1
+	jmp Get2bppViaHDMA
 
 ChooseMoveToLearn::
 	ld hl, MoveDetailsMenuPartyMonHeader
@@ -53,16 +59,22 @@ MoveDetailsMenu_ChooseMove:
 OpenAllMovesDetailsScreen::
 	ld hl, MoveDetailsMenuAllMovesHeader
 	call MoveDetailsMenu_SetupScreen
+	call .DrawTitle
+	ld a, HP_GREEN
+	ld [wPlayerHPPal], a
+	jr MoveDetailsMenu_Run
 
-	; no title on this screen: close the gap SetupScreen left in the top border
+.DrawTitle:
+	; center the view prompt in the top border
 	hlcoord 2, 0
 	ld bc, 16
 	ld a, "─"
 	call ByteFill
+	hlcoord 3, 0
+	ld de, .ViewText
+	jmp PlaceString
 
-	ld a, HP_GREEN
-	ld [wPlayerHPPal], a
-	; fallthrough
+.ViewText: db "A Button: View@"
 
 MoveDetailsMenu_Run:
 	ld a, [wMenuCursorPosition]
@@ -79,6 +91,13 @@ MoveDetailsMenu_Run:
 	jr z, .page_up
 	cp B_BUTTON
 	jr z, .carry
+	ld a, [wMenuJoypad]
+	cp A_BUTTON
+	jr nz, .choose_move
+	ld a, [wMenuDataFlags]
+	bit SCROLLINGMENU_ENABLE_LEFT, a
+	jr nz, .view_move
+.choose_move
 	ld a, [wMenuSelection]
 	ld [wPutativeTMHMMove], a
 	and a
@@ -86,6 +105,33 @@ MoveDetailsMenu_Run:
 	farcall PartyMoveIcons_Close
 	pop af
 	ret
+
+.view_move
+	ld a, [wMenuSelection]
+	and a
+	jr z, .input_loop
+	ld a, [wMenuScrollPosition]
+	push af
+	ld a, [wMenuSelection]
+	push af
+	; Keep the visible Move Dex icons until the preview replaces the BG map.
+	call MoveDetailsMenu_PreviewMove
+	ld hl, MoveDetailsMenuAllMovesHeader
+	call MoveDetailsMenu_SetupScreen
+	call OpenAllMovesDetailsScreen.DrawTitle
+	pop af
+	ld [wMenuSelection], a
+	ld b, a
+	pop af
+	ld [wMenuScrollPosition], a
+	ld c, a
+	ld a, b
+	sub c ; the Move Dex list is numbered from 1
+	ld [wMenuCursorPosition], a
+	ld [wMenuCursorY], a
+	ld a, HP_GREEN
+	ld [wPlayerHPPal], a
+	jr .input_loop
 
 .carry
 	scf
@@ -132,7 +178,7 @@ MoveDetailsMenu_Run:
 	sub e
 .store_dn
 	ld [wMenuScrollPosition], a
-	jr .input_loop
+	jmp .input_loop
 
 .page_up_do
 	ld a, [wMenuScrollPosition]
@@ -251,7 +297,7 @@ MoveDetailsMenu_PrintPP:
 
 	ld bc, 6
 	add hl, bc
-	ld a, $3e
+	ld a, MOVE_DETAILS_PP_TILE
 	ld [hli], a
 	ld [hl], a
 	ret
@@ -374,3 +420,187 @@ MoveDetailsMenu_PrintMoveDetails:
 	farjp MoveIcons_CommitPage
 
 MoveDetailsMenuNullValueString: db "---@"
+
+MoveDetailsMenu_PreviewMove:
+	farcall SaveMusic
+	ld e, MUSIC_NONE
+	call PlayMusic
+	ld a, [wBattleMode]
+	push af
+	ld a, [wBattleMonSpecies]
+	push af
+	ld a, [wEnemyMonSpecies]
+	push af
+	ld a, [wTempBattleMonSpecies]
+	push af
+	ld a, [wTempEnemyMonSpecies]
+	push af
+	ldh a, [hBattleTurn]
+	push af
+	ld a, [wMenuSelection]
+	push af
+
+	call DisableSpriteUpdates
+	xor a
+	ldh [hBGMapMode], a
+	call ClearSprites
+	hlcoord 0, 0
+	ld bc, wTilemapEnd - wTilemap
+	ld a, " "
+	call ByteFill
+	hlcoord 0, 0, wAttrmap
+	ld bc, wAttrmapEnd - wAttrmap
+	ld a, 7
+	call ByteFill
+	xor a
+	ldh [rVBK], a
+	ld [wPlayerSubStatus5], a
+	ld [wEnemySubStatus5], a
+	ld [wBattleMonDVs], a
+	ld [wBattleMonDVs + 1], a
+	ld [wEnemyMonDVs], a
+	ld [wEnemyMonDVs + 1], a
+	call LoadStandardFont
+	hlcoord 0, 12
+	lb bc, 4, 18
+	call Textbox
+	ld a, WILD_BATTLE
+	ld [wBattleMode], a
+	ld a, SMEARGLE
+	ld [wBattleMonSpecies], a
+	ld [wEnemyMonSpecies], a
+	ld [wTempBattleMonSpecies], a
+	ld [wTempEnemyMonSpecies], a
+	ld [wCurPartySpecies], a
+	ld de, vTiles2
+	predef GetMonFrontpic
+	ld de, vTiles2 tile $31
+	predef GetMonBackpic
+	xor a
+	ldh [hGraphicStartTile], a
+	lb bc, 7, 7
+	hlcoord 12, 0
+	predef PlaceGraphic
+	ld a, $31
+	ldh [hGraphicStartTile], a
+	lb bc, 6, 6
+	hlcoord 2, 6
+	predef PlaceGraphic
+	ld a, [wMenuSelection]
+	ld [wNamedObjectIndex], a
+	call GetMoveName
+	hlcoord 1, 13
+	call PlaceString
+	ld a, [wMenuSelection]
+	ld [wCurSpecies], a
+	hlcoord 1, 15
+	predef PrintMoveDescription
+	ldh a, [hCGB]
+	and a
+	jr z, .copy_preview
+	ld de, wBGPals1
+	farcall SetBattlePal_Player
+	farcall SetBattlePal_Enemy
+	farcall ApplyPals
+	call SetDefaultBGPAndOBP
+	hlcoord 12, 0, wAttrmap
+	lb bc, 7, 7
+	ld a, PAL_BATTLE_BG_ENEMY
+	call FillBoxWithByte
+	hlcoord 2, 6, wAttrmap
+	lb bc, 6, 6
+	ld a, PAL_BATTLE_BG_PLAYER
+	call FillBoxWithByte
+.copy_preview
+	call CopyTilemapAtOnce
+	ld b, SCGB_BATTLE_COLORS
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
+	call .ClearBouncePadding
+	xor a
+	ldh [hBattleTurn], a
+	call .PlayOneSide
+	ld a, 1
+	ldh [hBattleTurn], a
+	call .PlayOneSide
+	pop af ; selected move
+
+	pop af
+	ldh [hBattleTurn], a
+	pop af
+	ld [wTempEnemyMonSpecies], a
+	pop af
+	ld [wTempBattleMonSpecies], a
+	pop af
+	ld [wEnemyMonSpecies], a
+	pop af
+	ld [wBattleMonSpecies], a
+	pop af
+	ld [wBattleMode], a
+	farcall RestoreMusic
+	farcall BlankScreen
+	; The blank map has detached the borrowed badge tiles.
+	farcall MoveStatBadges_Hide
+	call LoadFontsBattleExtra
+	farcall LoadOW_BGPal7
+	jmp FadePalettes
+
+.PlayOneSide:
+	ld a, [wMenuSelection]
+	cp FLY
+	jr nz, .hit
+	ld a, 1
+	ld [wBattleAnimParam], a
+	call .Animate
+.hit
+	xor a
+	ld [wBattleAnimParam], a
+.Animate
+	xor a
+	ld [wNumHits], a
+	ld [wBattleAnimFlags], a
+	ld [wFXAnimID + 1], a
+	ld a, [wMenuSelection]
+	ld [wFXAnimID], a
+	farcall PlayMoveDexBattleAnim
+	ret
+
+.ClearBouncePadding:
+; Bounce Down scrolls the battler over the hidden rows of the BG map.
+	ld d, " "
+	call .FillBouncePadding
+	ld a, BANK(vBGMap2)
+	ldh [rVBK], a
+	ld d, PAL_BATTLE_BG_PLAYER
+	call .FillBouncePadding
+	xor a
+	ldh [rVBK], a
+	ret
+
+.FillBouncePadding:
+	ldh a, [hBGMapAddress + 1]
+	add HIGH(BG_MAP_WIDTH * SCREEN_HEIGHT)
+	ld h, a
+	ld l, LOW(BG_MAP_WIDTH * SCREEN_HEIGHT)
+	ld b, BG_MAP_HEIGHT - SCREEN_HEIGHT ; Bounce Down and upward shakes use rows 18-31
+.row
+	ld c, SCREEN_WIDTH
+.tile
+	di
+	ldh a, [rSTAT]
+	and rSTAT_MODE_2
+	jr nz, .tile
+	ld a, d
+	ld [hli], a
+	ei
+	dec c
+	jr nz, .tile
+	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
+	add l
+	ld l, a
+	jr nc, .next_row
+	inc h
+.next_row
+	dec b
+	jr nz, .row
+	ret

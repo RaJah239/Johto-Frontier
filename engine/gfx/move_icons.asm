@@ -445,9 +445,11 @@ MoveStatBadges_AllocateTiles:
 	jr nz, .scan
 
 	ld hl, wMoveStatTileBackup
+	ld bc, $55
+	add hl, bc ; keep Move Dex badges above the Smeargle picture tiles
 	ld de, wMoveStatBadgeTileIds
 	ld b, MOVE_STAT_BADGE_TILES
-	ld c, 0
+	ld c, $55
 .candidate
 	ld a, [hli]
 	and a
@@ -462,6 +464,22 @@ MoveStatBadges_AllocateTiles:
 	ld a, c
 	cp $7f
 	jr c, .candidate
+	ld hl, wMoveStatTileBackup
+	ld c, 0
+.low_candidate
+	ld a, [hli]
+	and a
+	jr nz, .next_low_candidate
+	ld a, c
+	ld [de], a
+	inc de
+	dec b
+	jr z, .allocated
+.next_low_candidate
+	inc c
+	ld a, c
+	cp $55
+	jr c, .low_candidate
 	scf
 	ret
 .allocated

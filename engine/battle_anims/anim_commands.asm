@@ -13,6 +13,40 @@ PlayBattleAnim:
 	ldh [rSVBK], a
 	ret
 
+PlayMoveDexBattleAnim::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wActiveAnimObjects)
+	ldh [rSVBK], a
+	call DelayFrame
+	call ClearBattleAnimCustomPals
+	call BattleAnimAssignPals
+	call BattleAnimRequestPals
+	ld c, 1
+	ldh a, [rKEY1]
+	bit 7, a
+	jr nz, .got_speed
+	ld c, 3
+.got_speed
+	ldh a, [hVBlank]
+	push af
+	ld a, c
+	ldh [hVBlank], a
+	call RunBattleAnimScript
+	call BattleAnim_RestoreCustomPals
+	call BattleAnimAssignPals
+	call BattleAnimRequestPals
+	pop af
+	ldh [hVBlank], a
+	xor a
+	ldh [hSCX], a
+	ldh [hSCY], a
+	call WaitSFX
+	call BattleAnim_RevertPals
+	pop af
+	ldh [rSVBK], a
+	ret
+
 _PlayBattleAnim:
 	call DelayFrame
 
