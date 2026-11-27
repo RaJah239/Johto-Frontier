@@ -240,6 +240,7 @@ AlphabeticalPokedexOrder:
 	db VENUSAUR
 	db VICTREEBEL
 	db VIKAVOLT
+	db VOLCANION
 	db VOLCARONA
 db VULPIX
 	db WARTORTLE

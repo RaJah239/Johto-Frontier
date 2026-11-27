@@ -258,6 +258,7 @@ MonMenuIconPals:
 	icon_pals PURPLE, GREEN ; GOODRA
 	icon_pals BLUE, PURPLE ; DRAGAPULT
 	icon_pals BLUE, GRAY ; BAXCALIBUR
+	icon_pals RED, BLUE ; VOLCANION
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

@@ -781,5 +781,9 @@ DragapultFrontpic: INCBIN "gfx/pokemon/dragapult/front.animated.2bpp.lz"
 DragapultBackpic: INCBIN "gfx/pokemon/dragapult/back.2bpp.lz"
 BaxcaliburFrontpic: INCBIN "gfx/pokemon/baxcalibur/front.animated.2bpp.lz"
 BaxcaliburBackpic: INCBIN "gfx/pokemon/baxcalibur/back.2bpp.lz"
+SECTION "Pics 34", ROMX
+
+VolcanionFrontpic: INCBIN "gfx/pokemon/volcanion/front.animated.2bpp.lz"
+VolcanionBackpic: INCBIN "gfx/pokemon/volcanion/back.2bpp.lz"
 DragoniteFrontpic: INCBIN "gfx/pokemon/dragonite/front.animated.2bpp.lz"
 DragoniteBackpic: INCBIN "gfx/pokemon/dragonite/back.2bpp.lz"

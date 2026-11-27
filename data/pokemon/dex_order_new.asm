@@ -253,4 +253,5 @@ NewPokedexOrder:
 	db GOODRA
 	db DRAGAPULT
 	db BAXCALIBUR
+	db VOLCANION
 	assert_table_length NUM_POKEMON

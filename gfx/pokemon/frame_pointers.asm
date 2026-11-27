@@ -251,4 +251,5 @@ dw VulpixFrames
 	dw GoodraFrames
 	dw DragapultFrames
 	dw BaxcaliburFrames
+	dw VolcanionFrames
 	assert_table_length NUM_POKEMON

@@ -281,6 +281,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const GOODRA ; f9
 	const DRAGAPULT ; fa
 	const BAXCALIBUR ; fb
+	const VOLCANION ; fc
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 
