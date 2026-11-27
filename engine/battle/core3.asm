@@ -201,6 +201,9 @@ _MoveInfoBox:
 
 ; print move's accuracy
 .place_accuracy
+	ld a, [wEnemyMonStatus]
+	and SLP_MASK
+	jr nz, .perfect_accuracy
 	farcall NoGuardCheck
 	jr c, .perfect_accuracy
 	ld a, [wCurSpecies]
