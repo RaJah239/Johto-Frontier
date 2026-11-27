@@ -713,14 +713,19 @@ AskPikaSurfText:
 	text_end
 
 PidgeotCallFunction:
+	call GetMapEnvironment
+	call CheckOutdoorMap
+	jr z, .outdoors
+	xor a
+	ld [wItemEffectSucceeded], a
+	jmp FieldMoveFailed
+
+.outdoors
 	ld a, 1
 	ld [wPidgeotCallFlight], a
 	ld a, [wUsingItemWithSelect]
 	and a
 	jr z, .fly
-	call GetMapEnvironment
-	call CheckOutdoorMap
-	jr nz, .fly
 	call FadeToMenu
 	call FlyFunction
 	call CloseSubmenu

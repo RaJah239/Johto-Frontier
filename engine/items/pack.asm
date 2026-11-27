@@ -465,6 +465,22 @@ UseItem:
 	jmp Pack_PrintTextNoScroll
 
 .Field:
+	ld a, [wCurItem]
+	cp PIDGEOT_CALL
+	jr nz, .use_field_item
+	call GetMapEnvironment
+	call CheckOutdoorMap
+	jr z, .use_field_item
+	xor a
+	ld [wItemEffectSucceeded], a
+	ld hl, .CantUseHereText
+	jmp Pack_PrintTextNoScroll
+
+.CantUseHereText:
+	text_far _CantUseItemText
+	text_end
+
+.use_field_item
 	call DoItemEffect
 	ld a, [wItemEffectSucceeded]
 	and a
