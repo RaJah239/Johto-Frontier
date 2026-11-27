@@ -66,7 +66,8 @@
 - Completed additions: Dragapult `c1f2585bc` (supplied front/back art, animations and shiny palette; icon and footprint from Shattered-Crystal; base experience capped to engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
 - Completed additions: Baxcalibur `a3d3771e3` (supplied front/back art, animations and shiny palette; icon from AR; no footprint reference was found, so the footprint is blank and this is documented; base experience capped to engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
 - Completed additions: Volcanion `b692c8757` (supplied art, animations and shiny palette; party icon derived from front art; no species footprint reference found, so the footprint is blank and this is documented; fallback Magcargo cry; new Pics 34 bank section; normal/debug builds and stadium checks passed).
-- Remaining additions: MELMETAL.
+- Completed additions: Melmetal `aca457341` (supplied art, animations and shiny palette; party icon derived from front art; no species footprint reference found, so the footprint is blank and this is documented; fallback Rhydon cry; new Pics 35 bank section; normal/debug builds and stadium checks passed).
+- Remaining additions: none; run final order/dependency audit.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
 - Dragonite was not in the desktop sprite folder; used the complete reference assets in `C:\cygwin64\home\RaJah239\timkun55\gfx` and documented the source above.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
