@@ -114,7 +114,7 @@ GetTableMapWeather:
 
 .found
 	ld a, [wTimeOfDay]
-	cp NITE_F
+	cp EVE_F
 	jr c, .pick ; morning/day list first
 	call .SkipList
 .pick
@@ -178,11 +178,16 @@ MapWeatherTable:
 	db GROUP_ROUTE_18, MAP_ROUTE_18
 	db WEATHER_NONE, WEATHER_RAIN, WEATHER_SUN, WEATHER_SANDSTORM, -1
 	db WEATHER_RAIN, WEATHER_SANDSTORM, WEATHER_NONE, -1
+	db GROUP_AZALEA_TOWN, MAP_AZALEA_TOWN
+	db WEATHER_RAIN, -1
+	db WEATHER_RAIN, -1
+	db GROUP_SILVER_CAVE_OUTSIDE, MAP_SILVER_CAVE_OUTSIDE
+	db WEATHER_SUN, WEATHER_RAIN, WEATHER_HAIL, WEATHER_SANDSTORM, WEATHER_NONE, -1
+	db WEATHER_RAIN, WEATHER_HAIL, WEATHER_SANDSTORM, WEATHER_NONE, -1
 	db -1 ; end
 
-; the weather is re-rolled each time you reach a new outdoor
-; map, so it stays the same when entering and leaving
-; buildings within a map.
+; The weather is re-rolled on a new outdoor map and every ten minutes
+; spent in the same area. Building visits retain the outdoor roll.
 HandleMapDefaultWeather:
 	ld a, [wMapGroup]
 	ld b, a
@@ -196,7 +201,7 @@ HandleMapDefaultWeather:
 ; buildings are clear; the outdoor weather is remembered for
 ; when you head back outside.
 	ld a, WEATHER_NONE
-	jr .done_weather
+	jmp .done_weather
 
 .outdoor
 ; re-roll only when this is a different outdoor map than the
@@ -214,6 +219,28 @@ HandleMapDefaultWeather:
 	ld [wLastWeatherMapGroup], a
 	ld a, [wMapNumber]
 	ld [wLastWeatherMapNumber], a
+	call .RollMapWeather
+	ld a, WEATHER_REROLL_SECONDS & $ff
+	ld [wWeatherRerollSeconds], a
+	ld a, WEATHER_REROLL_SECONDS >> 8
+	ld [wWeatherRerollSeconds + 1], a
+	jr .same_map_weather
+
+.RollMapWeather:
+; Tin Tower Roof is always sunny before evening.
+	ld a, [wMapGroup]
+	cp GROUP_TIN_TOWER_ROOF
+	jr nz, .cherrygrove
+	ld a, [wMapNumber]
+	cp MAP_TIN_TOWER_ROOF
+	jr nz, .cherrygrove
+	ld a, [wTimeOfDay]
+	cp EVE_F
+	jr nc, .normal_roll
+	ld a, WEATHER_SUN
+	jr .save_group
+
+.cherrygrove
 ; Cherrygrove City: 25% each of rain, sun, clear and cherry blossoms.
 	ld a, [wMapGroup]
 	cp GROUP_CHERRYGROVE_CITY
@@ -253,20 +280,28 @@ HandleMapDefaultWeather:
 	ld a, WEATHER_SUN
 .save_group
 	ld [wGroupWeather], a
+	ret
+
 .same_map_weather
 ; Apply the map's weather; sun becomes clear at night.
+	call .GetGroupWeather
+	jr .done_weather
+
+.GetGroupWeather:
 	ld a, [wGroupWeather]
 	cp WEATHER_SUN
-	jr nz, .done_weather
-; Sun becomes clear weather at night.
+	ret nz
+; Sun becomes clear weather in the evening and at night.
 	ld a, [wTimeOfDay]
-	cp NITE_F
-	jr z, .clear
+	cp EVE_F
+	jr nc, .clear
 	ld a, WEATHER_SUN
-	jr .done_weather
+	ret
 
 .clear
 	ld a, WEATHER_NONE
+	ret
+
 .done_weather
 	ld [wFieldWeather], a
 
@@ -310,6 +345,28 @@ HandleMapDefaultWeather:
 	ld [wPersistentBattleMusicOverride], a
 	ld [wPersistentBattleMusicOverride + 1], a
 .same_outdoor_map
+	ret
+
+RerollMapWeather::
+	call HandleMapDefaultWeather.RollMapWeather
+	call HandleMapDefaultWeather.GetGroupWeather
+	ld b, a
+	ld a, [wFieldWeather]
+	cp b
+	jr z, .restart
+	ld a, b
+	push af
+	farcall SaveWeatherFadeSource
+	pop af
+	ld [wFieldWeather], a
+	farcall SetCurrentWeather
+	farcall LoadMapPals
+	farcall MapConnWeatherFade
+.restart
+	ld a, WEATHER_REROLL_SECONDS & $ff
+	ld [wWeatherRerollSeconds], a
+	ld a, WEATHER_REROLL_SECONDS >> 8
+	ld [wWeatherRerollSeconds + 1], a
 	ret
 
 HandleAutoBicycle:

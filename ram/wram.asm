@@ -1826,12 +1826,11 @@ wWeatherFadeFrame:: db
 wOverworldWeatherStateEnd::
 assert wOverworldWeatherStateEnd - wOverworldWeatherState == OVERWORLD_WEATHER_STATE_SIZE
 
-; The overworld weather is re-rolled each time you reach a new
-; outdoor map, so it stays the same when entering and leaving
-; buildings within a map.
+; The outdoor weather is retained across visits to buildings on the same map.
 wLastWeatherMapGroup:: db
 wLastWeatherMapNumber:: db
 wGroupWeather:: db
+wWeatherRerollSeconds:: dw ; real play seconds, independent of RTC mode
 
 ; Music player: track the last outdoor map and its default music
 ; so the overworld music stays the same unless changing routes/cities.

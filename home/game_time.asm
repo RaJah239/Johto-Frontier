@@ -53,6 +53,19 @@ GameTimer::
 .second
 	xor a
 	ld [hl], a
+; Count real play seconds before NO_RTC_SPEEDUP advances the game clock.
+	ld hl, wWeatherRerollSeconds
+	ld a, [hli]
+	or [hl]
+	jr z, .weather_done
+	dec hl
+	ld a, [hl]
+	sub 1
+	ld [hli], a
+	ld a, [hl]
+	sbc 0
+	ld [hl], a
+.weather_done
 
 ; "Real Time Clock" Off: the game's own clock gains NO_RTC_SPEEDUP seconds
 ; for every second played (a day lasts 24 / NO_RTC_SPEEDUP real hours)

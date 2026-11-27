@@ -2,9 +2,31 @@
 ; Weather uses free OAM entries from the end so map objects keep priority.
 
 UpdateOverworldWeatherFrame::
+	call CheckWeatherReroll
 	call DoOverworldWeather
 	call SunShimmerFrame
 	jmp WeatherFadeStep
+
+CheckWeatherReroll:
+	ld a, [wWeatherRerollSeconds + 1]
+	and a
+	ret nz
+	ld a, [wWeatherRerollSeconds]
+	and a
+	ret nz
+	ld a, [wScriptRunning]
+	and a
+	ret nz
+	ld a, [wWeatherFlags]
+	and (1 << WEATHER_PAUSED_F) | (1 << WEATHER_FADE_ACTIVE_F)
+	ret nz
+	ld a, [wEnvironment]
+	cp ROUTE
+	jr z, .outdoor
+	cp TOWN
+	ret nz
+.outdoor
+	farjp RerollMapWeather
 
 DoOverworldWeather::
 ; Preserves bc, de, and hl

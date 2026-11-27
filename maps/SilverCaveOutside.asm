@@ -20,48 +20,6 @@ SilverCaveOutside_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, SilverCaveOutsideFlypointCallback
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	checktime EVE | NITE
-	iftrue .NightWeather
-	random 5
-	ifequal 0, .Sun
-	ifequal 1, .Rain
-	ifequal 2, .Hail
-	ifequal 3, .Sandstorm
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.NightWeather:
-	random 4
-	ifequal 0, .Rain
-	ifequal 1, .Hail
-	ifequal 2, .Sandstorm
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.Sun
-	setval WEATHER_SUN
-	writemem wFieldWeather
-	endcallback
-
-.Rain
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	endcallback
-
-.Hail
-	setval WEATHER_HAIL
-	writemem wFieldWeather
-	endcallback
-
-.Sandstorm
-	setval WEATHER_SANDSTORM
-	writemem wFieldWeather
-	endcallback
 
 SilverCaveOutsideFlypointCallback:
 	setflag ENGINE_FLYPOINT_SILVER_CAVE
