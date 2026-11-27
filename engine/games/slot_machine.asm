@@ -587,27 +587,18 @@ Slots_AddTopCoverSprites:
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], 42 ; mark sprite for later deletion
 	depixel 2, 9
 	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], 42
 	depixel 2, 13
 	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], 42
 	ret
 
 Slots_AddBottomCoverSprites:
@@ -645,22 +636,6 @@ Slots_RemoveBottomCoverSprites:
 	dec e
 	jr nz, .loop
 	ret
-
-Slots_RemoveTopCoverSprites:
-	ld a, 42
-	ld hl, wSpriteAnimationStructs + SPRITEANIMSTRUCT_VAR1
-	ld e, NUM_SPRITE_ANIM_STRUCTS
-.loop
-	cp [hl]
-	jr nz, .next
-	ld [hl], 69 ; mark sprite for *immediate* deletion
-.next
-	ld bc, SPRITEANIMSTRUCT_LENGTH
-	add hl, bc
-	dec e
-	jr nz, .loop
-	ret
-
 
 Slots_GetPals:
 	ld a, %11100100
