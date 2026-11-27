@@ -284,4 +284,5 @@ INCLUDE "data/pokemon/base_stats/goodra.asm"
 INCLUDE "data/pokemon/base_stats/dragapult.asm"
 INCLUDE "data/pokemon/base_stats/baxcalibur.asm"
 INCLUDE "data/pokemon/base_stats/volcanion.asm"
+INCLUDE "data/pokemon/base_stats/melmetal.asm"
 	assert_table_length NUM_POKEMON

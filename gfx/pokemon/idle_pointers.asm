@@ -252,4 +252,5 @@ dw VulpixAnimationIdle
 	dw DragapultAnimationIdle
 	dw BaxcaliburAnimationIdle
 	dw VolcanionAnimationIdle
+	dw MelmetalAnimationIdle
 	assert_table_length NUM_POKEMON

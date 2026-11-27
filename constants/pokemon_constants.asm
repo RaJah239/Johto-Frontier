@@ -282,6 +282,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const DRAGAPULT ; fa
 	const BAXCALIBUR ; fb
 	const VOLCANION ; fc
+	const MELMETAL ; fd
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

@@ -143,6 +143,7 @@ AlphabeticalPokedexOrder:
 	db MARSHTOMP
 	db MAWILE
 	db MEGANIUM
+	db MELMETAL
 	db MEOWTH
 	db METAGROSS
 	db MEW

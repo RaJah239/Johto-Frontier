@@ -785,5 +785,9 @@ SECTION "Pics 34", ROMX
 
 VolcanionFrontpic: INCBIN "gfx/pokemon/volcanion/front.animated.2bpp.lz"
 VolcanionBackpic: INCBIN "gfx/pokemon/volcanion/back.2bpp.lz"
+SECTION "Pics 35", ROMX
+
+MelmetalFrontpic: INCBIN "gfx/pokemon/melmetal/front.animated.2bpp.lz"
+MelmetalBackpic: INCBIN "gfx/pokemon/melmetal/back.2bpp.lz"
 DragoniteFrontpic: INCBIN "gfx/pokemon/dragonite/front.animated.2bpp.lz"
 DragoniteBackpic: INCBIN "gfx/pokemon/dragonite/back.2bpp.lz"

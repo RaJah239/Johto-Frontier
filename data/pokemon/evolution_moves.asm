@@ -252,5 +252,6 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; DRAGAPULT
 	db NO_MOVE      ; BAXCALIBUR
 	db NO_MOVE      ; VOLCANION
+	db NO_MOVE      ; MELMETAL
 
 	assert_table_length NUM_POKEMON

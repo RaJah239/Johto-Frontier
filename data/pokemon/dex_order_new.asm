@@ -254,4 +254,5 @@ NewPokedexOrder:
 	db DRAGAPULT
 	db BAXCALIBUR
 	db VOLCANION
+	db MELMETAL
 	assert_table_length NUM_POKEMON

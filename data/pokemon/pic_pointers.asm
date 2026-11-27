@@ -510,6 +510,8 @@ PokemonPicPointers::
 	dba BaxcaliburBackpic
 	dba VolcanionFrontpic
 	dba VolcanionBackpic
+	dba MelmetalFrontpic
+	dba MelmetalBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

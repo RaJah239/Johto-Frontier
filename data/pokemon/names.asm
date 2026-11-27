@@ -252,10 +252,10 @@ db "Vulpix@@@@"
 	db "Dragapult@"
 	db "Baxcalibur"
 	db "Volcanion@"
+	db "Melmetal@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	assert_table_length $100
