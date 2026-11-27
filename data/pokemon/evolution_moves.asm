@@ -250,5 +250,6 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; HYDREIGON
 	db NO_MOVE      ; GOODRA
 	db NO_MOVE      ; DRAGAPULT
+	db NO_MOVE      ; BAXCALIBUR
 
 	assert_table_length NUM_POKEMON

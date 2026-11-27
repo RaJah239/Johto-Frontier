@@ -251,4 +251,5 @@ PokedexDataPointerTable:
 	dba HydreigonPokedexEntry
 	dba GoodraPokedexEntry
 	dba DragapultPokedexEntry
+	dba BaxcaliburPokedexEntry
 	assert_table_length NUM_POKEMON

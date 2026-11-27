@@ -250,4 +250,5 @@ dw VulpixBitmasks
 	dw HydreigonBitmasks
 	dw GoodraBitmasks
 	dw DragapultBitmasks
+	dw BaxcaliburBitmasks
 	assert_table_length NUM_POKEMON

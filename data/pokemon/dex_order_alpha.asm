@@ -14,6 +14,7 @@ AlphabeticalPokedexOrder:
 	db ARIADOS
 	db ARTICUNO
 	db AZUMARILL
+	db BAXCALIBUR
 	db BALTOY
 	db BAYLEEF
 	db BEAUTIFLY

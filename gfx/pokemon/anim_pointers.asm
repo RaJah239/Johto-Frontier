@@ -250,4 +250,5 @@ dw VulpixAnimation
 	dw HydreigonAnimation
 	dw GoodraAnimation
 	dw DragapultAnimation
+	dw BaxcaliburAnimation
 	assert_table_length NUM_POKEMON
