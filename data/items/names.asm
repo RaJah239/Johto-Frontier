@@ -129,7 +129,7 @@ ItemNames::
 	li "GauntletBall"
 	li "Heavy Boots"
 	li "Egg Ticket"
-	li "Bellsprout Call"
+	li "Sprout Call"
 	li "Stardust"
 	li "Star Piece"
 	li "PP Max"
