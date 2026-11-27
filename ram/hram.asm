@@ -189,6 +189,7 @@ hWeatherRandom:: dw
 
 hDexDirectEntry:: db
 
-	ds 2
+hItemTargetSelected:: db
+	ds 1
 
 ENDSECTION

@@ -2169,8 +2169,12 @@ HealHP_SFX_GFX:
 	predef_jump AnimateHPBar
 
 UseItem_SelectMon:
+	xor a
+	ldh [hItemTargetSelected], a
 	call .SelectMon
 	ret c
+	ld a, TRUE
+	ldh [hItemTargetSelected], a
 
 	ld a, [wCurPartySpecies]
 	cp EGG

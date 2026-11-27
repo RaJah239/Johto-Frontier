@@ -453,7 +453,27 @@ UseItem:
 	ld a, [wPartyCount]
 	and a
 	jr z, .NoPokemon
+.party_loop
+	xor a
+	ldh [hItemTargetSelected], a
+	; Some effects temporarily replace wCurItem while checking stats.
+	ld a, [wCurItem]
+	push af
 	call DoItemEffect
+	pop af
+	ld [wCurItem], a
+	ldh a, [hItemTargetSelected]
+	and a
+	jr z, .restore_pack
+	ld a, [wItemEffectSucceeded]
+	cp 1
+	jr nz, .party_loop
+	ld a, 1
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call CheckItem
+	jr c, .party_loop
+.restore_pack
 	xor a
 	ldh [hBGMapMode], a
 	call Pack_InitGFX
@@ -494,7 +514,7 @@ UseItem:
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	call Pack_InitColors
-	jr .Oak
+	jmp .Oak
 
 .quit
 	ld a, PACKSTATE_QUITRUNSCRIPT
