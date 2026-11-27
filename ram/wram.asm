@@ -738,7 +738,10 @@ wCurReelYCoord:: db
 	ds 2
 wSlotBuildingMatch:: db
 wSlotsDataEnd::
-	ds 28
+wSlotsWhichSpecialAnim:: db
+wSlotReelIconDelay:: db
+SlotMachine_LCDCallback:: ds 16
+SlotMachine_VBlankCallback:: ds 15
 wSlotsEnd::
 
 NEXTU

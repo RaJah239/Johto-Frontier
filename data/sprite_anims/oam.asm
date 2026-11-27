@@ -90,7 +90,19 @@ SpriteAnimOAMData:
 	spriteanimoam $00, .OAMData_PCMode                   ; SPRITE_ANIM_OAMSET_PC_MODE
 	spriteanimoam $00, .OAMData_PCMode2                  ; SPRITE_ANIM_OAMSET_PC_MODE2
 	spriteanimoam $00, .OAMData_PCPack                   ; SPRITE_ANIM_OAMSET_PC_PACK
+	spriteanimoam $00, .OAMData_SlotsCoverWhite
+	spriteanimoam $00, .OAMData_SlotsCoverGreen
 	assert_table_length NUM_SPRITE_ANIM_OAMSETS
+
+.OAMData_SlotsCoverWhite:
+	db 2
+	dbsprite 1, 2, 0, 0, $3c, 7 | PRIORITY
+	dbsprite 2, 2, 0, 0, $3c, 7 | PRIORITY
+
+.OAMData_SlotsCoverGreen:
+	db 2
+	dbsprite 1, 2, 0, 0, $3c, 2 | PRIORITY
+	dbsprite 2, 2, 0, 0, $3c, 2 | PRIORITY
 
 .OAMData_1x1_Palette0:
 	db 1

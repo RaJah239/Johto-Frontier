@@ -71,6 +71,7 @@ DEF NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_OBJ_PC_MODE                   ; 26
 	const SPRITE_ANIM_OBJ_PC_MODE2                  ; 27
 	const SPRITE_ANIM_OBJ_PC_PACK                   ; 28
+	const SPRITE_ANIM_OBJ_SLOTS_COVER
 DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 
 ; DoSpriteAnimFrame.Jumptable indexes (see engine/sprite_anims/functions.asm)
@@ -106,6 +107,7 @@ DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 	const SPRITE_ANIM_FUNC_PC_QUICK                  ; 1c
 	const SPRITE_ANIM_FUNC_PC_MODE                   ; 1d
 	const SPRITE_ANIM_FUNC_PC_PACK                   ; 1e
+	const SPRITE_ANIM_FUNC_COVER
 DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)
@@ -164,6 +166,8 @@ DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 	const SPRITE_ANIM_FRAMESET_PC_MODE                   ; 36
 	const SPRITE_ANIM_FRAMESET_PC_MODE2                  ; 37
 	const SPRITE_ANIM_FRAMESET_PC_PACK                   ; 38
+	const SPRITE_ANIM_FRAMESET_SLOTS_COVER_WHITE
+	const SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
 DEF NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 
 ; SpriteAnimOAMData indexes (see data/sprite_anims/oam.asm)
@@ -249,6 +253,8 @@ DEF NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 	const SPRITE_ANIM_OAMSET_PC_MODE                     ; 52
 	const SPRITE_ANIM_OAMSET_PC_MODE2                    ; 53
 	const SPRITE_ANIM_OAMSET_PC_PACK                     ; 54
+	const SPRITE_ANIM_OAMSET_SLOTS_COVER_WHITE
+	const SPRITE_ANIM_OAMSET_SLOTS_COVER_GREEN
 DEF NUM_SPRITE_ANIM_OAMSETS EQU const_value
 
 assert NUM_SPRITE_ANIM_OAMSETS <= FIRST_OAM_CMD, \

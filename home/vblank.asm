@@ -61,6 +61,9 @@ VBlank0::
 	; inc frame counter
 	ld hl, hVBlankCounter
 	inc [hl]
+	ldh a, [hVBlankHookFunction]
+	and a
+	call nz, hVBlankHookFunction
 
 	ldh a, [hROMBank]
 	ldh [hROMBankBackup], a

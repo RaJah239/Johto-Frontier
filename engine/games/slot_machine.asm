@@ -1,11 +1,11 @@
 ; wSlotMatched values
 	const_def 0, 4
 	const SLOTS_SEVEN    ; $00
-	const SLOTS_POKEBALL ; $04
+	const SLOTS_BAR ; $04
 	const SLOTS_CHERRY   ; $08
-	const SLOTS_PIKACHU  ; $0c
-	const SLOTS_SQUIRTLE ; $10
-	const SLOTS_STARYU   ; $14
+	const SLOTS_LEDYBA  ; $0c
+	const SLOTS_WOOPER ; $10
+	const SLOTS_MAGNEMITE   ; $14
 DEF NUM_SLOT_REELS EQU const_value / 4 ; 6
 DEF SLOTS_NO_MATCH EQU -1
 
@@ -52,6 +52,13 @@ DEF REEL_STOP_DELAY    rb ; 15
 	const SLOTS_QUIT
 DEF SLOTS_END_LOOP_F EQU 7
 
+; wSlotsWhichSpecialAnim values
+	const_def
+	const SLOTS_SPECIAL_ANIM_NONE
+	const SLOTS_SPECIAL_ANIM_JACKPOT
+	const SLOTS_SPECIAL_ANIM_MATCH
+	const SLOTS_SPECIAL_ANIM_RESET_COLORS
+
 ; ReelActionJumptable constants
 	const_def
 	const REEL_ACTION_DO_NOTHING
@@ -84,6 +91,18 @@ _SlotMachine:
 	ld hl, wOptions
 	set NO_TEXT_SCROLL, [hl]
 	call .InitGFX
+; set up LCD callback
+	ld hl, .LCDCallbackPoint
+	ld de, SlotMachine_LCDCallback
+	ld bc, .LCDCallbackPoint_End - .LCDCallbackPoint
+	call CopyBytes
+; "jmp .LCDCallbackPoint"
+	ld a, JP_INSTRUCTION                :: ldh [hFunctionInstruction], a
+	ld a, LOW(SlotMachine_LCDCallback)  :: ldh [hFunctionTargetLo], a
+	ld a, HIGH(SlotMachine_LCDCallback) :: ldh [hFunctionTargetHi], a
+	ld a, JP_INSTRUCTION                :: ldh [hVBlankHookFunction + 0], a
+	ld a, LOW(SlotMachine_VBlankCallback)  :: ldh [hVBlankHookFunction + 1], a
+	ld a, HIGH(SlotMachine_VBlankCallback) :: ldh [hVBlankHookFunction + 2], a
 	call DelayFrame
 .loop
 	call SlotsLoop
@@ -92,6 +111,12 @@ _SlotMachine:
 	ld de, SFX_QUIT_SLOTS
 	call PlaySFX
 	call WaitSFX
+; clear callback
+	ld a, RETI_INSTRUCTION :: ldh [hFunctionInstruction], a
+	ld a, LOW(LCDGeneric)  :: ldh [hFunctionTargetLo], a
+	ld a, HIGH(LCDGeneric)  :: ldh [hFunctionTargetHi], a
+	xor a
+	ld [hVBlankHookFunction], a
 	call ClearBGPalettes
 	ld hl, wOptions
 	res NO_TEXT_SCROLL, [hl]
@@ -99,11 +124,385 @@ _SlotMachine:
 	res rLCDC_SPRITE_SIZE, [hl] ; 8x8
 	ret
 
+; no, the LOAD section directive does not work here
+.LCDCallbackPoint:
+; just does a unaccounted bankswitch to the payload
+	push af
+	ld a, BANK(.LCDCallbackPayload)
+	ld [MBC3RomBank], a
+	jp .LCDCallbackPayload ; have to use `jp` instead of `jmp` oddly enough
+.LCDCallbackPoint_JumpBack:
+	ldh a, [hROMBank]
+	ld [MBC3RomBank], a
+	pop af
+	reti
+; vblank hook does not need to save registers
+; since it runs INSIDE vblank
+.LCDCallbackPoint_VblankHook:
+	ld a, BANK(.VBlankHookPayload)
+	ld [MBC3RomBank], a
+	jp .VBlankHookPayload ; have to use `jp` instead of `jmp` oddly enough
+.LCDCallbackPoint_VblankHook_JumpBack:
+	ldh a, [hROMBank]
+	ld [MBC3RomBank], a
+	rst Bankswitch
+	ret
+.LCDCallbackPoint_End:
+	assert .LCDCallbackPoint_VblankHook - .LCDCallbackPoint == SlotMachine_VBlankCallback - SlotMachine_LCDCallback
+	assert .LCDCallbackPoint_End - .LCDCallbackPoint_VblankHook == wSlotsEnd - SlotMachine_VBlankCallback
+
+.LCDCallbackPayload:
+; payload generates mid-frame palette writes
+; for the gradient thingy
+	ldh a, [rLY]
+
+; sound engine on vblank spills over here, can't do
+; anything while that's going on
+	cp 24
+	jr c, .done
+
+; reset color on BGP 2 and BGP 1
+	cp 98
+	jr nc, .initial_color
+
+; brighten color on BGP 2
+	cp 80 - 1
+	jr nc, .bgp2light
+
+; brighten color on BGP 1
+	cp 64 - 1
+	jr nc, .bgp1light
+
+	jr .done
+
+.bgp2light
+; bgp2 second color
+	ld a, 18 | 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld a, $8e
+	ldh [rBGPD], a
+	ld a, $7f
+	ldh [rBGPD], a
+	jr .done
+
+.bgp1light
+; bgp1 second color
+	ld a, 10 | 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld a, $8e
+	ldh [rBGPD], a
+	ld a, $7f
+	ldh [rBGPD], a
+	jr .done
+
+.initial_color
+; bgp2 second color
+	ld a, 18 | 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld a, $c5
+	ldh [rBGPD], a
+	ld a, $6d
+	ldh [rBGPD], a
+; bgp1 second color
+	ld a, 10 | 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld a, $88
+	ldh [rBGPD], a
+	ld a, $76
+	ldh [rBGPD], a
+	jr .done
+
+.done
+; needs to be relative to RAM
+	jmp SlotMachine_LCDCallback+(.LCDCallbackPoint_JumpBack-.LCDCallbackPoint)
+
+.VBlankHookPayload:
+	ld a, [wSlotsWhichSpecialAnim]
+	and a
+	jmp z, .vbdone
+
+	cp SLOTS_SPECIAL_ANIM_RESET_COLORS
+	jmp z, .reset
+
+	cp SLOTS_SPECIAL_ANIM_MATCH
+	jmp z, .non_jackpot
+
+; .jackpot
+	ld a, [wSlotMatched]
+	ld d, a
+	call AnimateSlotReelIcon
+	call .AnimateJackpotLights
+	ld a, [hVBlankCounter]
+	and %1000
+	srl a
+	srl a
+	srl a
+	and a
+	jr nz, .jackpot_gfx_frameB
+	call .jackpot_hoppip_frameA
+	jr .jackpot_do_pal
+.jackpot_gfx_frameB
+	call .jackpot_hoppip_frameB
+.jackpot_do_pal
+	ld a, [hVBlankCounter]
+; cycle through 4 colors
+	and %110000
+	srl a
+	srl a
+	ld hl, .jackpot_lut
+	add a, l
+	ld l, a
+	ld a, h
+	adc 0
+	ld h, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hl]
+	ld e, a
+MACRO applybcpal
+	ld a, (\1*8) + (\2*2) | 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld a, b
+	ldh [rBGPD], a
+	ld a, c
+	ldh [rBGPD], a
+ENDM
+; unroll: apply palette to every white BGP except 7
+	applybcpal 0, 0
+	applybcpal 1, 0
+	applybcpal 2, 0
+	applybcpal 3, 0
+	applybcpal 4, 0
+	ld b, d
+	ld c, e
+	applybcpal 6, 1
+	;ld b, b
+	jmp .vbdone
+
+.jackpot_lut
+; BG white palette, then BG star palette
+	RGB 15, 31, 19
+	RGB 31, 23, 01
+
+	RGB 14, 24, 31
+	RGB 31, 30, 22
+
+	RGB 31, 14, 26
+	RGB 31, 23, 01
+
+	RGB 31, 27, 16
+	RGB 31, 15, 00
+
+.non_jackpot
+	ld a, [wSlotMatched]
+	ld d, a
+	call AnimateSlotReelIcon
+	call .AnimateMatchingSlotLights
+	ld a, [hVBlankCounter]
+	and %1000
+	srl a
+	srl a
+	srl a
+	and a
+	jr nz, .non_jackpot_gfx_frameB
+	call .jackpot_hoppip_frameA
+	jr .non_jackpot_do_pal
+.non_jackpot_gfx_frameB
+	call .jackpot_hoppip_frameB
+.non_jackpot_do_pal
+	ld a, [hVBlankCounter]
+; cycle through 4 colors
+	and %110000
+	srl a
+	srl a
+	srl a
+	ld hl, .non_jackpot_lut
+	add a, l
+	ld l, a
+	ld a, h
+	adc 0
+	ld h, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	applybcpal 6, 1
+	jr .vbdone
+
+.non_jackpot_lut
+; BG star palette
+	RGB 31, 23, 01
+	RGB 31, 30, 22
+	RGB 31, 23, 01
+	RGB 31, 15, 00
+
+.reset
+	ld bc, $ff7f
+	applybcpal 0, 0
+	applybcpal 1, 0
+	applybcpal 2, 0
+	applybcpal 3, 0
+	applybcpal 4, 0
+	ld bc, $ff06
+	applybcpal 6, 1
+	ld a, [wSlotMatched]
+	ld d, a
+	call ResetSlotReelIcon
+	call .jackpot_hoppip_frameA
+	xor a ; NONE
+	ld [wSlotsWhichSpecialAnim], a
+
+.vbdone
+	jmp SlotMachine_LCDCallback+(.LCDCallbackPoint_VblankHook_JumpBack-.LCDCallbackPoint)
+
+.jackpot_hoppip_frameA
+MACRO hoppipbgfx
+	ld a, \1
+	ld [hli], a
+	ld a, \1 + 1
+	ld [hli], a
+ENDM
+MACRO position_hoppipbgfx_both_maps
+	hlbgcoord \1, \2
+	hoppipbgfx \3
+	hlcoord \1, \2
+	hoppipbgfx \3
+ENDM
+; upper half
+	position_hoppipbgfx_both_maps 5, 2, $1c
+	position_hoppipbgfx_both_maps 9, 2, $1c
+	position_hoppipbgfx_both_maps 13, 2, $1c
+; lower half
+	position_hoppipbgfx_both_maps 5, 3, $1e
+	position_hoppipbgfx_both_maps 9, 3, $1e
+	position_hoppipbgfx_both_maps 13, 3, $1e
+	ret
+
+.jackpot_hoppip_frameB
+; upper half
+	position_hoppipbgfx_both_maps 5, 2, $20
+	position_hoppipbgfx_both_maps 9, 2, $20
+	position_hoppipbgfx_both_maps 13, 2, $20
+; lower half
+	position_hoppipbgfx_both_maps 5, 3, $22
+	position_hoppipbgfx_both_maps 9, 3, $22
+	position_hoppipbgfx_both_maps 13, 3, $22
+	ret
+
+.AnimateMatchingSlotLights:
+; light up the slot lights
+MACRO position_lightbg_on_fx
+	hlbgcoord \1, \2
+	ld [hl], $18
+	hlcoord \1, \2
+	ld [hl], $18
+	hlbgcoord \1, \2 + 1
+	ld [hl], $19
+	hlcoord \1, \2 + 1
+	ld [hl], $19
+ENDM
+MACRO position_lightbg_off_fx
+	hlbgcoord \1, \2
+	ld [hl], $16
+	hlcoord \1, \2
+	ld [hl], $16
+	hlbgcoord \1, \2 + 1
+	ld [hl], $17
+	hlcoord \1, \2 + 1
+	ld [hl], $17
+ENDM
+	ld a, [hVBlankCounter]
+	and %1000
+	srl a
+	srl a
+	srl a
+	and a
+	jmp nz, .all_lights_off
+; assume that the slots already have a value here
+; and that value is what we want
+; check left slots first
+; slot order: bottom, middle, top
+; value of `d` should be preserved here
+	ld a, [wReel1Stopped]
+	cp d
+	jr z, .left_bottom_matched
+	ld a, [wReel1Stopped + 2]
+	cp d
+	jmp z, .left_up_matched
+; only one possibility if left middle matched
+	position_lightbg_on_fx 3, 6
+	position_lightbg_on_fx 16, 6
+	ret
+
+.left_bottom_matched
+	ld a, [wReel3Stopped]
+	cp d
+	jr z, .left_bottom_right_bottom_matched
+; .left_bottom_right_up_matched
+	position_lightbg_on_fx 3, 10
+	position_lightbg_on_fx 16, 2
+	ret
+.left_bottom_right_bottom_matched
+	position_lightbg_on_fx 3, 8
+	position_lightbg_on_fx 16, 8
+	ret
+
+.left_up_matched
+	ld a, [wReel3Stopped]
+	cp d
+	jr z, .left_up_right_bottom_matched
+; .left_up_right_up_matched
+	position_lightbg_on_fx 3, 4
+	position_lightbg_on_fx 16, 4
+	ret
+.left_up_right_bottom_matched
+	position_lightbg_on_fx 3, 2
+	position_lightbg_on_fx 16, 10
+	ret
+
+.all_lights_off
+	position_lightbg_off_fx 3, 2
+	position_lightbg_off_fx 3, 4
+	position_lightbg_off_fx 3, 6
+	position_lightbg_off_fx 3, 8
+	position_lightbg_off_fx 3, 10
+	position_lightbg_off_fx 16, 2
+	position_lightbg_off_fx 16, 4
+	position_lightbg_off_fx 16, 6
+	position_lightbg_off_fx 16, 8
+	position_lightbg_off_fx 16, 10
+	ret
+
+.AnimateJackpotLights:
+	ld a, [hVBlankCounter]
+	and %1000
+	srl a
+	srl a
+	srl a
+	and a
+	jmp nz, .all_lights_off
+	position_lightbg_on_fx 3, 2
+	position_lightbg_on_fx 3, 4
+	position_lightbg_on_fx 3, 6
+	position_lightbg_on_fx 3, 8
+	position_lightbg_on_fx 3, 10
+	position_lightbg_on_fx 16, 2
+	position_lightbg_on_fx 16, 4
+	position_lightbg_on_fx 16, 6
+	position_lightbg_on_fx 16, 8
+	position_lightbg_on_fx 16, 10
+	ret
+
+
 .InitGFX:
 	call ClearBGPalettes
 	call ClearTilemap
 	call ClearSprites
-	ld e, MUSIC_NONE
+	ld de, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	call DisableLCD
@@ -127,12 +526,22 @@ _SlotMachine:
 	ld de, vTiles0 tile $40
 	call Decompress
 
+	; slots BG gfx
 	ld hl, Slots1LZ
 	ld de, vTiles2 tile $00
 	call Decompress
 
+	ld hl, vTiles2 tile $2B
+	ld c, $10
+	xor a
+.blank_tile
+	ld [hli], a
+	dec c
+	jr nz, .blank_tile
+
+	; payout gfx?
 	ld hl, Slots2LZ
-	ld de, vTiles2 tile $25
+	ld de, vTiles2 tile $2C
 	call Decompress
 
 	ld hl, SlotsTilemap
@@ -157,16 +566,101 @@ _SlotMachine:
 	ld [wJumptableIndex], a
 	ld a, SLOTS_NO_BIAS
 	ld [wSlotBias], a
-	ld e, MUSIC_GAME_CORNER
+	call Slots_AddTopCoverSprites
+	ld de, MUSIC_GAME_CORNER
 	call PlayMusic
 	xor a
 	ld [wKeepSevenBiasChance], a ; 87.5% chance
+	ld [wSlotsWhichSpecialAnim], a
 	call Random
 	and %00101010
 	ret nz
 	ld a, TRUE
 	ld [wKeepSevenBiasChance], a ; 12.5% chance
+	callfar DoNextFrameForFirst16Sprites
 	ret
+
+Slots_AddTopCoverSprites:
+	depixel 2, 5
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 42 ; mark sprite for later deletion
+	depixel 2, 9
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 42
+	depixel 2, 13
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_FRAMESET_SLOTS_COVER_GREEN
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 42
+	ret
+
+Slots_AddBottomCoverSprites:
+	depixel 10, 5
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 67 ; mark sprite for later deletion
+	depixel 10, 9
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 67
+	depixel 10, 13
+	ld a, SPRITE_ANIM_OBJ_SLOTS_COVER
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 67
+	ret
+
+Slots_RemoveBottomCoverSprites:
+	ld a, 67
+	ld hl, wSpriteAnimationStructs + SPRITEANIMSTRUCT_VAR1
+	ld e, NUM_SPRITE_ANIM_STRUCTS
+.loop
+	cp [hl]
+	jr nz, .next
+	ld [hl], 69 ; mark sprite for *immediate* deletion
+.next
+	ld bc, SPRITEANIMSTRUCT_LENGTH
+	add hl, bc
+	dec e
+	jr nz, .loop
+	ret
+
+Slots_RemoveTopCoverSprites:
+	ld a, 42
+	ld hl, wSpriteAnimationStructs + SPRITEANIMSTRUCT_VAR1
+	ld e, NUM_SPRITE_ANIM_STRUCTS
+.loop
+	cp [hl]
+	jr nz, .next
+	ld [hl], 69 ; mark sprite for *immediate* deletion
+.next
+	ld bc, SPRITEANIMSTRUCT_LENGTH
+	add hl, bc
+	dec e
+	jr nz, .loop
+	ret
+
 
 Slots_GetPals:
 	ld a, %11100100
@@ -177,7 +671,8 @@ Slots_GetPals:
 	jr nz, .cgb
 	lb de, %11000000, %11100100
 .cgb
-	jmp DmgToCgbObjPals
+	call DmgToCgbObjPals
+	ret
 
 SlotsLoop:
 	ld a, [wJumptableIndex]
@@ -205,7 +700,65 @@ SlotsLoop:
 	hlcoord 11, 1
 	ld de, wPayout
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
-	jmp PrintNum
+	call PrintNum
+	ret
+
+AnimateSlotReelIcon:
+; This animation was present in pokegold-spaceworld.
+
+; d = which slot reel icon to animate,
+;     refer to wSlotMatched values
+
+	ld hl, wSlotReelIconDelay
+	ld a, [hl]
+	inc [hl]
+	and $7
+	ret nz
+	ld hl, wShadowOAMSprite16TileID
+	ld c, NUM_SPRITE_OAM_STRUCTS - 16
+.loop
+	ld a, [hl]
+	ld b, a
+	and %11100
+	cp d
+	jr nz, .next
+	ld a, b
+	xor $20 ; alternate between $00-$1f and $20-$3f
+	ld [hl], a ; tile id
+.next
+	inc hl
+rept SPRITEOAMSTRUCT_LENGTH - 1
+	inc hl
+endr
+	dec c
+	jr nz, .loop
+	ret
+
+ResetSlotReelIcon:
+; d = which slot reel icon to reset,
+;     refer to wSlotMatched values
+	ld hl, wShadowOAMSprite16TileID
+	ld c, NUM_SPRITE_OAM_STRUCTS - 16
+.loop
+	ld a, [hl]
+	ld b, a
+	and %11000
+	srl a
+	srl a
+	srl a
+	cp d
+	jr nz, .next
+	ld a, b
+	and $1f
+	ld [hl], a ; tile id
+.next
+	inc hl
+rept SPRITEOAMSTRUCT_LENGTH - 1
+	inc hl
+endr
+	dec c
+	jr nz, .loop
+	ret
 
 SlotsJumptable:
 	jumptable .Jumptable, wJumptableIndex
@@ -253,6 +806,7 @@ SlotsAction_BetAndStart:
 	ret
 
 .proceed
+	call Slots_AddBottomCoverSprites
 	call SlotsAction_Next
 	call Slots_IlluminateBetLights
 	call Slots_InitBias
@@ -336,6 +890,7 @@ SlotsAction_WaitStopReel3:
 	ld a, [wReel3ReelAction]
 	cp REEL_ACTION_DO_NOTHING
 	ret nz
+	call Slots_RemoveBottomCoverSprites
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
 	ld bc, wReel3
@@ -374,6 +929,15 @@ SlotsAction_FlashScreen:
 
 .done
 	call Slots_GetPals
+	ld a, [wSlotMatched]
+	and a ; SLOTS_SEVEN
+	jr nz, .not_jackpot
+	ld a, SLOTS_SPECIAL_ANIM_JACKPOT
+	jr .set_special_anim
+.not_jackpot
+	ld a, SLOTS_SPECIAL_ANIM_MATCH
+.set_special_anim
+	ld [wSlotsWhichSpecialAnim], a
 	jmp SlotsAction_Next
 
 SlotsAction_GiveEarnedCoins:
@@ -747,8 +1311,7 @@ Slots_UpdateReelPositionAndOAM:
 	ld [hli], a ; x
 	ld a, [de]
 	ld [hli], a ; tile id
-	srl a
-	srl a
+	call GetSlotIconPalette
 	set OAM_PRIORITY, a
 	ld [hli], a ; attributes
 
@@ -761,8 +1324,7 @@ Slots_UpdateReelPositionAndOAM:
 	inc a
 	inc a
 	ld [hli], a ; tile id
-	srl a
-	srl a
+	call GetSlotIconPalette
 	set OAM_PRIORITY, a
 	ld [hli], a ; attributes
 	inc de
@@ -772,6 +1334,29 @@ Slots_UpdateReelPositionAndOAM:
 	cp 2 * TILE_WIDTH
 	jr nz, .loop
 	ret
+
+GetSlotIconPalette:
+	push hl
+	srl a
+	srl a
+	add LOW(.data)
+	ld l, a
+	ld a, 0
+	adc HIGH(.data)
+	ld h, a
+	ld a, [hl]
+	pop hl
+	ret
+
+.data:
+	table_width 1
+	db 3 ; SLOTS_SEVEN
+	db 3 ; SLOTS_BAR
+	db 2 ; SLOTS_CHERRY
+	db 3 ; SLOTS_LEDYBA
+	db 4 ; SLOTS_WOOPER
+	db 5 ; SLOTS_MAGNEMITE
+	assert_table_length NUM_SLOT_REELS
 
 ReelActionJumptable:
 	ld hl, REEL_ACTION
@@ -1040,6 +1625,10 @@ ReelAction_InitGolem:
 	call Slots_GetNumberOfGolems
 	push bc
 	push af
+	call Slots_RemoveBottomCoverSprites
+	xor a
+	ld [wCurSpriteOAMAddr], a
+	callfar DoNextFrameForFirst16Sprites
 	depixel 12, 13
 	ld a, SPRITE_ANIM_OBJ_SLOTS_GOLEM
 	call InitSpriteAnimStruct
@@ -1100,6 +1689,10 @@ ReelAction_InitChansey:
 	add hl, bc
 	ld [hl], 0
 	push bc
+	call Slots_RemoveBottomCoverSprites
+	xor a
+	ld [wCurSpriteOAMAddr], a
+	callfar DoNextFrameForFirst16Sprites
 	depixel 12, 0
 	ld a, SPRITE_ANIM_OBJ_SLOTS_CHANSEY
 	call InitSpriteAnimStruct
@@ -1547,24 +2140,24 @@ Slots_InitBias:
 
 .Normal:
 	db   1 percent - 1, SLOTS_SEVEN
-	db   1 percent + 1, SLOTS_POKEBALL
-	db   4 percent,     SLOTS_STARYU
-	db   8 percent,     SLOTS_SQUIRTLE
-	db  16 percent,     SLOTS_PIKACHU
+	db   1 percent + 1, SLOTS_BAR
+	db   4 percent,     SLOTS_MAGNEMITE
+	db   8 percent,     SLOTS_WOOPER
+	db  16 percent,     SLOTS_LEDYBA
 	db  19 percent,     SLOTS_CHERRY
 	db 100 percent,     SLOTS_NO_BIAS
 
 .Lucky:
 	db   1 percent,     SLOTS_SEVEN
-	db   1 percent + 1, SLOTS_POKEBALL
-	db   3 percent + 1, SLOTS_STARYU
-	db   6 percent + 1, SLOTS_SQUIRTLE
-	db  12 percent,     SLOTS_PIKACHU
+	db   1 percent + 1, SLOTS_BAR
+	db   3 percent + 1, SLOTS_MAGNEMITE
+	db   6 percent + 1, SLOTS_WOOPER
+	db  12 percent,     SLOTS_LEDYBA
 	db  31 percent + 1, SLOTS_CHERRY
 	db 100 percent,     SLOTS_NO_BIAS
 
 Slots_IlluminateBetLights:
-	ld b, $14 ; turned on
+	ld b, $18 ; turned on
 	ld a, [wSlotBet]
 	dec a
 	jr z, Slots_Lights1OnOff
@@ -1573,7 +2166,7 @@ Slots_IlluminateBetLights:
 	jr Slots_Lights3OnOff
 
 Slots_DeilluminateBetLights:
-	ld b, $23 ; turned off
+	ld b, $16 ; turned off
 Slots_Lights3OnOff:
 	hlcoord 3, 2
 	call Slots_TurnLightsOnOrOff
@@ -1691,10 +2284,14 @@ Slots_AskPlayAgain:
 	call CloseWindow
 	and a
 	jr nz, .exit_slots
+	ld a, SLOTS_SPECIAL_ANIM_RESET_COLORS
+	ld [wSlotsWhichSpecialAnim], a
 	and a
 	ret
 
 .exit_slots
+	ld a, SLOTS_SPECIAL_ANIM_RESET_COLORS
+	ld [wSlotsWhichSpecialAnim], a
 	scf
 	ret
 
@@ -1726,11 +2323,11 @@ Slots_GetPayout:
 .PayoutTable:
 	table_width 2, Slots_GetPayout.PayoutTable
 	dw 777 ; SLOTS_SEVEN
-	dw 500 ; SLOTS_POKEBALL
+	dw 500 ; SLOTS_BAR
 	dw  80 ; SLOTS_CHERRY
-	dw 300 ; SLOTS_PIKACHU
-	dw 200 ; SLOTS_SQUIRTLE
-	dw 100 ; SLOTS_STARYU
+	dw 300 ; SLOTS_LEDYBA
+	dw 200 ; SLOTS_WOOPER
+	dw 100 ; SLOTS_MAGNEMITE
 	assert_table_length NUM_SLOT_REELS
 
 .no_win
@@ -1772,17 +2369,17 @@ Slots_PayoutText:
 .PayoutStrings:
 	table_width 6, Slots_PayoutText.PayoutStrings
 	dbw "777@", .LinedUpSevens      ; SLOTS_SEVEN
-	dbw "500@", .LinedUpPokeballs   ; SLOTS_POKEBALL
+	dbw "500@", .LinedUpBars   ; SLOTS_BAR
 	dbw "80@@", .LinedUpMonOrCherry ; SLOTS_CHERRY
-	dbw "300@", .LinedUpMonOrCherry ; SLOTS_PIKACHU
-	dbw "200@", .LinedUpMonOrCherry ; SLOTS_SQUIRTLE
-	dbw "100@", .LinedUpMonOrCherry ; SLOTS_STARYU
+	dbw "300@", .LinedUpMonOrCherry ; SLOTS_LEDYBA
+	dbw "200@", .LinedUpMonOrCherry ; SLOTS_WOOPER
+	dbw "100@", .LinedUpMonOrCherry ; SLOTS_MAGNEMITE
 	assert_table_length NUM_SLOT_REELS
 
 .Text_PrintPayout:
 	text_asm
 	ld a, [wSlotMatched]
-	add $25
+	add $2c
 	ldcoord_a 2, 13
 	inc a
 	ldcoord_a 2, 14
@@ -1833,7 +2430,7 @@ endr
 	ld [wSlotBias], a
 	ret
 
-.LinedUpPokeballs:
+.LinedUpBars:
 	ld a, SFX_3RD_PLACE
 	call Slots_PlaySFX
 	jmp WaitSFX
@@ -2036,61 +2633,61 @@ Slots_PlaySFX:
 Reel1Tilemap:
 	db SLOTS_SEVEN    ;  0
 	db SLOTS_CHERRY   ;  1
-	db SLOTS_STARYU   ;  2
-	db SLOTS_PIKACHU  ;  3
-	db SLOTS_SQUIRTLE ;  4
+	db SLOTS_MAGNEMITE   ;  2
+	db SLOTS_LEDYBA  ;  3
+	db SLOTS_WOOPER ;  4
 	db SLOTS_SEVEN    ;  5
 	db SLOTS_CHERRY   ;  6
-	db SLOTS_STARYU   ;  7
-	db SLOTS_PIKACHU  ;  8
-	db SLOTS_SQUIRTLE ;  9
-	db SLOTS_POKEBALL ; 10
+	db SLOTS_MAGNEMITE   ;  7
+	db SLOTS_LEDYBA  ;  8
+	db SLOTS_WOOPER ;  9
+	db SLOTS_BAR ; 10
 	db SLOTS_CHERRY   ; 11
-	db SLOTS_STARYU   ; 12
-	db SLOTS_PIKACHU  ; 13
-	db SLOTS_SQUIRTLE ; 14
+	db SLOTS_MAGNEMITE   ; 12
+	db SLOTS_LEDYBA  ; 13
+	db SLOTS_WOOPER ; 14
 	db SLOTS_SEVEN    ;  0
 	db SLOTS_CHERRY   ;  1
-	db SLOTS_STARYU   ;  2
+	db SLOTS_MAGNEMITE   ;  2
 
 Reel2Tilemap:
 	db SLOTS_SEVEN    ;  0
-	db SLOTS_PIKACHU  ;  1
+	db SLOTS_LEDYBA  ;  1
 	db SLOTS_CHERRY   ;  2
-	db SLOTS_SQUIRTLE ;  3
-	db SLOTS_STARYU   ;  4
-	db SLOTS_POKEBALL ;  5
-	db SLOTS_PIKACHU  ;  6
+	db SLOTS_WOOPER ;  3
+	db SLOTS_MAGNEMITE   ;  4
+	db SLOTS_BAR ;  5
+	db SLOTS_LEDYBA  ;  6
 	db SLOTS_CHERRY   ;  7
-	db SLOTS_SQUIRTLE ;  8
-	db SLOTS_STARYU   ;  9
-	db SLOTS_POKEBALL ; 10
-	db SLOTS_PIKACHU  ; 11
+	db SLOTS_WOOPER ;  8
+	db SLOTS_MAGNEMITE   ;  9
+	db SLOTS_BAR ; 10
+	db SLOTS_LEDYBA  ; 11
 	db SLOTS_CHERRY   ; 12
-	db SLOTS_SQUIRTLE ; 13
-	db SLOTS_STARYU   ; 14
+	db SLOTS_WOOPER ; 13
+	db SLOTS_MAGNEMITE   ; 14
 	db SLOTS_SEVEN    ;  0
-	db SLOTS_PIKACHU  ;  1
+	db SLOTS_LEDYBA  ;  1
 	db SLOTS_CHERRY   ;  2
 
 Reel3Tilemap:
 	db SLOTS_SEVEN    ;  0
-	db SLOTS_PIKACHU  ;  1
+	db SLOTS_LEDYBA  ;  1
 	db SLOTS_CHERRY   ;  2
-	db SLOTS_SQUIRTLE ;  3
-	db SLOTS_STARYU   ;  4
-	db SLOTS_PIKACHU  ;  5
+	db SLOTS_WOOPER ;  3
+	db SLOTS_MAGNEMITE   ;  4
+	db SLOTS_LEDYBA  ;  5
 	db SLOTS_CHERRY   ;  6
-	db SLOTS_SQUIRTLE ;  7
-	db SLOTS_STARYU   ;  8
-	db SLOTS_PIKACHU  ;  9
-	db SLOTS_POKEBALL ; 10
+	db SLOTS_WOOPER ;  7
+	db SLOTS_MAGNEMITE   ;  8
+	db SLOTS_LEDYBA  ;  9
+	db SLOTS_BAR ; 10
 	db SLOTS_CHERRY   ; 11
-	db SLOTS_SQUIRTLE ; 12
-	db SLOTS_STARYU   ; 13
-	db SLOTS_PIKACHU  ; 14
+	db SLOTS_WOOPER ; 12
+	db SLOTS_MAGNEMITE   ; 13
+	db SLOTS_LEDYBA  ; 14
 	db SLOTS_SEVEN    ;  0
-	db SLOTS_PIKACHU  ;  1
+	db SLOTS_LEDYBA  ;  1
 	db SLOTS_CHERRY   ;  2
 
 SlotsTilemap:

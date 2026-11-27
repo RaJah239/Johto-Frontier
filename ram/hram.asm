@@ -190,6 +190,6 @@ hWeatherRandom:: dw
 hDexDirectEntry:: db
 
 hItemTargetSelected:: db
-	ds 1
+hVBlankHookFunction:: ds 3
 
 ENDSECTION
