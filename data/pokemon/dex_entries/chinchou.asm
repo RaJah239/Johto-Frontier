@@ -5,4 +5,5 @@
 	feed "fin, have both po-"
 	feed "sitive and neg-"
 	feed "ative charges flo-"
-	feed "wing through them.@"
+	feed "wing through"
+	feed "them.@"

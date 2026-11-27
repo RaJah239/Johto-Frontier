@@ -4,4 +4,5 @@
 	db   "Can't be forced"
 	feed "switched by foe."
 	feed ""
-	feed "Entry: Leech Seed.@"
+	feed "Entry: Leech"
+	feed "Seed.@"

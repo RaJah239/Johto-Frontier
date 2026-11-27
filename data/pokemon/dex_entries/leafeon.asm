@@ -3,7 +3,8 @@
 
 	db   "Just like a plant,"
 	feed "it uses photosynt-"
-	feed "hesis. As a result,"
+	feed "hesis. As a"
+	feed "result,"
 	feed "it is always"
 	feed "enveloped in clean"
 	feed "air.@"

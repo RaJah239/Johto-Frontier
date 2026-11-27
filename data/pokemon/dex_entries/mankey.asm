@@ -5,4 +5,5 @@
 	feed "If it loses sight"
 	feed "of its group, it"
 	feed "becomes infuriated"
-	feed "by its loneliness.@"
+	feed "by its"
+	feed "loneliness.@"

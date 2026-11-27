@@ -5,4 +5,5 @@
 	feed "power it has in"
 	feed "its fingers to"
 	feed "solidify air into"
-	feed "an invisible wall.@"
+	feed "an invisible"
+	feed "wall.@"

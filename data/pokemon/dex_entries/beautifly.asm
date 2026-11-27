@@ -5,4 +5,5 @@
 	feed "It jabs with its"
 	feed "long, thin mouth"
 	feed "if disturbed while"
-	feed "collecting pollen.@"
+	feed "collecting"
+	feed "pollen.@"

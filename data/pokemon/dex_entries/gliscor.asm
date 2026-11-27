@@ -5,4 +5,5 @@
 	feed "inverted from"
 	feed "branches. When the"
 	feed "chance presents"
-	feed "itself, it swoops!@"
+	feed "itself, it"
+	feed "swoops!@"

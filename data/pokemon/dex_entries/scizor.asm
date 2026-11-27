@@ -5,4 +5,5 @@
 	feed "contain steel, can"
 	feed "crush any hard"
 	feed "object it gets a"
-	feed "hold of into bits.@"
+	feed "hold of into"
+	feed "bits.@"

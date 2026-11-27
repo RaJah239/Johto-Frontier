@@ -5,4 +5,5 @@
 	feed "its territory by"
 	feed "causing them to"
 	feed "experience deep,"
-	feed "horrifying dreams.@"
+	feed "horrifying"
+	feed "dreams.@"

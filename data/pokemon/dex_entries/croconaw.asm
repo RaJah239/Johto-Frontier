@@ -5,4 +5,5 @@
 	feed "backward. Once"
 	feed "those fangs clamp"
 	feed "down, the prey has"
-	feed "no hope of escape.@"
+	feed "no hope of"
+	feed "escape.@"

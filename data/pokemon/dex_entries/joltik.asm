@@ -5,4 +5,5 @@
 	feed "learned a skill"
 	feed "for sucking elec-"
 	feed "ricity from"
-	feed "outlets in houses.@"
+	feed "outlets in"
+	feed "houses.@"

@@ -5,4 +5,5 @@
 	feed "calm raging sto-"
 	feed "rms. It is said"
 	feed "that LUGIA appears"
-	feed "when storms start.@"
+	feed "when storms"
+	feed "start.@"

@@ -5,4 +5,5 @@
 	feed "tell where someone"
 	feed "is sleeping and"
 	feed "what that person"
-	feed "is dreaming about.@"
+	feed "is dreaming"
+	feed "about.@"

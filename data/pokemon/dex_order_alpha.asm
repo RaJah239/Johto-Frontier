@@ -9,13 +9,14 @@ AlphabeticalPokedexOrder:
 	db AGGRON
 	db ALAKAZAM
 	db ALTARIA
+	db AMOONGUSS
 	db AMPHAROS
 	db ANNIHILAPE
 	db ARIADOS
 	db ARTICUNO
 	db AZUMARILL
-	db BAXCALIBUR
 	db BALTOY
+	db BAXCALIBUR
 	db BAYLEEF
 	db BEAUTIFLY
 	db BELLSPROUT
@@ -54,21 +55,21 @@ AlphabeticalPokedexOrder:
 	db DODUO
 	db DONDOZO
 	db DONPHAN
+	db DRAGALGE
+	db DRAGAPULT
 	db DRAGONITE
 	db DRAPION
 	db DRILBUR
 	db DROWZEE
-	db DRAGALGE
-	db DRAGAPULT
 	db DUGTRIO_A
 	db DUOSION
 	db DURALUDON
 	db DUSCLOPS
 	db DUSKNOIR
 	db DUSTOX
+	db EELEKTROSS
 	db EEVEE
 	db ELECTABUZZ
-	db EELEKTROSS
 	db ENTEI
 	db ESPEON
 	db EXCADRILL
@@ -80,7 +81,6 @@ AlphabeticalPokedexOrder:
 	db FLAAFFY
 	db FLAREON
 	db FOONGUS
-	db AMOONGUSS
 	db FROSLASS
 	db GABITE
 	db GALLADE
@@ -93,8 +93,8 @@ AlphabeticalPokedexOrder:
 	db GLALIE
 	db GLIGAR
 	db GLISCOR
-	db GOODRA
 	db GOLBAT
+	db GOODRA
 	db GRANBULL
 	db GRIMER
 	db GROVYLE
@@ -102,11 +102,11 @@ AlphabeticalPokedexOrder:
 	db HAUNTER
 	db HAXORUS
 	db HERACROSS
-	db HO_OH
-	db HOOTHOOT
 	db HONCHKROW
+	db HOOTHOOT
 	db HOUNDOOM
 	db HOUNDOUR
+	db HO_OH
 	db HYDRAPPLE
 	db HYDREIGON
 	db HYPNO
@@ -134,9 +134,9 @@ AlphabeticalPokedexOrder:
 	db MACHAMP
 	db MACHOKE
 	db MAGIKARP
+	db MAGMORTAR
 	db MAGNETON
 	db MAGNEZONE
-	db MAGMORTAR
 	db MAMOSWINE
 	db MANKEY
 	db MARILL
@@ -169,17 +169,17 @@ AlphabeticalPokedexOrder:
 	db PIDGEOTTO
 	db PIKACHU
 	db PILOSWINE
+	db POLITOED
 	db POLIWHIRL
 	db POLIWRATH
-	db POLITOED
 	db PONYTA
 	db PORYGON
 	db PORYGON2
 	db PORYGONZ
+	db PRIMARINA
 	db PRIMEAPE
 	db QUAGSIRE
 	db QUILAVA
-	db PRIMARINA
 	db RAICHU
 	db RAIKOU
 	db RAPIDASH
@@ -243,7 +243,7 @@ AlphabeticalPokedexOrder:
 	db VIKAVOLT
 	db VOLCANION
 	db VOLCARONA
-db VULPIX
+	db VULPIX
 	db WARTORTLE
 	db WEAVILE
 	db WEEPINBELL

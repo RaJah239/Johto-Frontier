@@ -5,4 +5,5 @@
 	feed "pure-hearted"
 	feed "trainer by shining"
 	feed "its bright rain-"
-	feed "bow-colored wings.@"
+	feed "bow-colored"
+	feed "wings.@"

@@ -4,4 +4,5 @@
 
 	feed "stab opponents."
 	feed "They're even hard-"
-	feed "er than its shell.@"
+	feed "er than its"
+	feed "shell.@"

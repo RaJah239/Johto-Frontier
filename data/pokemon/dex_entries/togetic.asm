@@ -5,4 +5,5 @@
 	feed "very much, it can"
 	feed "stay up in the air"
 	feed "as it tags along"
-	feed "after its trainer.@"
+	feed "after its"
+	feed "trainer.@"

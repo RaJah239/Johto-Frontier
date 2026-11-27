@@ -5,4 +5,5 @@
 	feed "toxic spores. It"
 	feed "knocks out foes"
 	feed "with quick, nearly"
-	feed "invisible punches.@"
+	feed "invisible"
+	feed "punches.@"

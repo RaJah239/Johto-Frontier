@@ -5,4 +5,5 @@
 	feed "bangs its head on"
 	feed "the river bottom"
 	feed "as it swims but"
-	feed "seems not to care.@"
+	feed "seems not to"
+	feed "care.@"

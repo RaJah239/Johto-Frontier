@@ -2,7 +2,8 @@
 	dw 411, 2262 ; height, weight
 
 	db   "Entry:"
-	feed "Lower foe's attack."
+	feed "Lower foe's"
+	feed "attack."
 	feed ""
 	feed "KO Boost:"
 	feed "Atk & Sp.Atk.@"

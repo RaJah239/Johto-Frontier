@@ -5,4 +5,5 @@
 	feed "gives it energy"
 	feed "for its psychokin-"
 	feed "etic power. Likes"
-	feed "to spin and dance.@"
+	feed "to spin and"
+	feed "dance.@"

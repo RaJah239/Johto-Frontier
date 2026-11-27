@@ -8,24 +8,17 @@ AnimationPointers:
 	dw MeganiumAnimation
 	dw TogeticAnimation
 	dw TogekissAnimation
-	dw CharmeleonAnimation
-	dw CharizardAnimation
-	dw WartortleAnimation
-	dw BlastoiseAnimation
-	dw TorterraAnimation
 	dw PikachuAnimation
 	dw RaichuAnimation
 	dw EeveeAnimation
 	dw EspeonAnimation
 	dw FlareonAnimation
+	dw GlaceonAnimation
 	dw JolteonAnimation
+	dw LeafeonAnimation
 	dw SylveonAnimation
 	dw UmbreonAnimation
 	dw VaporeonAnimation
-	dw CombuskenAnimation
-	dw BlazikenAnimation
-	dw FeebasAnimation
-	dw MiloticAnimation
 	dw KirliaAnimation
 	dw GardevoirAnimation
 	dw GalladeAnimation
@@ -34,21 +27,24 @@ AnimationPointers:
 	dw BeautiflyAnimation
 	dw CascoonAnimation
 	dw DustoxAnimation
-	dw YanmaAnimation
-	dw YanmegaAnimation
 	dw BunearyAnimation
 	dw LopunnyAnimation
+	dw JoltikAnimation
+	dw GalvantulaAnimation
 	dw PidgeottoAnimation
 	dw PidgeotAnimation
+	dw SpinarakAnimation
+	dw AriadosAnimation
 	dw HoothootAnimation
 	dw NoctowlAnimation
 	dw GolbatAnimation
 	dw CrobatAnimation
-	dw UrsaringAnimation
-	dw UrsalunaAnimation
-	dw UrsalunaBAnimation
 	dw PhanpyAnimation
 	dw DonphanAnimation
+	dw BaltoyAnimation
+	dw ClaydolAnimation
+	dw BronzorAnimation
+	dw BronzongAnimation
 	dw BellsproutAnimation
 	dw WeepinbellAnimation
 	dw VictreebelAnimation
@@ -56,54 +52,75 @@ AnimationPointers:
 	dw AmpharosAnimation
 	dw MarillAnimation
 	dw AzumarillAnimation
-	dw RhydonAnimation
+	dw PoliwhirlAnimation
+	dw PoliwrathAnimation
+	dw PolitoedAnimation
 	dw DrilburAnimation
 	dw ExcadrillAnimation
-	dw OnixAnimation
-	dw SteelixAnimation
-	dw MagikarpAnimation
-	dw GyaradosAnimation
+	dw UrsaringAnimation
+	dw UrsalunaAnimation
+	dw UrsalunaBAnimation
+	dw MawileAnimation
+	dw DuosionAnimation
+	dw ReuniclusAnimation
 	dw HaunterAnimation
 	dw GengarAnimation
+	dw SmeargleAnimation
+	dw CottoneeAnimation
+	dw WhimsicottAnimation
 	dw SwabluAnimation
 	dw AltariaAnimation
-	dw SmeargleAnimation
-	dw HoundourAnimation
-	dw HoundoomAnimation
+	dw YanmaAnimation
+	dw YanmegaAnimation
+	dw SkorupiAnimation
+	dw DrapionAnimation
 	dw WooperAnimation
 	dw QuagsireAnimation
+	dw HoundourAnimation
+	dw HoundoomAnimation
+	dw MagikarpAnimation
+	dw GyaradosAnimation
+	dw FeebasAnimation
+	dw MiloticAnimation
 	dw GligarAnimation
 	dw GliscorAnimation
+	dw MachokeAnimation
+	dw MachampAnimation
 	dw GabiteAnimation
 	dw GarchompAnimation
+	dw OnixAnimation
+	dw SteelixAnimation
 	dw DoduoAnimation
 	dw DodrioAnimation
 	dw PonytaAnimation
 	dw RapidashAnimation
 	dw SlowpokeAnimation
 	dw SlowbroAnimation
+	dw SlowkingAnimation
 	dw ShroomishAnimation
 	dw BreloomAnimation
-	dw SpinarakAnimation
-	dw AriadosAnimation
+	dw FoongusAnimation
+	dw AmoongussAnimation
 	dw VenipedeAnimation
 	dw WhirlipedeAnimation
 	dw ScolipedeAnimation
-	dw JoltikAnimation
-	dw GalvantulaAnimation
-	dw SkorupiAnimation
-	dw DrapionAnimation
 	dw LarvestaAnimation
 	dw VolcaronaAnimation
-	dw MankeyAnimation
-	dw PrimeapeAnimation
-	dw AnnihilapeAnimation
-	dw FerroseedAnimation
-	dw FerrothornAnimation
 	dw ScytherAnimation
 	dw ScizorAnimation
 	dw KleavorAnimation
+	dw MankeyAnimation
+	dw PrimeapeAnimation
+	dw AnnihilapeAnimation
+	dw DipplinAnimation
+	dw HydrappleAnimation
+	dw FerroseedAnimation
+	dw FerrothornAnimation
 	dw HeracrossAnimation
+	dw RoseliaAnimation
+	dw RoseradeAnimation
+	dw KadabraAnimation
+	dw AlakazamAnimation
 	dw MeowthAnimation
 	dw PersianAnimation
 	dw SnubbullAnimation
@@ -111,32 +128,59 @@ AnimationPointers:
 	dw DrowzeeAnimation
 	dw HypnoAnimation
 	dw MrMimeAnimation
+dw VulpixAnimation
+	dw NinetalesAnimation
+	dw NinetalesAAnimation
+	dw IvysaurAnimation
+	dw VenusaurAnimation
 	dw SudowoodoAnimation
 	dw KoffingAnimation
 	dw WeezingAnimation
 	dw GrimerAnimation
 	dw MukAnimation
-	dw ChandelureAnimation
+	dw SableyeAnimation
+	dw CharmeleonAnimation
+	dw CharizardAnimation
 	dw MiltankAnimation
 	dw TaurosAnimation
-	dw ElectabuzzAnimation
-	dw MagnetonAnimation
-	dw MagnezoneAnimation
-	dw ShuckleAnimation
-	dw CorsolaAnimation
+	dw CombuskenAnimation
+	dw BlazikenAnimation
+	dw LaprasAnimation
+	dw ShellderAnimation
+	dw CloysterAnimation
 	dw StaryuAnimation
 	dw StarmieAnimation
+	dw VikavoltAnimation
+	dw ElectabuzzAnimation
+	dw DusclopsAnimation
+	dw DusknoirAnimation
+	dw MagnetonAnimation
+	dw MagnezoneAnimation
+	dw EelektrossAnimation
+	dw ShuckleAnimation
+	dw CorsolaAnimation
 	dw ChinchouAnimation
 	dw LanturnAnimation
 	dw TentacoolAnimation
 	dw TentacruelAnimation
 	dw SeadraAnimation
 	dw KingdraAnimation
-	dw LaprasAnimation
+	dw DhelmiseAnimation
+	dw DragalgeAnimation
 	dw ClefairyAnimation
 	dw ClefableAnimation
 	dw SolrockAnimation
 	dw LunatoneAnimation
+	dw WartortleAnimation
+	dw BlastoiseAnimation
+	dw HonchkrowAnimation
+	dw MarshtompAnimation
+	dw SwampertAnimation
+	dw JumpluffAnimation
+	dw SnoverAnimation
+	dw AbomasnowAnimation
+	dw GrovyleAnimation
+	dw SceptileAnimation
 	dw DelibirdAnimation
 	dw JynxAnimation
 	dw SnoruntAnimation
@@ -147,25 +191,38 @@ AnimationPointers:
 	dw SneaselAnimation
 	dw WeavileAnimation
 	dw SneaslerAnimation
-	dw SnoverAnimation
-	dw AbomasnowAnimation
-	dw BaltoyAnimation
-	dw ClaydolAnimation
-	dw LucarioAnimation
-	dw BronzorAnimation
-	dw BronzongAnimation
+	dw CrabominableAnimation
+	dw DondozoAnimation
+	dw CyclizarAnimation
+	dw KrookodileAnimation
+	dw RhydonAnimation
+	dw RhyperiorAnimation
 	dw SkarmoryAnimation
+	dw TorterraAnimation
+	dw ChandelureAnimation
+	dw MimikyuAnimation
+	dw DugtrioAAnimation
+	dw LucarioAnimation
 	dw AggronAnimation
 	dw AegislashAnimation
 	dw MisdreavusAnimation
 	dw MismagiusAnimation
 	dw ChanseyAnimation
 	dw BlisseyAnimation
+	dw MagmortarAnimation
+	dw PrimarinaAnimation
+	dw ExploudAnimation
 	dw SnorlaxAnimation
+	dw TyrantrumAnimation
+	dw HaxorusAnimation
+	dw DragoniteAnimation
 	dw TyranitarAnimation
 	dw SalamenceAnimation
 	dw MetagrossAnimation
-	dw HaxorusAnimation
+	dw HydreigonAnimation
+	dw GoodraAnimation
+	dw DragapultAnimation
+	dw BaxcaliburAnimation
 	dw PorygonAnimation
 	dw Porygon2Animation
 	dw PorygonZAnimation
@@ -174,11 +231,13 @@ AnimationPointers:
 	dw LileepAnimation
 	dw CradilyAnimation
 	dw AerodactylAnimation
+	dw DuraludonAnimation
 	dw RotomAnimation
 	dw AbsolAnimation
-	dw DuraludonAnimation
 	dw GholdengoAnimation
+	dw VolcanionAnimation
 	dw DarkraiAnimation
+	dw MelmetalAnimation
 	dw ArticunoAnimation
 	dw ZapdosAnimation
 	dw MoltresAnimation
@@ -194,63 +253,4 @@ AnimationPointers:
 	dw DittoAnimation
 	dw MewAnimation
 	dw MewtwoAnimation
-	dw GlaceonAnimation
-	dw LeafeonAnimation
-	dw PoliwhirlAnimation
-	dw PoliwrathAnimation
-	dw PolitoedAnimation
-	dw MawileAnimation
-	dw DuosionAnimation
-	dw ReuniclusAnimation
-	dw CottoneeAnimation
-	dw WhimsicottAnimation
-	dw MachokeAnimation
-	dw MachampAnimation
-	dw SlowkingAnimation
-	dw FoongusAnimation
-	dw AmoongussAnimation
-	dw DipplinAnimation
-	dw HydrappleAnimation
-	dw RoseliaAnimation
-	dw RoseradeAnimation
-	dw KadabraAnimation
-	dw AlakazamAnimation
-dw VulpixAnimation
-	dw NinetalesAnimation
-	dw NinetalesAAnimation
-	dw IvysaurAnimation
-	dw VenusaurAnimation
-	dw SableyeAnimation
-	dw ShellderAnimation
-	dw CloysterAnimation
-	dw VikavoltAnimation
-	dw DusclopsAnimation
-	dw DusknoirAnimation
-	dw EelektrossAnimation
-	dw DhelmiseAnimation
-	dw DragalgeAnimation
-	dw HonchkrowAnimation
-	dw MarshtompAnimation
-	dw SwampertAnimation
-	dw JumpluffAnimation
-	dw GrovyleAnimation
-	dw SceptileAnimation
-	dw CrabominableAnimation
-	dw DondozoAnimation
-	dw CyclizarAnimation
-	dw KrookodileAnimation
-	dw RhyperiorAnimation
-	dw MimikyuAnimation
-	dw DugtrioAAnimation
-	dw MagmortarAnimation
-	dw PrimarinaAnimation
-	dw ExploudAnimation
-	dw TyrantrumAnimation
-	dw DragoniteAnimation
-	dw HydreigonAnimation
-	dw GoodraAnimation
-	dw DragapultAnimation
-	dw BaxcaliburAnimation
-	dw VolcanionAnimation
-	dw MelmetalAnimation
 	assert_table_length NUM_POKEMON

@@ -67,10 +67,13 @@
 - Completed additions: Baxcalibur `a3d3771e3` (supplied front/back art, animations and shiny palette; icon from AR; no footprint reference was found, so the footprint is blank and this is documented; base experience capped to engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
 - Completed additions: Volcanion `b692c8757` (supplied art, animations and shiny palette; party icon derived from front art; no species footprint reference found, so the footprint is blank and this is documented; fallback Magcargo cry; new Pics 34 bank section; normal/debug builds and stadium checks passed).
 - Completed additions: Melmetal `aca457341` (supplied art, animations and shiny palette; party icon derived from front art; no species footprint reference found, so the footprint is blank and this is documented; fallback Rhydon cry; new Pics 35 bank section; normal/debug builds and stadium checks passed).
-- Remaining additions: none; run final order/dependency audit.
-- Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
+- Migration status: complete — all 253 listed species are present once and in source order. Constants, New Pokédex order, base-stat includes, palettes, and footprints were audited against the source list. The Kanto/Johto frame boundary remains at species 116; animation, idle, bitmask, and sprite pointer tables were reordered and the clean ROM builds passed.
+- Source-list spelling normalization: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` maps to POLIWRATH.
 - Dragonite was not in the desktop sprite folder; used the complete reference assets in `C:\cygwin64\home\RaJah239\timkun55\gfx` and documented the source above.
-- Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
-- Runtime limitation: emulator checks have not been performed. Species IDs shift during this migration, so existing saves may be incompatible; verify at the end.
+- Review flag: Zubat removal leaves 30 generic `L@` zero-party class placeholders in `data/trainers/parties.asm`; repository search found no map or script references to these generic placeholders.
 
-- Review: Removing Gastly leaves the five generic Sage/Ping trainer parties empty in `data/trainers/parties.asm`; check whether these placeholders are used before release.
+
+- Review flag: Removing Gastly leaves active Sage Ping trainer sets PING1–PING5 empty. Ecruteak Gym calls each set; per migration requirements these are flagged for trainer review and no replacement species was assigned.
+
+- Final verification: `make clean && make -j4 johtofrontier.gbc d` passed; `tools/stadium` passed on both release and debug ROMs; free space is 654,239/2,097,152 bytes (31.20%). Clean build required converting Exploud front/back PNGs to indexed embedded-palette PNGs using their existing colors.
+- Runtime limitation: emulator checks were not performed. Species IDs changed, so existing saves may be incompatible.

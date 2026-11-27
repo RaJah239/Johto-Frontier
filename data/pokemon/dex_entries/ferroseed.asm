@@ -5,4 +5,5 @@
 	feed "the rock while"
 	feed "clinging to the"
 	feed "ceiling. It shoots"
-	feed "spikes in defense.@"
+	feed "spikes in"
+	feed "defense.@"
